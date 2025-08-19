@@ -1,0 +1,115 @@
+@font-face {
+  font-family: 'Nohemi-Bold';
+  src: url(fontes/Nohemi-Bold.woff2) format('woff2'),
+       url(fontes/Nohemi-Bold.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Nohemi-Regular';
+  src: url(fontes/Nohemi-Regular.woff2) format('woff2'),
+       url(fontes/Nohemi-Regular.woff) format('woff');
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+#mensagem {
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  height: 100vh;
+  background: linear-gradient(180deg, #7b91c7 0%, #e6eaff 40%, #fff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-box img {
+    display: block; 
+    margin: 0 auto 20px auto;
+    width: 80px;
+    height: 80px;
+    object-fit: cover; 
+    border-radius: 90%;
+}
+    
+.login-box {
+  background: transparent;
+  width: 300px; 
+  padding: 50px;
+  border-radius: 20px;
+  border: 2px solid rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.login-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.login-box input {
+  width: 100%; 
+  padding: 10px;
+  width: 93%;
+  margin-bottom: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background: #80acdd;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-box button:hover {
+  background: #367699;
+}
+
+p {
+  text-align: center;
+  margin-top: 20px;
+  font-size: small;
+  color: #367699;
+}
+
+a {
+  color: #007bff;  
+}
+
+.voltar {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  background: transparent;
+  color: #367699;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+  outline: none;
+  text-decoration: none;
+}
+
+.voltar:hover {
+  text-decoration: underline;
+}

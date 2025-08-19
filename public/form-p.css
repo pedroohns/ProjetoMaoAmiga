@@ -1,0 +1,88 @@
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #feedback-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #2196f3;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      cursor: move;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+
+    #feedback-box {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      width: 350px;
+      background-color: white;
+      border: 2px solid #2196f3;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      padding: 16px;
+      display: none;
+      z-index: 999;
+    }
+
+    #feedback-box h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: #0d47a1;
+    }
+
+    #feedback-box p {
+      font-size: 13px;
+      color: #444;
+      margin-bottom: 10px;
+    }
+
+    #feedback-box label {
+      font-weight: bold;
+      font-size: 14px;
+      color: #0d47a1;
+    }
+
+    #feedback-box input,
+    #feedback-box textarea,
+    #feedback-box select {
+      width: 100%;
+      margin: 5px 0 15px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    #feedback-box button {
+      background-color: #2196f3;
+      border: none;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      width: 100%;
+    }
+
+    .close {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 18px;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .close:hover {
+      color: #000;
+    }
+ 
