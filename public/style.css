@@ -166,13 +166,19 @@ main {
 .actions {
   display: flex;
   justify-content: center;
-  gap: 18px;
+  gap: 24px;
   flex-wrap: wrap;
   margin-bottom: 28px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .btn {
-  padding: 14px 32px;
+  flex: 1; 
+  min-width: 220px; 
+  max-width: 300px; 
+  padding: 14px 32px; 
   border-radius: 12px;
   border: 2px solid transparent;
   cursor: pointer;
@@ -180,9 +186,9 @@ main {
   font-size: 17px;
   display: flex;
   align-items: center;
+  justify-content: center; 
   gap: 8px;
   background: #fff;
-  color: inherit;
   transition: all 0.2s;
 }
 
@@ -190,13 +196,13 @@ main {
   transform: scale(0.97);
 }
 
-.green { color: #34d399; border-color: #34d399; }
 .blue { color: #6d7dfc; border-color: #6d7dfc; }
+.green { color: #34d399; border-color: #34d399; }
 .pink { color: #f472b6; border-color: #f472b6; }
 .orange { color: #fbbf24; border-color: #fbbf24; }
 
-.btn.green:hover { background-color: #34d399; color: #fff; }
 .btn.blue:hover { background-color: #6d7dfc; color: #fff; }
+.btn.green:hover { background-color: #34d399; color: #fff; }
 .btn.pink:hover { background-color: #f472b6; color: #fff; }
 .btn.orange:hover { background-color: #fbbf24; color: #fff; }
 

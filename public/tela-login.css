@@ -23,7 +23,7 @@ body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   height: 100vh;
-  background: linear-gradient(180deg, #7b91c7 0%, #e6eaff 40%, #fff 100%);
+  background: linear-gradient(180deg, #7b91c7 0%, #7b91c7 40%, #fff 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,11 +39,10 @@ body {
 }
     
 .login-box {
-  background: transparent;
+  background: white;
   width: 300px; 
   padding: 50px;
   border-radius: 20px;
-  border: 2px solid rgba(0,0,0,0.1);
   position: relative;
 }
 

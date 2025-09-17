@@ -53,29 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
     box.style.display = 'none';
   });
 
-  // Função para tornar o botão arrastável
-  let isDragging = false;
-  let offsetX, offsetY;
 
-  btn.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    offsetX = e.clientX - btn.getBoundingClientRect().left;
-    offsetY = e.clientY - btn.getBoundingClientRect().top;
-    btn.style.cursor = 'grabbing';
-  });
-
-  document.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    
-    btn.style.position = 'fixed';
-    btn.style.left = (e.clientX - offsetX) + 'px';
-    btn.style.top = (e.clientY - offsetY) + 'px';
-  });
-
-  document.addEventListener('mouseup', () => {
-    isDragging = false;
-    btn.style.cursor = 'pointer';
-  });
 
   // Versão para touch (mobile)
   btn.addEventListener('touchstart', (e) => {
