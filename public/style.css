@@ -33,6 +33,7 @@ html, body {
   overflow-x: hidden;
 }
 
+
 /* HEADER */
 header {
   position: fixed;
@@ -531,6 +532,14 @@ footer {
   .btn {
     font-size: 15px;
     padding: 12px 24px;
+  }
+  .hero, .hero-cards, .info-boxes {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .hero-card, .info-box {
+    width: 100%;
+    max-width: 100%;
   }
 }
 
