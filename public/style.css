@@ -49,6 +49,13 @@ header {
   backdrop-filter: blur(8px);
 }
 
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 .logo img {
   height: 44px;  
 }
@@ -576,60 +583,6 @@ footer {
   }
 }
 
-.quem-somos {
-  padding: 80px 20px;
-  background: linear-gradient(180deg, #7b91c7 0%, #e6eaff 40%, #fff 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-top: 40px;
-}
-
-.quem-somos .section-title {
-  font-size: 36px;
-  font-family: 'Nohemi', sans-serif;
-  color: #111;
-  margin-bottom: 24px;
-}
-
-.quem-somos .section-description {
-  font-size: 18px;
-  max-width: 800px;
-  color: #444;
-}
-
-.quem-somos .valores {
-  margin-top: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  justify-content: center;
-  margin-bottom: 40px; /* evita sobreposição com o footer */
-}
-
-.quem-somos .valor {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  padding: 24px;
-  max-width: 300px;
-  text-align: left;
-}
-
-.quem-somos .valor h3 {
-  font-size: 22px;
-  color: #2563eb;
-  margin-bottom: 12px;
-}
-
-.quem-somos .valor p {
-  font-size: 16px;
-  color: #333;
-  line-height: 1.5;
-}
-
 @media (max-width: 768px) {
   .quem-somos {
     padding-top: 40px;
@@ -643,7 +596,38 @@ footer {
     max-width: 90%;
   }
 }
- /* Oculta o checkbox */
+ 
+/* MOBILE ONLY */
+@media (max-width: 768px) {
+  .mobile-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-menu {
+    display: none;
+  }
+}
+
+/* Oculta o checkbox */
 .menu-toggle {
   display: none;
 }
@@ -700,42 +684,4 @@ footer {
 
 .mobile-nav a:hover {
   text-decoration: underline;
-}
-
-/* Wrapper do topo */
-.header-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-/* MOBILE ONLY */
-@media (max-width: 768px) {
-  .mobile-menu {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-
-  .header-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
-  .desktop-nav {
-    display: none;
-  }
-}
-
-@media (min-width: 769px) {
-  .mobile-menu {
-    display: none;
-  }
 }
