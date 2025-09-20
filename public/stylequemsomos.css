@@ -48,6 +48,14 @@ header {
   backdrop-filter: blur(8px);
 }
 
+/* Wrapper do topo */
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 .logo img {
   height: 44px;
 }
@@ -102,6 +110,108 @@ nav a.active {
   background: #6d7dfc;
   color: #e6eaff ;
 }
+
+/* Menu hamburguer */
+    .menu-toggle {
+      display: none;
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1001;
+      width: 30px;
+      height: 30px;
+    }
+
+    .hamburger span {
+      height: 3px;
+      width: 24px;
+      background: white;
+      margin: 3px 0;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: rgba(123, 145, 199, 0.98);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      flex-direction: column;
+      gap: 16px;
+      z-index: 1000;
+      min-width: 220px;
+    }
+
+    .menu-toggle:checked ~ .mobile-nav {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      color: white;
+      font-size: 16px;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .mobile-nav a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Botões de autenticação no menu mobile */
+    .mobile-auth-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .mobile-auth-buttons button {
+      flex: 1;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mobile-entrar {
+      background: #6d7dfc;
+      color: white;
+      border: 1.5px solid white;
+    }
+
+    .mobile-entrar:hover {
+      background: white;
+      color: #7b91c7;
+    }
+
+    .mobile-criar-conta {
+      background: white;
+      color: #7b91c7;
+    }
+
+    .mobile-criar-conta:hover {
+      background: #6d7dfc;
+      color: white;
+    }
 
 /* MAIN HERO */
 main {
@@ -348,180 +458,23 @@ footer {
   }
 }
 
-/* Wrapper do topo */
-.header-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
+/* Mobile */
+    @media (max-width: 768px) {
+      /* Header mobile */
+      header {
+        padding: 16px 20px;
+      }
 
-/* Centralizar botões no mobile */
-.center-mobile {
-  display: flex;
-  gap: 10px;
-}
+      .desktop-nav,
+      .auth-buttons {
+        display: none;
+      }
 
-.menu-toggle {
-  display: none;
-}
+      .mobile-menu {
+        display: block;
+      }
 
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  padding: 10px;
-  z-index: 999;
-}
-
-.hamburger span {
-  height: 3px;
-  width: 25px;
-  background: white;
-  margin: 4px 0;
-  border-radius: 2px;
-  transition: 0.3s;
-}
-
-/* Menu mobile escondido */
-.mobile-nav {
-  display: none;
-  flex-direction: column;
-  background: #7b91c7;
-  width: 100%;
-  padding: 20px;
-  gap: 16px;
-}
-
-.mobile-nav a {
-  color: white;
-  font-size: 18px;
-  text-decoration: none;
-}
-
-/* Mostra o menu quando checked */
-.menu-toggle:checked ~ .mobile-nav {
-  display: flex;
-}
-
-/* MOBILE ONLY */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 16px;
-  }
-
-  .logo {
-    flex: 1;
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  .center-mobile {
-    justify-content: center;
-  }
-
-  .hamburger {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .auth-buttons {
-    margin: 0 auto;
-    flex-direction: row;
-  }
-
-  nav {
-    display: none;
-  }
-}
- /* Oculta o checkbox */
-.menu-toggle {
-  display: none;
-}
-
-/* Ícone hambúrguer */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  cursor: pointer;
-  z-index: 1001;
-}
-
-.hamburger span {
-  height: 3px;
-  width: 24px;
-  background: white;
-  margin: 3px 0;
-  border-radius: 2px;
-}
-
-/* Wrapper do menu mobile */
-.mobile-menu {
-  position: relative;
-}
-
-/* Menu dropdown visível apenas se toggle ativado */
-.mobile-nav {
-  display: none;
-  position: absolute;
-  top: 40px;
-  right: 0;
-  background: rgba(123, 145, 199, 0.95);
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  flex-direction: column;
-  gap: 16px;
-  z-index: 1000;
-  min-width: 200px;
-}
-
-.menu-toggle:checked ~ .mobile-nav {
-  display: flex;
-}
-
-.mobile-nav a {
-  color: white;
-  font-size: 16px;
-  text-decoration: none;
-  padding: 4px 0;
-}
-
-.mobile-nav a:hover {
-  text-decoration: underline;
-}
-
-
-/* MOBILE ONLY */
-@media (max-width: 768px) {
-  .mobile-menu {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-
-  .header-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
-  .desktop-nav {
-    display: none;
-  }
-}
-
-@media (min-width: 769px) {
-  .mobile-menu {
-    display: none;
-  }
-}
+      .hamburger {
+        display: flex;
+      }
+    }
