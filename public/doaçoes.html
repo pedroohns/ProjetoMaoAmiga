@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mão Amiga - Doações e Projetos Sociais</title>
+  <link rel="shortcut icon" href="imagens/maozinha.ico" type="image/x-icon">
+  <style>
+/* fontes */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('./fontes/Nohemi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('./fontes/Nohemi-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* RESET E BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  background: linear-gradient(180deg, #7b91c7 0%, #e6eaff 40%, #fff 100%);
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 40px;
+  box-shadow: 0 2px 12px rgba(123, 145, 199, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo img {
+  height: 44px;  
+}
+
+nav {
+  display: flex;
+  gap: 5rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+
+nav a:hover,
+nav a.active {
+  color: #6366f1;
+}
+
+.auth-buttons button {
+  margin-left: 12px;
+  padding: 12px 24px;
+  border: 1.5px solid #c7d2fe;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.auth-buttons .entrar {
+  background: transparent;
+  color: #fff;
+}
+.auth-buttons .entrar:hover {
+  background: #fff;
+  color: #111;
+}
+
+.auth-buttons .criar-conta {
+  background: #fff;
+  color: #111;
+  border: none;
+  box-shadow: 0 2px 8px rgba(123, 145, 199, 0.08);
+}
+.auth-buttons .criar-conta:hover {
+  background: #6d7dfc;
+  color: #e6eaff ;
+}
+
+/* Menu hamburguer */
+    .menu-toggle {
+      display: none;
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1001;
+      width: 30px;
+      height: 30px;
+    }
+
+    .hamburger span {
+      height: 3px;
+      width: 24px;
+      background: white;
+      margin: 3px 0;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: rgba(123, 145, 199, 0.98);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      flex-direction: column;
+      gap: 16px;
+      z-index: 1000;
+      min-width: 220px;
+    }
+
+    .menu-toggle:checked ~ .mobile-nav {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      color: white;
+      font-size: 16px;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .mobile-nav a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Botões de autenticação no menu mobile */
+    .mobile-auth-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .mobile-auth-buttons button {
+      flex: 1;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mobile-entrar {
+      background: #6d7dfc;
+      color: white;
+      border: 1.5px solid white;
+    }
+
+    .mobile-entrar:hover {
+      background: white;
+      color: #7b91c7;
+    }
+
+    .mobile-criar-conta {
+      background: white;
+      color: #7b91c7;
+    }
+
+    .mobile-criar-conta:hover {
+      background: #6d7dfc;
+      color: white;
+    }
+
+/* MAIN HERO */
+main {
+  margin-top: 120px;
+  flex: 1;
+}
+
+.hero {
+  text-align: center;
+  padding: 20px 20px 40px;
+}
+
+.hero-img {
+  width: 20em;
+  margin-bottom: -15px;
+  position: relative;
+  z-index: 2;
+}
+
+.white-blur {
+  width: 250px;
+  height: 80px;
+  margin: -50px auto 24px;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.8) 60%, rgba(123, 145, 199, 0.15) 100%);
+  filter: blur(18px);
+  border-radius: 50px;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero h1 {
+  font-family: 'Nohemi', sans-serif;
+  font-size: 38px;
+  font-weight: 900;
+  margin-bottom: 18px;
+  color: #111;
+}
+
+.highlight {
+  color: #6d7dfc;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 24px;
+  max-width: 1050px;
+  margin-inline: auto;
+  color: #000;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pill {
+  flex: 1; 
+  min-width: 180px; 
+  max-width: 220px; 
+  padding: 14px 24px; 
+  border-radius: 12px;
+  border: 2px solid #6d7dfc;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  gap: 8px;
+  background: #fff;
+  transition: all 0.2s;
+  color: #6d7dfc;
+}
+
+.pill:hover {
+  background-color: #6d7dfc;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* CONTAINER E CONTROLES */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 32px 0;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.search {
+  flex: 1;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  min-width: 300px;
+}
+
+.search input {
+  flex: 1;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 2px solid #e6e9f2;
+  background: white;
+  font-size: 16px;
+  transition: border-color 0.2s;
+}
+
+.search input:focus {
+  outline: none;
+  border-color: #6d7dfc;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 2px solid rgba(15,17,36,0.06);
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  color: #333;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: #6d7dfc;
+  color: white;
+  border-color: #6d7dfc;
+}
+
+/* SEÇÕES E GRIDS */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 40px 0 20px;
+}
+
+.section-header h3 {
+  margin: 0;
+  font-size: 24px;
+  font-family: 'Nohemi', sans-serif;
+  color: #3d3d3d;
+}
+
+.view-all {
+  color: #6d7dfc;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.view-all:hover {
+  background: rgba(109, 125, 252, 0.1);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(35,45,80,0.08);
+  overflow: hidden;
+  border: 1px solid rgba(15,17,36,0.04);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(35,45,80,0.12);
+}
+
+.card .media {
+  height: 160px;
+  background: linear-gradient(90deg, rgba(91,109,240,0.08), rgba(43,182,115,0.06));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.card .media img {
+  max-height: 140px;
+  max-width: 90%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.card .body {
+  padding: 20px;
+}
+
+.card h3 {
+  margin: 0 0 12px;
+  font-size: 20px;
+  font-family: 'Nohemi', sans-serif;
+  color: #3d3d3d;
+  font-weight: 700;
+}
+
+.card p {
+  margin: 0 0 16px;
+  color: #666;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.tag {
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(15,17,36,0.06);
+  background: #f8f9ff;
+  color: #6d7dfc;
+  font-weight: 600;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-top: 1px solid rgba(15,17,36,0.05);
+  background: #fafbff;
+}
+
+.small {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.primary-action {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  background: #6d7dfc;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.primary-action:hover {
+  background: #5a67d8;
+  transform: translateY(-2px);
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(9,14,28,0.5);
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal .dialog {
+  width: 92%;
+  max-width: 600px;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.dialog .head {
+  padding: 20px 24px;
+  border-bottom: 1px solid #eef2fb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8f9ff;
+}
+
+.dialog .head strong {
+  font-size: 20px;
+  color: #3d3d3d;
+}
+
+.dialog .head button {
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px;
+  color: #666;
+}
+
+.dialog .head button:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+.dialog .content {
+  padding: 24px;
+}
+
+/* BOTÃO DE AJUDA */
+.help {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 56px;
+  height: 56px;
+  background: #2e9df8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 26px rgba(46,157,248,0.25);
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 999;
+}
+
+.help:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px rgba(46,157,248,0.35);
+}
+
+.help svg {
+  fill: white;
+}
+
+/* FOOTER */
+footer {
+  width: 100%;
+  background: #f4f8ff;
+  box-shadow: 0 -2px 12px rgba(213, 220, 236, 0.185);
+  padding: 14px 0 4px;
+  margin-top: 60px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.logo-footer img {
+  height: 36px;
+}
+
+.footer-termo a {
+  font-size: 15px;
+  color: #333;
+  text-decoration: none;
+}
+
+.footer-termo a:hover {
+  text-decoration: underline;
+}
+
+.social-icons a {
+  margin: 0 8px;
+  color: #333;
+  transition: color 0.2s;
+}
+
+.social-icons a:hover {
+  color: #6d7dfc;
+}
+
+.copyright {
+  font-size: 13px;
+  color: #555;
+}
+
+/* RESPONSIVIDADE */
+    
+    /* Tablets e telas médias */
+    @media (max-width: 1024px) {
+      header {
+        padding: 20px 30px;
+      }
+
+      nav {
+        gap: 2rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(22px, 3.5vw, 36px);
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search {
+        min-width: 100%;
+      }
+
+      .filters {
+        justify-content: center;
+      }
+
+      .grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      /* Header mobile */
+      header {
+        padding: 16px 20px;
+      }
+
+      nav,
+      .auth-buttons {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      /* Hero mobile */
+      main {
+        margin-top: 80px;
+      }
+
+      .hero {
+        padding: 30px 16px;
+      }
+
+      .hero-img {
+        width: 200px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .actions {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .pill {
+        min-width: 100%;
+        max-width: 100%;
+      }
+
+      .container {
+        padding: 16px;
+      }
+
+      .controls {
+        padding: 20px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .help {
+        right: 20px;
+        bottom: 20px;
+        width: 48px;
+        height: 48px;
+      }
+    }
+
+    /* Mobile pequeno */
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 24px;
+      }
+
+      .hero p {
+        font-size: 14px;
+      }
+
+      .controls {
+        padding: 16px;
+      }
+
+      .card .media {
+        height: 120px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+        padding: 0 16px;
+      }
+
+      .social-icons {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container-wrapper">
+
+  <header>
+    <div class="header-wrapper">
+      <div class="logo">
+        <img src="./imagens/logo.png" alt="Mão Amiga Logo">
+      </div>
+
+      <nav class="desktop-nav">
+        <a href="index.html">Página Inicial</a>
+        <a href="quem-somos.html">Quem somos</a>
+        <a href="#">Histórias</a>
+        <a href="fale-conosco.html">Fale Conosco</a>
+        <a href="#">Autoatendimento</a>
+      </nav>
+
+      <div class="auth-buttons">
+        <button class="entrar">Entrar</button>
+        <button class="criar-conta">Criar Conta</button>
+      </div>
+
+      <!-- Menu hamburguer e mobile nav -->
+      <div class="mobile-menu">
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+
+        <nav class="mobile-nav">
+          <a href="index.html">Início</a>
+          <a href="#" class="active">Doações</a>
+          <a href="quem-somos.html">Quem somos</a>
+          <a href="#">Histórias</a>
+          <a href="fale-conosco.html">Fale Conosco</a>
+          <a href="#">Autoatendimento</a>
+          <div class="mobile-auth-buttons">
+            <button class="mobile-entrar">Entrar</button>
+            <button class="mobile-criar-conta">Criar Conta</button>
+          </div>
+        </nav>
+      </div>
+
+    </div>
+  </header>
+  
+  <main>
+    <div class="hero">
+      <img src="./imagens/maozinha.png" alt="mãos em oração" class="hero-img">
+      <div class="white-blur"></div>
+      <h1>Uma <span class="highlight">Mão Amiga</span> para conectar doações e projetos sociais</h1>
+      <p>Encontre doações disponíveis perto de você, apoie projetos sociais ou cadastre um novo pedido de ajuda. Veja abaixo o que está ativo.</p>
+      <div class="actions">
+        <div class="pill">Pesquisar doações</div>
+        <div class="pill">Ver projetos ativos</div>
+        <div class="pill">Quero doar</div>
+      </div>
+    </div>
+
+    <section class="container">
+      <div class="controls">
+        <div class="search">
+          <svg width="20" height="20" viewBox="0 0 24 24" style="opacity:0.7"><path fill="currentColor" d="M9.5 3a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13m0-2a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17z"></path></svg>
+          <input id="search" placeholder="Buscar doações, projetos ou locais" />
+        </div>
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all">Todos</button>
+          <button class="filter-btn" data-filter="donation">Doações</button>
+          <button class="filter-btn" data-filter="project">Projetos</button>
+          <button class="filter-btn" data-filter="near">Perto de mim</button>
+        </div>
+      </div>
+
+      <!-- DOAÇÕES -->
+      <div class="section-header">
+        <h3>Doações disponíveis</h3>
+      </div>
+
+      <div id="donation-grid" class="grid">
+        <!-- cards gerados por JS -->
+      </div>
+
+      <!-- PROJETOS -->
+      <div class="section-header">
+        <h3>Projetos sociais</h3>
+      </div>
+
+      <div id="project-grid" class="grid">
+        <!-- cards gerados por JS -->
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="logo-footer">
+        <img src="imagens/logo-black.png" alt="Mão Amiga Logo">
+      </div>
+      <div class="footer-termo">
+        <a href="#">Termos de Uso</a>
+      </div>
+      <div class="social-icons">
+        <a href="#" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="26" height="26" viewBox="0 0 24 24">
+            <path d="M 8 3 C 5.239 3 3 5.239 3 8 L 3 16 C 3 18.761 5.239 21 8 21 L 16 21 C 18.761 21 21 18.761 21 16 L 21 8 C 21 5.239 18.761 3 16 3 L 8 3 z M 18 5 C 18.552 5 19 5.448 19 6 C 19 6.552 18.552 7 18 7 C 17.448 7 17 6.552 17 6 C 17 5.448 17.448 5 18 5 z M 12 7 C 14.761 7 17 9.239 17 12 C 17 14.761 14.761 17 12 17 C 9.239 17 7 14.761 7 12 C 7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z"></path>
+          </svg></a>
+        <a href="#" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="26" height="26" viewBox="0 0 24 24">
+            <path d="M12,2C6.477,2,2,6.477,2,12c0,5.013,3.693,9.153,8.505,9.876V14.65H8.031v-2.629h2.474v-1.749 c0-2.896,1.411-4.167,3.818-4.167c1.153,0,1.762,0.085,2.051,0.124v2.294h-1.642c-1.022,0-1.379,0.969-1.379,2.061v1.437h2.995 l-0.406,2.629h-2.588v7.247C18.235,21.236,22,17.062,22,12C22,6.477,17.523,2,12,2z"></path>
+          </svg></a>
+        <a href="#" title="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="26" height="26" viewBox="0 0 24 24">
+            <path d="M19.077,4.928C17.191,3.041,14.683,2.001,12.011,2c-5.506,0-9.987,4.479-9.989,9.985 c-0.001,1.76,0.459,3.478,1.333,4.992L2,22l5.233-1.237c1.459,0.796,3.101,1.215,4.773,1.216h0.004 c5.505,0,9.986-4.48,9.989-9.985C22.001,9.325,20.963,6.816,19.077,4.928z M16.898,15.554c-0.208,0.583-1.227,1.145-1.685,1.186 c-0.458,0.042-0.887,0.207-2.995-0.624c-2.537-1-4.139-3.601-4.263-3.767c-0.125-0.167-1.019-1.353-1.019-2.581 S7.581,7.936,7.81,7.687c0.229-0.25,0.499-0.312,0.666-0.312c0.166,0,0.333,0,0.478,0.006c0.178,0.007,0.375,0.016,0.562,0.431 c0.222,0.494,0.707,1.728,0.769,1.853s0.104,0.271,0.021,0.437s-0.125,0.27-0.249,0.416c-0.125,0.146-0.262,0.325-0.374,0.437 c-0.125,0.124-0.255,0.26-0.11,0.509c0.146,0.25,0.646,1.067,1.388,1.728c0.954,0.85,1.757,1.113,2.007,1.239 c0.25,0.125,0.395,0.104,0.541-0.063c0.146-0.166,0.624-0.728,0.79-0.978s0.333-0.208,0.562-0.125s1.456,0.687,1.705,0.812 c0.25,0.125,0.416,0.187,0.478,0.291C17.106,14.471,17.106,14.971,16.898,15.554z"></path>
+          </svg></a>
+      </div>
+      <div class="copyright">
+        © 2025 • Mão Amiga. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  
+
+  
+
+</div>
+
+<script>
+  // Dados das doações
+  const donations = [
+    {id:1, type:'donation', title:'Cestas Básicas - Centro', qty:12, desc:'Cestas com alimentos básicos, prontas para retirada no centro.', tags:['Alimentação','Urgente'], img:'download.jpeg'},
+    {id:2, type:'donation', title:'Roupas Infantis', qty:34, desc:'Doação de roupas para crianças de 0-6 anos. Muitas peças novas.', tags:['Roupas','Infantil'], img:'images.jpeg'},
+    {id:3, type:'donation', title:'Produtos de Higiene', qty:48, desc:'Sabonetes, shampoo e itens de higiene pessoal.', tags:['Higiene'], img:'images (1).jpeg'}
+  ];
+
+  // Dados dos projetos sociais 
+  const projects = [
+    {id:101, type:'project', title:'Refeição Solidária', location:'Bairro São José', desc:'Projeto que oferece jantares comunitários 3x por semana.', tags:['Alimentação','Voluntariado'], img:'download (1).jpeg'},
+    {id:102, type:'project', title:'Oficina de Alfabetização', location:'Comunidade Vale Verde', desc:'Aulas para crianças e adultos que não tiveram acesso à escola.', tags:['Educação','Comunidade'], img:'download (2).jpeg'},
+    {id:103, type:'project', title:'Escola de Judo', location:'Unidade Volta Redonda', desc:'Escola de judo 3x por semana com prof Renato.', tags:['Arte Marcial','Defesa Pessoal'], img:'images (2).jpeg'}
+  ];
+
+  function makeCard(item){
+    const el = document.createElement('article');
+    el.className = 'card';
+    el.innerHTML = `
+      <div class="media">
+        ${item.img ? `<img src="${escapeHtml(item.img)}" alt="imagem">` : placeholderSVG(item)}
+      </div>
+      <div class="body">
+        <h3>${escapeHtml(item.title)}</h3>
+        <p>${escapeHtml(item.desc)}</p>
+        <div class="tags">${item.tags.map(t=>`<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>
+      </div>
+      <div class="card-footer">
+        <div class="small">${item.type==='donation'?('Quantidade: '+(item.qty||0)):(item.location||'—')}</div>
+        <button class="primary-action" onclick="openModal(${item.id})">Ver</button>
+      </div>
+    `;
+    el.dataset.type = item.type;
+    el.dataset.id = item.id;
+    return el;
+  }
+
+  function placeholderSVG(item){
+    if(item.type==='donation'){
+      return `<svg width=120 height=80 viewBox='0 0 120 80' xmlns='http://www.w3.org/2000/svg'><rect rx='8' width='120' height='80' fill='rgba(91,109,240,0.06)'></rect><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-size='12' fill='rgba(11,20,40,0.5)'>Doação</text></svg>`;
+    }
+    return `<svg width=120 height=80 viewBox='0 0 120 80' xmlns='http://www.w3.org/2000/svg'><rect rx='8' width='120' height='80' fill='rgba(246,196,66,0.06)'></rect><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-size='12' fill='rgba(11,20,40,0.5)'>Projeto</text></svg>`;
+  }
+
+  function escapeHtml(str){
+    return (str||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  // Renderização inicial
+  const dGrid = document.getElementById('donation-grid');
+  donations.forEach(d=>dGrid.appendChild(makeCard(d)));
+  const pGrid = document.getElementById('project-grid');
+  projects.forEach(p=>pGrid.appendChild(makeCard(p)));
+
+  // Filtros
+  document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('click',()=>{
+    // Remove active de todos os botões
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    // Adiciona active ao botão clicado
+    btn.classList.add('active');
+    
+    const f = btn.dataset.filter;
+    filterGrid(f);
+  }));
+
+  function filterGrid(filter){
+    const allCards = document.querySelectorAll('.card');
+    allCards.forEach(c=>{
+      if(filter==='all') { c.style.display='block'; return }
+      if(filter==='near') { c.style.display='block'; return } // placeholder
+      if(c.dataset.type===filter) c.style.display='block'; else c.style.display='none';
+    });
+  }
+
+  // Busca
+  document.getElementById('search').addEventListener('input',function(){
+    const q = this.value.trim().toLowerCase();
+    document.querySelectorAll('.card').forEach(c=>{
+      const title = c.querySelector('h3').textContent.toLowerCase();
+      const desc = c.querySelector('p').textContent.toLowerCase();
+      c.style.display = (title.includes(q) || desc.includes(q))? 'block' : 'none';
+    });
+  });
+
+  // Modal
+  function openModal(id){
+    const all = donations.concat(projects);
+    const item = all.find(x=>x.id==id);
+    if(!item) return;
+    document.getElementById('modal-title').textContent = item.title;
+    document.getElementById('modal-content').innerHTML = `
+      <p><strong>Descrição:</strong> ${escapeHtml(item.desc)}</p>
+      ${item.location?`<p><strong>Local:</strong> ${escapeHtml(item.location)}</p>`:''}
+      ${item.qty?`<p><strong>Quantidade disponível:</strong> ${item.qty}</p>`:''}
+      <p style='margin-top:16px'><button class='primary-action' onclick='confirmSupport(${item.id})'>Quero me inscrever</button></p>
+    `;
+    document.getElementById('modal').style.display = 'flex';
+  }
+
+  function closeModal(e){
+    if(e && e.target && e.target.id!=='modal') return;
+    document.getElementById('modal').style.display = 'none';
+  }
+
+  function confirmSupport(id){
+    alert('Obrigado! Entraremos em contato para passar mais informações. ID='+id);
+    closeModal();
+  }
+</script>
+
+</body>
+</html>
