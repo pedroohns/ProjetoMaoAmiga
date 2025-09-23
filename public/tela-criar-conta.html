@@ -1,24 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Criar Conta - Mão Amiga</title>
-    <link rel="stylesheet" href="tela-criar-conta.css">
-    <link rel="icon" href="imagens/maozinha.ico">
+  <meta charset="UTF-8">
+  <title>Criar Conta - Mão Amiga</title>
+  <link rel="stylesheet" href="tela-criar-conta.css">
+  <link rel="icon" href="imagens/maozinha.ico">
 </head>
 <body>
-    <div class="container">
-        <img src="imagens/logo-blue.png" alt="Logo Mão Amiga" class="logo">
-        <h2>Criar Conta</h2>
-        <form id="form-criar-conta">
-            <input type="text" name="nome" placeholder="Nome completo" required>
-            <input type="email" name="email" placeholder="E-mail" required>
-            <input type="password" name="senha" placeholder="Senha" required>
-            <input type="password" name="confirmarSenha" placeholder="Confirmar senha" required>
-            <button type="submit">Criar Conta</button>
-        </form>
-        <p>Já tem uma conta? <a href="tela-login.html">Entrar</a></p>
+
+  <div class="register-container">
+    <div class="register-card">
+      <a href="index.html" class="voltar">← Voltar</a>
+
+      <img src="imagens/logo-blue.png" alt="Logo Mão Amiga" class="logo">
+
+      <h2>Criar Conta</h2>
+      <p class="subtitle">Preencha seus dados para começar</p>
+
+      <form id="form-criar-conta">
+        <div class="input-group">
+          <input type="text" name="nome" placeholder="Nome completo" required>
+        </div>
+        <div class="input-group">
+          <input type="email" name="email" placeholder="E-mail" required>
+        </div>
+        <div class="input-group">
+          <input type="password" name="senha" placeholder="Senha" required>
+        </div>
+        <div class="input-group">
+          <input type="password" name="confirmarSenha" placeholder="Confirmar senha" required>
+        </div>
+        <button type="submit" class="btn-register">Criar Conta</button>
+      </form>
+
+      <p class="links">
+        Já tem uma conta? <a href="tela-login.html">Entrar</a>
+      </p>
     </div>
-    <script src="tela-criar-conta.js"></script>
+  </div>
+
+  <script src="tela-criar-conta.js"></script>
 </body>
 </html>

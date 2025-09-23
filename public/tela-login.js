@@ -1,41 +1,49 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("form-login");
 
-document.getElementById('formLogin').addEventListener('submit', function(event) {
-    event.preventDefault();
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-    const email = document.querySelector('input[name="email"]').value.trim();
-    const senha = document.querySelector('input[name="senha"]').value.trim();
-    const mensagem = document.getElementById('mensagem');
+    const email = form.email.value.trim();
+    const senha = form.senha.value.trim();
 
-    mensagem.style.color = 'red';
-    mensagem.innerHTML = '';
+    removerErros(form);
+    let valido = true;
 
-    // Validação de campos vazios
-    if (email === '') {
-        mensagem.innerHTML = 'Por favor, preencha o email.';
-        return;
+    if (!email) {
+      mostrarErro(form.email, "Digite seu e-mail.");
+      valido = false;
+    } else if (!validarEmail(email)) {
+      mostrarErro(form.email, "Digite um e-mail válido.");
+      valido = false;
     }
 
-    // Regex simples para validar email
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!regexEmail.test(email)) {
-        mensagem.innerHTML = 'Por favor, insira um email válido.';
-        return;
+    if (!senha) {
+      mostrarErro(form.senha, "Digite sua senha.");
+      valido = false;
+    } else if (senha.length < 6) {
+      mostrarErro(form.senha, "A senha deve ter no mínimo 6 caracteres.");
+      valido = false;
     }
 
-    if (senha === '') {
-        mensagem.innerHTML = 'Por favor, preencha a senha.';
-        return;
+    if (valido) {
+      alert("Login realizado com sucesso!");
+      form.reset();
     }
+  });
 
-    if (senha.length < 6) {
-        mensagem.innerHTML = 'A senha deve ter no mínimo 6 caracteres.';
-        return;
-    }
+  function validarEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
 
-    // Se passou na validação
-    mensagem.style.color = 'green';
-    mensagem.innerHTML = 'Login realizado com sucesso!';
+  function mostrarErro(input, mensagem) {
+    let erro = document.createElement("small");
+    erro.classList.add("erro");
+    erro.textContent = mensagem;
+    input.insertAdjacentElement("afterend", erro);
+  }
 
-    // Aqui você pode prosseguir, como redirecionar:
-    // window.location.href = "pagina-inicial.html";
+  function removerErros(form) {
+    form.querySelectorAll(".erro").forEach(el => el.remove());
+  }
 });
