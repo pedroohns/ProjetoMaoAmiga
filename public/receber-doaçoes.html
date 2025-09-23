@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receber Doações - Mão Amiga</title>
+    <link rel="stylesheet" href="receber-doaçoes.css">
+    <script src="receber-doaçoes.js"></script>
+</head>
+<body>
+     <div class="container">
+        <div class="header">
+            <div class="sparkle">✨</div>
+            <div class="sparkle">⭐</div>
+            <div class="sparkle">✨</div>
+            
+            <div class="logo">
+                <div class="logo-icon">🤝</div>
+                <span style="font-size: 20px; font-weight: 600;">Mão Amiga</span>
+            </div>
+            
+            <div class="hands-emoji">🙏</div>
+            
+            <h1>Cadastro para Receber Doações</h1>
+            <p>Antes de receber doações, precisamos confirmar algumas coisinhas para garantir que nossa ajuda chegue até você da melhor forma!</p>
+        </div>
+
+        <div class="form-container">
+            <div class="welcome-text">
+                <h2>Vamos nos conhecer melhor? 😊</h2>
+                <p>Suas informações são seguras e nos ajudam a entender melhor como podemos apoiar você.</p>
+            </div>
+
+            <form id="cadastroForm">
+                <div class="form-section">
+                    <h3 class="section-title">📋 Dados Pessoais</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome">Nome Completo *</label>
+                            <input type="text" id="nome" name="nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cpf">CPF *</label>
+                            <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nascimento">Data de Nascimento *</label>
+                            <input type="date" id="nascimento" name="nascimento" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="estado_civil">Estado Civil</label>
+                            <select id="estado_civil" name="estado_civil">
+                                <option value="">Selecione</option>
+                                <option value="solteiro">Solteiro(a)</option>
+                                <option value="casado">Casado(a)</option>
+                                <option value="divorciado">Divorciado(a)</option>
+                                <option value="viuvo">Viúvo(a)</option>
+                                <option value="uniao_estavel">União Estável</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="section-title">📞 Contato</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="telefone">Telefone/WhatsApp *</label>
+                            <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" placeholder="seu.email@exemplo.com">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="section-title">🏠 Endereço</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cep">CEP *</label>
+                            <input type="text" id="cep" name="cep" placeholder="00000-000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cidade">Cidade *</label>
+                            <input type="text" id="cidade" name="cidade" required>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="endereco">Endereço Completo *</label>
+                        <input type="text" id="endereco" name="endereco" placeholder="Rua, número, complemento, bairro" required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="section-title">💼 Situação Socioeconômica</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="renda_familiar">Renda Familiar Mensal</label>
+                            <select id="renda_familiar" name="renda_familiar">
+                                <option value="">Selecione</option>
+                                <option value="ate_1_salario">Até 1 salário mínimo</option>
+                                <option value="1_a_2_salarios">1 a 2 salários mínimos</option>
+                                <option value="2_a_3_salarios">2 a 3 salários mínimos</option>
+                                <option value="acima_3_salarios">Acima de 3 salários mínimos</option>
+                                <option value="sem_renda">Sem renda</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="pessoas_casa">Quantas pessoas moram na casa?</label>
+                            <input type="number" id="pessoas_casa" name="pessoas_casa" min="1" max="20">
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="situacao_atual">Conte-nos um pouco sobre sua situação atual</label>
+                        <textarea id="situacao_atual" name="situacao_atual" placeholder="Descreva brevemente sua situação e como as doações podem te ajudar..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="section-title">🎯 Tipo de Ajuda Necessária</h3>
+                    <div class="form-group full-width">
+                        <label>Que tipo de doação você mais precisa? (marque todas que se aplicam)</label>
+                        <div class="checkbox-options">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="alimentos" name="tipo_doacao[]" value="alimentos">
+                                <label for="alimentos">Alimentos</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="roupas" name="tipo_doacao[]" value="roupas">
+                                <label for="roupas">Roupas</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="medicamentos" name="tipo_doacao[]" value="medicamentos">
+                                <label for="medicamentos">Medicamentos</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="produtos_higiene" name="tipo_doacao[]" value="produtos_higiene">
+                                <label for="produtos_higiene">Produtos de higiene</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="moveis" name="tipo_doacao[]" value="moveis">
+                                <label for="moveis">Móveis</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="outros" name="tipo_doacao[]" value="outros">
+                                <label for="outros">Outros</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="termos" name="termos" required>
+                    <label for="termos">Declaro que todas as informações fornecidas são verdadeiras e estou ciente de que elas serão utilizadas exclusivamente para fins de doação através da plataforma Mão Amiga.</label>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Finalizar Cadastro 🤝
+                </button>
+
+                <div class="back-link">
+                    <a href="#" onclick="history.back()">← Voltar para página inicial</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
