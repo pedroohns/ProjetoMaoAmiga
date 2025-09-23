@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doar - Mão Amiga</title>
+    <title>Quero Doar - Mão Amiga</title>
     <link rel="stylesheet" href="quero-doar.css">
+    <link rel="stylesheet" href="form-p.css">
     <link rel="shortcut icon" href="imagens/maozinha.ico" type="image/x-icon">
     <script src="quero-doar.js"></script>
+    <script src="form-p.js"></script>
 </head>
 <body>
   <header>
@@ -21,7 +23,7 @@
         <a href="#">Doações</a>
         <a href="quem-somos.html">Quem somos</a>
         <a href="#">Histórias</a>
-        <a href="#">Fale Conosco</a>
+        <a href="fale-conosco.html">Fale Conosco</a>
         <a href="#">Autoatendimento</a>
       </nav>
 
@@ -45,7 +47,7 @@
           <a href="#">Doações</a>
           <a href="quem-somos.html">Quem somos</a>
           <a href="#">Histórias</a>
-          <a href="#">Fale Conosco</a>
+          <a href="fale-conosco.html">Fale Conosco</a>
           <a href="#">Autoatendimento</a>
           <div class="mobile-auth-buttons">
             <button class="mobile-entrar">Entrar</button>
@@ -183,5 +185,33 @@
       </div>
     </div>
   </footer>
+
+  <button id="feedback-btn" title="Enviar uma mensagem de apoio">💬</button>
+
+  <div id="feedback-box">
+    <span class="close" id="close-box">&times;</span>
+    <h3>Fale com a gente 💙</h3>
+    <p>Nos envie sua mensagem. Nossa equipe responderá em até <strong>24 horas</strong>.</p>
+
+    <label for="nome">Seu nome:</label>
+    <input type="text" id="nome" placeholder="Digite seu nome">
+
+    <label for="email">Seu e-mail:</label>
+    <input type="email" id="email" placeholder="Digite seu e-mail">
+
+    <label for="tipo">Tipo de mensagem:</label>
+    <select id="tipo">
+      <option value="">Selecione</option>
+      <option value="dúvida">Dúvida</option>
+      <option value="sugestão">Sugestão</option>
+      <option value="pedido">Pedido de apoio</option>
+      <option value="outro">Outro</option>
+    </select>
+
+    <label for="mensagem">Mensagem:</label>
+    <textarea id="mensagem" placeholder="Descreva sua situação ou ideia..."></textarea>
+
+    <button id="send-feedback">Enviar</button>
+    
 </body>
 </html>

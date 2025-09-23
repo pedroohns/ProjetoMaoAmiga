@@ -433,6 +433,7 @@ footer {
   padding: 24px;
   max-width: 300px;
   text-align: left;
+  border: 6px solid #6d7dfc;
 }
 
 .quem-somos .valor h3 {
