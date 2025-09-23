@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agente Mão Amiga — Chat</title>
+  <link rel="stylesheet" href="autoatendimento.css">
+  <link rel="shortcut icon" href="imagens/maozinha.ico" type="image/x-icon">
+  <script src="script.js"></script>
+</head>
+<body>
+  <div class="container">
+
+  <header>
+    <div class="header-wrapper">
+      <div class="logo">
+        <img src="./imagens/logo.png" alt="Mão Amiga Logo">
+      </div>
+
+      <nav class="desktop-nav">
+        <a href="index.html">Página Inicial</a>
+        <a href="#">Doações</a>
+        <a href="quem-somos.html">Quem somos</a>
+        <a href="#">Histórias</a>
+        <a href="fale-conosco.html">Fale Conosco</a>
+      </nav>
+
+      <div class="auth-buttons">
+        <button class="entrar">Entrar</button>
+        <button class="criar-conta">Criar Conta</button>
+      </div>
+
+      <!-- Menu hamburguer e mobile nav devem estar dentro da mesma div para funcionar -->
+      <div class="mobile-menu">
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+
+        <nav class="mobile-nav">
+          <a href="index.html">Página Inicial</a>
+          <a href="#">Doações</a>
+          <a href="quem-somos.html">Quem somos</a>
+          <a href="#">Histórias</a>
+          <a href="fale-conosco.html">Fale Conosco</a>
+          <div class="mobile-auth-buttons">
+            <button class="mobile-entrar">Entrar</button>
+            <button class="mobile-criar-conta">Criar Conta</button>
+          </div>
+        </nav>
+      </div>
+
+    </div>
+  </header>
+  
+  <div id="chat-container">
+    <div id="chat-card">
+      <div id="messages">
+        <div class="msg from-agent">
+          Olá 👋 — sou o Agente Virtual Mão Amiga.
+        </div>
+      </div>
+      <div id="input-area">
+        <input id="inputMsg" type="text" placeholder="Digite sua mensagem..." autocomplete="off" />
+        <button id="btnSend">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
