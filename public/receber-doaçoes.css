@@ -40,7 +40,7 @@
         }
 
         .header {
-            background: #4f5f86;
+            background: #6d7dfc;
             padding: 30px;
             text-align: center;
             color: white;
@@ -249,17 +249,18 @@
         }
 
         .submit-btn {
-            background: #4f5f86;
+            background: #6d7dfc;
             color: white;
             border: none;
             padding: 15px 40px;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 500;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
             margin-top: 20px;
+            font-family: 'Nohemi', sans-serif;
         }
 
         .submit-btn:hover {

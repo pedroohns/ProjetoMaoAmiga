@@ -1,3 +1,21 @@
+/* fontes */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('./fontes/Nohemi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('./fontes/Nohemi-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
 :root{
       --bg-top: #7b91c7;
       --bg-mid: #9eb4df;
@@ -75,7 +93,7 @@
       position: absolute;
       left: 20px;
       top: 20px;
-      color: var(--primary);
+      color: #6d7dfc;
       font-size: 0.9rem;
       text-decoration: none;
       z-index: 10;
@@ -93,7 +111,7 @@
     }
 
     h2 {
-      color: var(--accent);
+      color: #6d7dfc;
       font-size: 1.6rem;
       font-weight: 600;
       margin-bottom: 8px;
@@ -134,14 +152,15 @@
       padding: 16px;
       border-radius: 10px;
       border: none;
-      background: linear-gradient(180deg, var(--primary), #2f6a86);
+      background: #6d7dfc;
       color: #fff;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 1.1rem;
       cursor: pointer;
       margin-top: 8px;
       transition: transform .12s ease, box-shadow .12s ease;
       touch-action: manipulation;
+      font-family: 'Nohemi', sans-serif;
     }
 
     .btn-login:active { 
@@ -159,7 +178,7 @@
     }
 
     .links a { 
-      color: var(--accent); 
+      color: #6d7dfc; 
       text-decoration: none; 
       font-weight: 600; 
     }
