@@ -290,6 +290,7 @@ main {
   background: #fff;
   transition: all 0.2s;
   color: #6d7dfc;
+  text-decoration: none;
 }
 
 .pill:hover {

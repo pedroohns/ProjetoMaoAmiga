@@ -156,9 +156,9 @@ async function sendToApi(userText){
         conversationContext.lastIntent = 'how-help';
         return `A Mão Amiga ajuda de duas formas principais:
         <br><br>
-        **Para quem precisa:** Oferecemos um espaço seguro para você pedir doações, encontrar empregos ou buscar apoio emocional, tudo de forma gratuita. Melhoramos a **visibilidade** do seu pedido para que mais pessoas possam te encontrar.
+        **Para quem precisa:** Oferecemos um espaço seguro para você pedir doações ou buscar apoio, tudo de forma gratuita. Melhoramos a **visibilidade** do seu pedido para que mais pessoas possam te encontrar.
         <br><br>
-        **Para quem quer ajudar:** Simplificamos o processo para você encontrar pessoas que precisam de ajuda, seja doando, oferecendo um emprego ou atuando como voluntário. Com a **facilidade** da nossa plataforma, você ajuda de maneira rápida e segura.
+        **Para quem quer ajudar:** Simplificamos o processo para você encontrar pessoas que precisam de ajuda, seja doando, oferecendo ajuda ou atuando como voluntário. Com a **facilidade** da nossa plataforma, você ajuda de maneira rápida e segura.
         <br><br>
         Ficou mais claro? Se quiser, posso te explicar como doar, procurar empregos ou buscar apoio emocional.`;
     }
@@ -221,7 +221,7 @@ async function sendToApi(userText){
     }
     if (wantsDonation) {
         conversationContext.lastIntent = 'donation';
-        return `Sua solidariedade é muito importante para nós! Se você precisa de doações ou deseja ajudar, <a href="doacoes.html" target="_blank" rel="noopener">clique aqui para acessar nossa página de doações</a>.
+        return `Sua solidariedade é muito importante para nós! Se você precisa de doações ou deseja ajudar, <a href="doaçoes.html" target="_blank" rel="noopener">clique aqui para acessar nossa página de doações</a>.
         <br><br>Se quiser saber mais sobre como a Mão Amiga ajuda, é só perguntar!`;
     }
     if (wantsJobs) {
