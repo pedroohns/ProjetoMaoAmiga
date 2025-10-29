@@ -539,6 +539,19 @@ footer {
   .hours-content {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .desktop-nav,
+  .auth-buttons {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .hamburger {
+    display: flex;
+  }
 }
 
 /* Mobile Large (481px - 768px) */

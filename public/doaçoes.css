@@ -584,6 +584,19 @@ footer {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
   }
+
+  .desktop-nav,
+  .auth-buttons {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .hamburger {
+    display: flex;
+  }
 }
 
 /* Mobile */

@@ -322,16 +322,17 @@ footer {
     flex-wrap: wrap;
   }
 
-  .search-bar {
-    flex-direction: column;
-    align-items: center;
+  .desktop-nav,
+  .auth-buttons {
+    display: none;
   }
 
-  .search-input-wrapper,
-  .search-bar input,
-  .search-bar button {
-    width: 100%;
-    max-width: 100%;
+  .mobile-menu {
+    display: block;
+  }
+
+  .hamburger {
+    display: flex;
   }
 }
 

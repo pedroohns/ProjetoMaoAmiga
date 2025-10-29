@@ -370,8 +370,17 @@ nav a.active {
     padding: 20px 30px;
   }
 
-  .desktop-nav {
-    gap: 2rem;
+  .desktop-nav,
+  .auth-buttons {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .hamburger {
+    display: flex;
   }
 }
 

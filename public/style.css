@@ -715,6 +715,19 @@ footer {
   .info-link {
     max-width: 45%;
   }
+  
+  .desktop-nav,
+  .auth-buttons {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .hamburger {
+    display: flex;
+  }
 }
 
 /* Mobile */
