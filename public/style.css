@@ -564,15 +564,15 @@ main {
 
 /* imagens */
 .img1 {
-  background-image: url("/public/imagens/voltaredonda.jpg");
+  background-image: url("imagens/voltaredonda.jpg");
 }
 
 .img2 {
-  background-image: url("/public/imagens/beneficios-sociais.jpg");
+  background-image: url("imagens/beneficios-sociais.jpg");
 }
 
 .img3 {
-  background-image: url("/public/imagens/direitos-sociais.jpg");
+  background-image: url("imagens/direitos-sociais.jpg");
 }
 
 .testimonial-box {
