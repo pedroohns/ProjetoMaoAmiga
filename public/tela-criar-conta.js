@@ -4,13 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // inputs
     const nome = form.nome.value.trim();
     const email = form.email.value.trim();
     const senha = form.senha.value.trim();
     const confirmarSenha = form.confirmarSenha.value.trim();
 
-    // remove mensagens antigas
+    //remove mensagens antigas
     removerErros(form);
 
     let valido = true;
@@ -19,8 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
       mostrarErro(form.nome, "Digite seu nome completo.");
       valido = false;
     } else if (nome.lenght < 3 || !nome.includes(" ")) {
-        mostrarErro(form.nome, "Digite seu nome completo (nome e sobrenome).");
-        valido = false
+      mostrarErro(form.nome, "Digite seu nome completo (nome e sobrenome).");
+      valido = false
     }
 
     if (!email) {

@@ -15,9 +15,7 @@
   font-style: normal;
 }
 
-
-
-:root{
+:root {
   --bg-top: #7b91c7;
   --bg-mid: #9eb4df;
   --primary: #367699;
@@ -32,7 +30,8 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -50,8 +49,8 @@ body {
 }
 
 @supports (height: 100svh) {
-  body { 
-    min-height: 100svh; 
+  body {
+    min-height: 100svh;
   }
 }
 
@@ -75,20 +74,21 @@ body {
   text-align: center;
   min-height: 100vh;
   overflow: auto;
-  animation: cardIn .36s cubic-bezier(.2,.9,.3,1) both;
+  animation: cardIn .36s cubic-bezier(.2, .9, .3, 1) both;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 @keyframes cardIn {
-  from { 
-    opacity: 0; 
-    transform: translateY(12px); 
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -102,8 +102,8 @@ body {
   z-index: 10;
 }
 
-.voltar:hover { 
-  text-decoration: underline; 
+.voltar:hover {
+  text-decoration: underline;
 }
 
 .logo {
@@ -126,8 +126,8 @@ h2 {
   margin-bottom: 28px;
 }
 
-.input-group { 
-  margin-bottom: 14px; 
+.input-group {
+  margin-bottom: 14px;
 }
 
 input {
@@ -141,13 +141,13 @@ input {
   background: #fff;
 }
 
-input::placeholder { 
-  color: #9aa3b2; 
+input::placeholder {
+  color: #9aa3b2;
 }
 
 input:focus {
   border-color: var(--primary);
-  box-shadow: 0 8px 20px rgba(54,118,153,0.08);
+  box-shadow: 0 8px 20px rgba(54, 118, 153, 0.08);
 }
 
 .btn-register {
@@ -166,12 +166,12 @@ input:focus {
   font-family: 'Nohemi', sans-serif;
 }
 
-.btn-register:active { 
-  transform: translateY(1px); 
+.btn-register:active {
+  transform: translateY(1px);
 }
 
-.btn-register:hover { 
-  box-shadow: 0 8px 24px rgba(46,103,135,0.12); 
+.btn-register:hover {
+  box-shadow: 0 8px 24px rgba(46, 103, 135, 0.12);
 }
 
 .links {
@@ -180,21 +180,21 @@ input:focus {
   color: var(--muted);
 }
 
-.links a { 
-  color: #6d7dfc; 
-  text-decoration: none; 
-  font-weight: 600; 
+.links a {
+  color: #6d7dfc;
+  text-decoration: none;
+  font-weight: 600;
 }
 
-.links a:hover { 
-  text-decoration: underline; 
+.links a:hover {
+  text-decoration: underline;
 }
 
-#mensagem { 
-  margin-top: 16px; 
-  font-weight: 600; 
-  color: #d43f3f; 
-  text-align: center; 
+#mensagem {
+  margin-top: 16px;
+  font-weight: 600;
+  color: #d43f3f;
+  text-align: center;
 }
 
 .erro {
@@ -239,8 +239,8 @@ input:focus {
     margin-bottom: 18px;
   }
 
-  .input-group { 
-    margin-bottom: 12px; 
+  .input-group {
+    margin-bottom: 12px;
   }
 
   input {
@@ -259,8 +259,8 @@ input:focus {
     font-size: 0.9rem;
   }
 
-  #mensagem { 
-    margin-top: 12px; 
+  #mensagem {
+    margin-top: 12px;
   }
 }
 

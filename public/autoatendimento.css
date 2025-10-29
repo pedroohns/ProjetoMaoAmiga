@@ -30,7 +30,7 @@
   --accent: #6366f1;
   --gray: #6b7280;
   --radius: 18px;
-  --shadow: 0 8px 32px rgba(37,99,235,0.10);
+  --shadow: 0 8px 32px rgba(37, 99, 235, 0.10);
   font-family: 'Segoe UI', Inter, Arial, sans-serif;
 }
 
@@ -61,7 +61,7 @@ header {
 }
 
 .logo img {
-  height: 44px;  
+  height: 44px;
 }
 
 nav {
@@ -99,6 +99,7 @@ nav a.active {
   background: transparent;
   color: #fff;
 }
+
 .auth-buttons .entrar:hover {
   background: #fff;
   color: #111;
@@ -110,9 +111,10 @@ nav a.active {
   border: none;
   box-shadow: 0 2px 8px rgba(123, 145, 199, 0.08);
 }
+
 .auth-buttons .criar-conta:hover {
   background: #6d7dfc;
-  color: #e6eaff ;
+  color: #e6eaff;
 }
 
 .header-wrapper {
@@ -171,7 +173,7 @@ nav a.active {
   min-width: 220px;
 }
 
-.menu-toggle:checked ~ .mobile-nav {
+.menu-toggle:checked~.mobile-nav {
   display: flex;
 }
 
@@ -277,7 +279,7 @@ nav a.active {
   color: #222;
   max-width: 70%;
   font-size: 1.08em;
-  box-shadow: 0 1px 8px rgba(16,24,40,0.06);
+  box-shadow: 0 1px 8px rgba(16, 24, 40, 0.06);
   transition: background 0.2s;
   word-break: break-word;
 }
@@ -325,7 +327,7 @@ nav a.active {
   background: #fff;
   outline: none;
   transition: border 0.2s;
-  box-shadow: 0 2px 8px rgba(16,24,40,0.06);
+  box-shadow: 0 2px 8px rgba(16, 24, 40, 0.06);
 }
 
 #inputMsg:focus {
@@ -343,16 +345,19 @@ nav a.active {
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(91,141,247,0.08);
+  box-shadow: 0 2px 8px rgba(91, 141, 247, 0.08);
 }
 
-#btnSend:hover, #btnSend:focus {
+#btnSend:hover,
+#btnSend:focus {
   background: #1746a2;
 }
 
 /* RESPONSIVIDADE */
 @media (max-width: 1000px) {
-  #messages, #input-area {
+
+  #messages,
+  #input-area {
     max-width: 98vw;
     padding-left: 1vw;
     padding-right: 1vw;
@@ -372,6 +377,7 @@ nav a.active {
 
 /* Mobile */
 @media (max-width: 768px) {
+
   /* Header mobile */
   header {
     padding: 16px 20px;
@@ -398,22 +404,35 @@ nav a.active {
     padding: 10px 0 6px 0;
     gap: 4px;
   }
-  .header-left, .header-center, .header-right {
+
+  .header-left,
+  .header-center,
+  .header-right {
     flex: none;
     justify-content: center;
     padding: 0;
   }
-  .header-left { margin-bottom: 2px; }
-  .header-right { margin-top: 2px; }
+
+  .header-left {
+    margin-bottom: 2px;
+  }
+
+  .header-right {
+    margin-top: 2px;
+  }
+
   #chat-container {
     top: 60px;
     height: calc(100vh - 60px);
   }
-  #messages, #input-area {
+
+  #messages,
+  #input-area {
     max-width: 100vw;
     padding-left: 0;
     padding-right: 0;
   }
+
   .msg {
     padding: 12px 8vw;
     font-size: 1em;

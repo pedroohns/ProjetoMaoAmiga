@@ -2,10 +2,10 @@ const messagesEl = document.getElementById('messages');
 const input = document.getElementById('inputMsg');
 const btn = document.getElementById('btnSend');
 
-function appendMessage(text, cls = 'from-agent'){
+function appendMessage(text, cls = 'from-agent') {
     const d = document.createElement('div');
     d.className = 'msg ' + cls;
-    if(cls === 'from-agent') {
+    if (cls === 'from-agent') {
         d.innerHTML = text;
     } else {
         d.textContent = text;
@@ -19,8 +19,8 @@ function appendMessage(text, cls = 'from-agent'){
     return d;
 }
 
-function userSend(text){
-    if(!text || !text.trim()) return;
+function userSend(text) {
+    if (!text || !text.trim()) return;
     appendMessage(text, 'from-user');
     input.value = '';
     const typing = appendMessage('O agente está digitando...', 'from-agent');
@@ -35,8 +35,8 @@ function userSend(text){
     });
 }
 
-btn.addEventListener('click', ()=> userSend(input.value));
-input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') userSend(input.value); });
+btn.addEventListener('click', () => userSend(input.value));
+input.addEventListener('keydown', (e) => { if (e.key === 'Enter') userSend(input.value); });
 
 let conversationContext = {
     lastIntent: null,
@@ -49,8 +49,8 @@ let conversationContext = {
     howHelpFlow: false
 };
 
-async function sendToApi(userText){
-    await new Promise(r=>setTimeout(r, 800));
+async function sendToApi(userText) {
+    await new Promise(r => setTimeout(r, 800));
     const txt = userText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
     const piadas = [
@@ -93,12 +93,12 @@ async function sendToApi(userText){
             return `Obrigado por informar. Repassei o seu endereço para o serviço de emergência. Por favor, mantenha a calma.`;
         }
     }
-    
+
     if (isEmergency || wantsPolice || wantsFirefighter || wantsSamu) {
         conversationContext.emergencyFlow = true;
         conversationContext.addressProvided = false;
         let response = `🚨 **Emergência detectada!** 🚨 Para quem devo ligar?`;
-        
+
         const options = [];
         if (!wantsPolice) options.push('Polícia (190)');
         if (!wantsFirefighter) options.push('Bombeiro (193)');
@@ -150,7 +150,7 @@ async function sendToApi(userText){
         return `Desculpe, não entendi. Você pode perguntar sobre nossa **missão**, **visão**, **valores** ou **como participar**.`;
     }
 
-    // NOVO: PRIORIDADE 4: FLUXO DE COMO AJUDA
+    // PRIORIDADE 4: FLUXO DE COMO AJUDA
     if (wantsHowHelp) {
         conversationContext.howHelpFlow = true;
         conversationContext.lastIntent = 'how-help';

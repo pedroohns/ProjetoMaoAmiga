@@ -23,7 +23,8 @@
   font-family: 'Inter', sans-serif;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   background: linear-gradient(180deg, #7b91c7 0%, #e6eaff 40%, #fff 100%);
   color: #333;
@@ -95,6 +96,7 @@ nav a.active {
   background: transparent;
   color: #fff;
 }
+
 .auth-buttons .entrar:hover {
   background: #fff;
   color: #111;
@@ -106,112 +108,113 @@ nav a.active {
   border: none;
   box-shadow: 0 2px 8px rgba(123, 145, 199, 0.08);
 }
+
 .auth-buttons .criar-conta:hover {
   background: #6d7dfc;
-  color: #e6eaff ;
+  color: #e6eaff;
 }
 
 /* Menu hamburguer */
-    .menu-toggle {
-      display: none;
-    }
+.menu-toggle {
+  display: none;
+}
 
-    .mobile-menu {
-      display: none;
-    }
+.mobile-menu {
+  display: none;
+}
 
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      z-index: 1001;
-      width: 30px;
-      height: 30px;
-    }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1001;
+  width: 30px;
+  height: 30px;
+}
 
-    .hamburger span {
-      height: 3px;
-      width: 24px;
-      background: white;
-      margin: 3px 0;
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
+.hamburger span {
+  height: 3px;
+  width: 24px;
+  background: white;
+  margin: 3px 0;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
 
-    .mobile-nav {
-      display: none;
-      position: absolute;
-      top: 60px;
-      right: 20px;
-      background: rgba(123, 145, 199, 0.98);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      flex-direction: column;
-      gap: 16px;
-      z-index: 1000;
-      min-width: 220px;
-    }
+.mobile-nav {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: rgba(123, 145, 199, 0.98);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+  gap: 16px;
+  z-index: 1000;
+  min-width: 220px;
+}
 
-    .menu-toggle:checked ~ .mobile-nav {
-      display: flex;
-    }
+.menu-toggle:checked~.mobile-nav {
+  display: flex;
+}
 
-    .mobile-nav a {
-      color: white;
-      font-size: 16px;
-      text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 8px;
-      transition: background 0.2s;
-    }
+.mobile-nav a {
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
 
-    .mobile-nav a:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
+.mobile-nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
 
-    /* Botões de autenticação no menu mobile */
-    .mobile-auth-buttons {
-      display: flex;
-      gap: 12px;
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-    }
+/* Botões de autenticação no menu mobile */
+.mobile-auth-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
 
-    .mobile-auth-buttons button {
-      flex: 1;
-      padding: 10px 16px;
-      border-radius: 8px;
-      border: none;
-      font-weight: bold;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
+.mobile-auth-buttons button {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
 
-    .mobile-entrar {
-      background: #6d7dfc;
-      color: white;
-      border: 1.5px solid white;
-    }
+.mobile-entrar {
+  background: #6d7dfc;
+  color: white;
+  border: 1.5px solid white;
+}
 
-    .mobile-entrar:hover {
-      background: white;
-      color: #7b91c7;
-    }
+.mobile-entrar:hover {
+  background: white;
+  color: #7b91c7;
+}
 
-    .mobile-criar-conta {
-      background: white;
-      color: #7b91c7;
-    }
+.mobile-criar-conta {
+  background: white;
+  color: #7b91c7;
+}
 
-    .mobile-criar-conta:hover {
-      background: #6d7dfc;
-      color: white;
-    }
+.mobile-criar-conta:hover {
+  background: #6d7dfc;
+  color: white;
+}
 
 /* MAIN HERO */
 main {
@@ -318,10 +321,12 @@ footer {
     gap: 2rem;
     flex-wrap: wrap;
   }
+
   .search-bar {
     flex-direction: column;
     align-items: center;
   }
+
   .search-input-wrapper,
   .search-bar input,
   .search-bar button {
@@ -335,12 +340,13 @@ footer {
     flex-direction: column;
     gap: 12px;
   }
+
   nav {
     flex-wrap: wrap;
     gap: 1rem;
   }
 
-  nav a{
+  nav a {
     padding: 0;
   }
 
@@ -351,18 +357,21 @@ footer {
   }
 
   .hero-img {
-  width: 13em;
-}
+    width: 13em;
+  }
 
   .hero h1 {
     font-size: 30px;
   }
+
   .hero p {
     font-size: 16px;
   }
+
   .search-bar input {
     min-width: 100%;
   }
+
   .btn {
     font-size: 15px;
     padding: 12px 24px;
@@ -373,19 +382,24 @@ footer {
   header {
     padding: 12px;
   }
+
   nav a {
     font-size: 14px;
   }
+
   .auth-buttons button {
     font-size: 14px;
     padding: 10px 18px;
   }
+
   .hero h1 {
     font-size: 22px;
   }
+
   .hero p {
     font-size: 14px;
   }
+
   .footer-content {
     flex-direction: column;
     align-items: center;
@@ -423,7 +437,8 @@ footer {
   flex-wrap: wrap;
   gap: 40px;
   justify-content: center;
-  margin-bottom: 40px; /* evita sobreposição com o footer */
+  margin-bottom: 40px;
+  /* evita sobreposição com o footer */
 }
 
 .quem-somos .valor {
@@ -453,6 +468,7 @@ footer {
     flex-direction: column;
     align-items: center;
   }
+
   .quem-somos .valor {
     width: 100%;
     max-width: 90%;
@@ -460,22 +476,23 @@ footer {
 }
 
 /* Mobile */
-    @media (max-width: 768px) {
-      /* Header mobile */
-      header {
-        padding: 16px 20px;
-      }
+@media (max-width: 768px) {
 
-      .desktop-nav,
-      .auth-buttons {
-        display: none;
-      }
+  /* Header mobile */
+  header {
+    padding: 16px 20px;
+  }
 
-      .mobile-menu {
-        display: block;
-      }
+  .desktop-nav,
+  .auth-buttons {
+    display: none;
+  }
 
-      .hamburger {
-        display: flex;
-      }
-    }
+  .mobile-menu {
+    display: block;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}

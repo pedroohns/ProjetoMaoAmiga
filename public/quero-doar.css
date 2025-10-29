@@ -22,7 +22,8 @@
   font-family: 'Inter', sans-serif;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   background: linear-gradient(180deg, #7b91c7 0%, #e6eaff 40%, #fff 100%);
   color: #333;
@@ -55,7 +56,7 @@ header {
 }
 
 .logo img {
-  height: 44px;  
+  height: 44px;
 }
 
 .desktop-nav {
@@ -93,6 +94,7 @@ header {
   background: transparent;
   color: #fff;
 }
+
 .auth-buttons .entrar:hover {
   background: #fff;
   color: #111;
@@ -104,6 +106,7 @@ header {
   border: none;
   box-shadow: 0 2px 8px rgba(123, 145, 199, 0.08);
 }
+
 .auth-buttons .criar-conta:hover {
   background: #6d7dfc;
   color: #e6eaff;
@@ -153,7 +156,7 @@ header {
   min-width: 220px;
 }
 
-.menu-toggle:checked ~ .mobile-nav {
+.menu-toggle:checked~.mobile-nav {
   display: flex;
 }
 
@@ -316,7 +319,8 @@ header {
   text-align: center;
 }
 
-.amount-btn:hover, .amount-btn.selected {
+.amount-btn:hover,
+.amount-btn.selected {
   background: #a8b8e8;
   color: white;
 }
@@ -476,20 +480,20 @@ footer {
   .desktop-nav {
     gap: 2rem;
   }
-  
+
   .donation-cards {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
-  
+
   .hero-title {
     font-size: 32px;
   }
-  
+
   .hero-img {
     width: 18em;
   }
-  
+
   .impact-stats {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -497,132 +501,133 @@ footer {
 
 /* Mobile Large (481px - 768px) */
 @media (max-width: 768px) {
+
   /* Header Mobile */
   header {
     padding: 16px 24px;
   }
-  
+
   .desktop-nav,
   .auth-buttons {
     display: none;
   }
-  
+
   .mobile-menu {
     display: block;
   }
-  
+
   .hamburger {
     display: flex;
   }
-  
+
   .mobile-nav {
     top: 70px;
   }
-  
+
   /* Main Content */
   .main-content {
     padding: 2rem 1.5rem;
     margin-top: 20px;
   }
-  
+
   .hero-section {
     margin-bottom: 3rem;
   }
-  
+
   .hero-title {
     font-size: 28px;
     margin-bottom: 16px;
   }
-  
+
   .hero-img {
     width: 15em;
   }
-  
+
   .white-blur {
     width: 200px;
     height: 60px;
   }
-  
+
   .hero-subtitle {
     font-size: 16px;
     margin-bottom: 20px;
     padding: 0 10px;
   }
-  
+
   /* Donation Cards - Stack vertically */
   .donation-cards {
     grid-template-columns: 1fr;
     gap: 2rem;
     margin-bottom: 2.5rem;
   }
-  
+
   .donation-card {
     padding: 1.5rem;
   }
-  
+
   .card-title {
     font-size: 1.3rem;
   }
-  
+
   .card-description {
     font-size: 14px;
     margin-bottom: 1.5rem;
   }
-  
+
   .donation-amounts {
     gap: 0.8rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .amount-btn {
     padding: 0.6rem 0.8rem;
     font-size: 14px;
   }
-  
+
   /* Impact Section */
   .impact-section {
     padding: 2rem 1.5rem;
     margin-bottom: 2.5rem;
   }
-  
+
   .impact-title {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .impact-stats {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
-  
+
   .stat-number {
     font-size: 2rem;
   }
-  
+
   .stat-label {
     font-size: 14px;
   }
-  
+
   /* Payment Methods */
   .payment-methods {
     padding: 1.5rem;
   }
-  
+
   .payment-title {
     font-size: 1.2rem;
     margin-bottom: 1rem;
   }
-  
+
   .payment-icons {
     gap: 1rem;
   }
-  
+
   .payment-icon {
     width: 50px;
     height: 35px;
     font-size: 1.2rem;
   }
-  
+
   /* Footer */
   .footer-content {
     padding: 0 24px;
@@ -630,15 +635,15 @@ footer {
     gap: 16px;
     text-align: center;
   }
-  
+
   .logo-footer img {
     height: 32px;
   }
-  
+
   .footer-termo a {
     font-size: 14px;
   }
-  
+
   .copyright {
     font-size: 12px;
   }
@@ -649,120 +654,120 @@ footer {
   header {
     padding: 12px 16px;
   }
-  
+
   .logo img {
     height: 36px;
   }
-  
+
   .mobile-nav {
     right: 10px;
     min-width: 200px;
     padding: 16px;
   }
-  
+
   .main-content {
     padding: 1.5rem 1rem;
   }
-  
+
   .hero-title {
     font-size: 24px;
     line-height: 1.2;
   }
-  
+
   .hero-img {
     width: 12em;
   }
-  
+
   .white-blur {
     width: 150px;
     height: 50px;
   }
-  
+
   .hero-subtitle {
     font-size: 14px;
     padding: 0 5px;
   }
-  
+
   .donation-card {
     padding: 1.2rem;
   }
-  
+
   .card-icon {
     font-size: 2.5rem;
   }
-  
+
   .card-title {
     font-size: 1.2rem;
   }
-  
+
   .card-description {
     font-size: 13px;
   }
-  
+
   .donation-amounts {
     grid-template-columns: 1fr;
     gap: 0.8rem;
   }
-  
+
   .amount-btn {
     padding: 0.8rem;
     font-size: 16px;
   }
-  
+
   .custom-amount {
     padding: 0.8rem;
     font-size: 16px;
   }
-  
+
   .donate-btn {
     padding: 1.2rem;
     font-size: 1rem;
   }
-  
+
   .impact-section {
     padding: 1.5rem 1rem;
   }
-  
+
   .impact-title {
     font-size: 1.3rem;
   }
-  
+
   .impact-stats {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  
+
   .stat-item {
     padding: 1rem;
   }
-  
+
   .stat-number {
     font-size: 1.8rem;
   }
-  
+
   .payment-methods {
     padding: 1rem;
   }
-  
+
   .payment-title {
     font-size: 1.1rem;
   }
-  
+
   .payment-icons {
     gap: 0.8rem;
   }
-  
+
   .payment-icon {
     width: 45px;
     height: 30px;
     font-size: 1rem;
   }
-  
+
   .footer-content {
     padding: 0 16px;
     gap: 12px;
   }
-  
+
   .social-icons a {
     margin: 0 6px;
   }
@@ -773,24 +778,24 @@ footer {
   .hero-title {
     font-size: 20px;
   }
-  
+
   .hero-img {
     width: 10em;
   }
-  
+
   .donation-card {
     padding: 1rem;
   }
-  
+
   .card-icon {
     font-size: 2rem;
   }
-  
+
   .impact-section,
   .payment-methods {
     padding: 1rem 0.8rem;
   }
-  
+
   .main-content {
     padding: 1rem 0.8rem;
   }

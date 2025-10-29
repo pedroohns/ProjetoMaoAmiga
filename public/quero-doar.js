@@ -1,8 +1,8 @@
 //novo codigo para botao entrar
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const btnEntrar = document.querySelector('.entrar');
   if (btnEntrar) {
-    btnEntrar.addEventListener('click', function() {
+    btnEntrar.addEventListener('click', function () {
       window.location.href = 'tela-login.html';
     });
   }
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
   //novo codigo para botao criar conta
   const btnCriarConta = document.querySelector('.criar-conta');
   if (btnCriarConta) {
-    btnCriarConta.addEventListener('click', function() {
+    btnCriarConta.addEventListener('click', function () {
       window.location.href = 'tela-criar-conta.html';
     });
   }
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
   //codigo pro entrar do menu hamburger
   const btnMobileEntrar = document.querySelector('.mobile-entrar');
   if (btnMobileEntrar) {
-    btnMobileEntrar.addEventListener('click', function() {
+    btnMobileEntrar.addEventListener('click', function () {
       window.location.href = 'tela-login.html';
     });
   }
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
   //codigo do criar conta pro menu hamburger
   const btnMobileCriarConta = document.querySelector('.mobile-criar-conta');
   if (btnMobileCriarConta) {
-    btnMobileCriarConta.addEventListener('click', function() {
+    btnMobileCriarConta.addEventListener('click', function () {
       window.location.href = 'tela-criar-conta.html';
     });
   }
@@ -37,35 +37,35 @@ document.addEventListener('DOMContentLoaded', function() {
 function selectAmount(button, amount) {
   const card = button.closest('.donation-card');
   const buttons = card.querySelectorAll('.amount-btn');
-    buttons.forEach(btn => btn.classList.remove('selected'));
-                        
-    button.classList.add('selected');
-                        
-    const customInput = card.querySelector('.custom-amount');
-    customInput.value = '';
- }
+  buttons.forEach(btn => btn.classList.remove('selected'));
+
+  button.classList.add('selected');
+
+  const customInput = card.querySelector('.custom-amount');
+  customInput.value = '';
+}
 
 function donate(type) {
   let cardIndex;
-    switch(type) {
-      case 'unica': cardIndex = 0; break;
-      case 'mensal': cardIndex = 1; break;
-      case 'projeto': cardIndex = 2; break;
-    }
-            
+  switch (type) {
+    case 'unica': cardIndex = 0; break;
+    case 'mensal': cardIndex = 1; break;
+    case 'projeto': cardIndex = 2; break;
+  }
+
   const card = document.querySelectorAll('.donation-card')[cardIndex];
   const selectedBtn = card.querySelector('.amount-btn.selected');
   const customAmount = card.querySelector('.custom-amount').value;
-            
-   let amount;
-    if (customAmount) {
-      amount = customAmount;
-    } else if (selectedBtn) {
-      amount = selectedBtn.textContent.replace('R$ ', '');
-    }
-    if (amount) {
-      alert(`Obrigado por escolher doar R$ ${amount} - ${type}!`);
-    } else {
-      alert('Por favor, selecione um valor para doar.');
-    }
+
+  let amount;
+  if (customAmount) {
+    amount = customAmount;
+  } else if (selectedBtn) {
+    amount = selectedBtn.textContent.replace('R$ ', '');
+  }
+  if (amount) {
+    alert(`Obrigado por escolher doar R$ ${amount} - ${type}!`);
+  } else {
+    alert('Por favor, selecione um valor para doar.');
+  }
 }

@@ -1,21 +1,17 @@
-// Espera o DOM carregar completamente
-document.addEventListener('DOMContentLoaded', function() {
-  // Seleciona os elementos
+document.addEventListener('DOMContentLoaded', function () {
+
   const btn = document.getElementById('feedback-btn');
   const box = document.getElementById('feedback-box');
   const close = document.getElementById('close-box');
   const send = document.getElementById('send-feedback');
 
-  // Verifica se todos elementos existem (debug)
   if (!btn || !box || !close || !send) {
     console.error('Erro: Algum elemento não foi encontrado. Verifique os IDs no HTML.');
     return;
   }
 
-  // Configuração inicial - esconde a caixa
   box.style.display = 'none';
 
-  // Abrir e fechar
   btn.addEventListener('click', () => {
     box.style.display = 'block';
   });
@@ -24,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
     box.style.display = 'none';
   });
 
-  // Validação do formulário
   send.addEventListener('click', () => {
     const nome = document.getElementById('nome').value.trim();
     const email = document.getElementById('email').value.trim();
@@ -44,8 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     alert(`Obrigado, ${nome}! Sua mensagem foi enviada. Responderemos em até 24 horas.`);
-    
-    // Limpa o formulário
+
     document.getElementById('nome').value = '';
     document.getElementById('email').value = '';
     document.getElementById('tipo').value = '';
@@ -54,8 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 
-
-  // Versão para touch (mobile)
   btn.addEventListener('touchstart', (e) => {
     isDragging = true;
     const touch = e.touches[0];
