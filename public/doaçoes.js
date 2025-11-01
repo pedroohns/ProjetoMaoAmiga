@@ -1,15 +1,15 @@
 //dados das doações
 const donations = [
-  { id: 1, type: 'donation', title: 'Cestas Básicas - Centro', qty: 12, desc: 'Cestas com alimentos básicos, prontas para retirada no centro.', tags: ['Alimentação', 'Urgente'], img: '/public/imagens/cesta-basica.jpeg' },
-  { id: 2, type: 'donation', title: 'Roupas Infantis', qty: 34, desc: 'Doação de roupas para crianças de 0-6 anos. Muitas peças novas.', tags: ['Roupas', 'Infantil'], img: '/public/imagens/roupas.jpeg' },
-  { id: 3, type: 'donation', title: 'Produtos de Higiene', qty: 48, desc: 'Sabonetes, shampoo e itens de higiene pessoal.', tags: ['Higiene'], img: '/public/imagens/limpeza.jpeg' }
+  { id: 1, type: 'donation', title: 'Cestas Básicas - Centro', qty: 12, desc: 'Cestas com alimentos básicos, prontas para retirada no centro.', tags: ['Alimentação', 'Urgente'], img: 'imagens/cesta-basica.jpeg' },
+  { id: 2, type: 'donation', title: 'Roupas Infantis', qty: 34, desc: 'Doação de roupas para crianças de 0-6 anos. Muitas peças novas.', tags: ['Roupas', 'Infantil'], img: 'imagens/roupas.jpeg' },
+  { id: 3, type: 'donation', title: 'Produtos de Higiene', qty: 48, desc: 'Sabonetes, shampoo e itens de higiene pessoal.', tags: ['Higiene'], img: 'imagens/limpeza.jpeg' }
 ];
 
 //dados dos projetos sociais 
 const projects = [
-  { id: 101, type: 'project', title: 'Refeição Solidária', location: 'Bairro São José', desc: 'Projeto que oferece jantares comunitários 3x por semana.', tags: ['Alimentação', 'Voluntariado'], img: '/public/imagens/marmita.jpeg' },
-  { id: 102, type: 'project', title: 'Oficina de Alfabetização', location: 'Comunidade Vale Verde', desc: 'Aulas para crianças e adultos que não tiveram acesso à escola.', tags: ['Educação', 'Comunidade'], img: '/public/imagens/alfabetizaçao.jpeg' },
-  { id: 103, type: 'project', title: 'Escola de Judo', location: 'Unidade Volta Redonda', desc: 'Escola de judo 3x por semana com Professor Renato.', tags: ['Arte Marcial', 'Defesa Pessoal'], img: '/public/imagens/judo.jpeg' }
+  { id: 101, type: 'project', title: 'Refeição Solidária', location: 'Bairro São José', desc: 'Projeto que oferece jantares comunitários 3x por semana.', tags: ['Alimentação', 'Voluntariado'], img: 'imagens/marmita.jpeg' },
+  { id: 102, type: 'project', title: 'Oficina de Alfabetização', location: 'Comunidade Vale Verde', desc: 'Aulas para crianças e adultos que não tiveram acesso à escola.', tags: ['Educação', 'Comunidade'], img: 'imagens/alfabetizaçao.jpeg' },
+  { id: 103, type: 'project', title: 'Escola de Judo', location: 'Unidade Volta Redonda', desc: 'Escola de judo 3x por semana com Professor Renato.', tags: ['Arte Marcial', 'Defesa Pessoal'], img: 'imagens/judo.jpeg' }
 ];
 
 function makeCard(item) {
