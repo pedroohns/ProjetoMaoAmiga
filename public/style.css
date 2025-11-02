@@ -248,7 +248,6 @@ main {
 
 .hero h1 {
   font-family: 'Nohemi', sans-serif;
-  font-size: 38px;
   font-weight: 900;
   margin-bottom: 18px;
   color: #111;
@@ -697,10 +696,6 @@ footer {
 
   .desktop-nav {
     gap: 2rem;
-  }
-
-  .hero h1 {
-    font-size: clamp(22px, 3.5vw, 36px);
   }
 
   .hero-cards {
