@@ -114,7 +114,7 @@ nav a.active {
   color: #e6eaff;
 }
 
-/* Menu hamburguer */
+/* menu hamburguer */
 .menu-toggle {
   display: none;
 }
@@ -175,7 +175,7 @@ nav a.active {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Botões de autenticação no menu mobile */
+/* botoes de entrar e criarconta mobile */
 .mobile-auth-buttons {
   display: flex;
   gap: 12px;
@@ -420,7 +420,6 @@ footer {
 }
 
 .quem-somos .section-title {
-  font-size: 36px;
   font-family: 'Nohemi', sans-serif;
   color: #111;
   margin-bottom: 24px;

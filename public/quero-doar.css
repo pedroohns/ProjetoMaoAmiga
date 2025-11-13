@@ -112,7 +112,7 @@ header {
   color: #e6eaff;
 }
 
-/* Menu hamburguer */
+/* menu hamburguer */
 .menu-toggle {
   display: none;
 }
@@ -227,7 +227,6 @@ header {
 
 .hero-title {
   font-family: 'Nohemi', sans-serif;
-  font-size: 38px;
   font-weight: 900;
   margin-bottom: 18px;
   color: #111;
@@ -271,7 +270,7 @@ header {
 .donation-card {
   background: transparent;
   border-radius: 16px;
-  padding: 2rem;
+  padding: 1.5rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   border: 6px solid #6d7dfc;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -317,6 +316,7 @@ header {
   cursor: pointer;
   transition: all 0.3s;
   text-align: center;
+  white-space: nowrap;
 }
 
 .amount-btn:hover,

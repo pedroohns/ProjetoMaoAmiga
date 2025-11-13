@@ -231,7 +231,7 @@ main {
   width: 20em;
   margin-bottom: -15px;
   position: relative;
-  z-index: 2;
+  z-index: 2;   
 }
 
 .white-blur {
