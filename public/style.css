@@ -663,9 +663,8 @@ footer {
   color: #555;
 }
 
-/* RESPONSIVIDADE OTIMIZADA - PÁGINA INICIAL */
+/* RESPONSIVIDADE */
 
-/* Mobile Portrait (até 767px) - Menu Hamburguer */
 @media (max-width: 767px) {
   header {
     padding: 16px 20px;
@@ -688,7 +687,6 @@ footer {
     display: flex;
   }
 
-  /* Hero mobile */
   main {
     margin-top: 80px;
   }
@@ -722,7 +720,6 @@ footer {
     font-size: 15px;
   }
 
-  /* HERO CARDS - EMPILHADOS VERTICALMENTE */
   .hero-cards {
     flex-direction: column !important;
     max-width: 100% !important;
@@ -762,7 +759,6 @@ footer {
     width: 100% !important;
   }
 
-  /* INFO BOXES MOBILE */
   .info-boxes {
     flex-direction: column;
     gap: 24px;
@@ -798,7 +794,6 @@ footer {
   }
 }
 
-/* Mobile Landscape (altura pequena indica mobile em landscape) - Menu Hamburguer */
 @media (max-height: 500px) and (orientation: landscape) {
   header {
     padding: 12px 20px;
@@ -851,7 +846,6 @@ footer {
     max-width: 48%;
   }
 
-  /* HERO CARDS LANDSCAPE - LADO A LADO MAS MENOR */
   .hero-cards {
     flex-direction: row !important;
     gap: 16px !important;
@@ -909,7 +903,6 @@ footer {
   }
 }
 
-/* Tablet Portrait (768px - 1024px + portrait) - Menu Hamburguer */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   header {
     padding: 20px 30px;
@@ -932,7 +925,6 @@ footer {
     font-size: 36px;
   }
 
-  /* HERO CARDS - EMPILHADOS NO TABLET PORTRAIT */
   .hero-cards {
     flex-direction: column;
     max-width: 600px;
@@ -962,7 +954,6 @@ footer {
   }
 }
 
-/* Tablet Landscape (768px - 1279px) - Menu Desktop Compacto */
 @media (min-width: 768px) and (max-width: 1279px) and (orientation: landscape) {
   header {
     padding: 18px 24px;
@@ -1005,7 +996,6 @@ footer {
     font-size: 16px;
   }
 
-  /* HERO CARDS - LADO A LADO NO TABLET LANDSCAPE */
   .hero-cards {
     max-width: 90%;
     gap: 28px;
@@ -1052,7 +1042,6 @@ footer {
   }
 }
 
-/* Tablet Landscape Grande (1024px - 1279px) */
 @media (min-width: 1024px) and (max-width: 1279px) and (orientation: landscape) {
   nav {
     gap: 3.5rem;
@@ -1080,7 +1069,6 @@ footer {
   }
 }
 
-/* Desktop (1280px+) */
 @media (min-width: 1280px) {
   .mobile-menu,
   .hamburger {
@@ -1093,7 +1081,6 @@ footer {
   }
 }
 
-/* Mobile pequeno */
 @media (max-width: 480px) {
   .hero h1 {
     font-size: 24px;
