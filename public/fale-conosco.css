@@ -522,49 +522,14 @@ footer {
 
 /* RESPONSIVIDADE */
 
-/* Tablet (768px - 1024px) */
-@media (max-width: 1024px) {
-  .desktop-nav {
-    gap: 2rem;
-  }
-
-  .contact-cards {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-
-  .hero-title {
-    font-size: 32px;
-  }
-
-  .hero-img {
-    width: 18em;
-  }
-
-  .hours-content {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .desktop-nav,
-  .auth-buttons {
-    display: none;
-  }
-
-  .mobile-menu {
-    display: block;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-}
-
-/* Mobile Large (481px - 768px) */
-@media (max-width: 768px) {
-
-  /* Header Mobile */
+/* mobile portrait */
+@media (max-width: 767px) {
   header {
     padding: 16px 24px;
+  }
+
+  .logo img {
+    height: 36px;
   }
 
   .desktop-nav,
@@ -584,7 +549,6 @@ footer {
     top: 70px;
   }
 
-  /* Main Content */
   .main-content {
     padding: 2rem 1.5rem;
     margin-top: 20px;
@@ -614,7 +578,6 @@ footer {
     padding: 0 10px;
   }
 
-  /* Contact Cards - Stack vertically */
   .contact-cards {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -634,7 +597,6 @@ footer {
     margin-bottom: 1.5rem;
   }
 
-  /* Contact Form */
   .contact-form-section {
     padding: 2rem 1.5rem;
     margin-bottom: 2.5rem;
@@ -650,7 +612,6 @@ footer {
     gap: 0;
   }
 
-  /* Hours Section */
   .hours-section {
     padding: 1.5rem;
   }
@@ -665,7 +626,6 @@ footer {
     gap: 1rem;
   }
 
-  /* Footer */
   .footer-content {
     padding: 0 24px;
     flex-direction: column;
@@ -686,7 +646,204 @@ footer {
   }
 }
 
-/* Mobile Small (320px - 480px) */
+/* mobile landscape */
+@media (max-height: 500px) and (orientation: landscape) {
+  header {
+    padding: 12px 20px;
+  }
+
+  .logo img {
+    height: 36px;
+  }
+
+  .desktop-nav,
+  .auth-buttons {
+    display: none !important;
+  }
+
+  .mobile-menu {
+    display: block !important;
+  }
+
+  .hamburger {
+    display: flex !important;
+  }
+
+  .main-content {
+    padding: 1.5rem 1rem;
+    margin-top: 10px;
+  }
+
+  .hero-img {
+    width: 140px;
+  }
+
+  .white-blur {
+    width: 150px;
+    height: 50px;
+  }
+
+  .hero-title {
+    font-size: 22px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+  }
+
+  .contact-cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .contact-card {
+    padding: 1rem;
+  }
+
+  .card-icon {
+    font-size: 2rem;
+  }
+
+  .contact-form-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .hours-content {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+/* tablet portrait */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  header {
+    padding: 20px 30px;
+  }
+
+  .desktop-nav,
+  .auth-buttons {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .contact-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .hero-img {
+    width: 18em;
+  }
+
+  .hours-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* tablet landscape */
+@media (min-width: 768px) and (max-width: 1279px) and (orientation: landscape) {
+  header {
+    padding: 18px 24px;
+  }
+
+  .logo img {
+    height: 38px;
+  }
+
+  .desktop-nav {
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  .desktop-nav a {
+    font-size: 14px;
+    padding: 6px 0;
+  }
+
+  .auth-buttons {
+    display: flex;
+  }
+
+  .auth-buttons button {
+    padding: 10px 18px;
+    font-size: 14px;
+    margin-left: 8px;
+  }
+
+  .mobile-menu,
+  .hamburger {
+    display: none;
+  }
+
+  .main-content {
+    padding: 2.5rem 2rem;
+    margin-top: 30px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .hero-img {
+    width: 18em;
+  }
+
+  .contact-cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .hours-content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* tablet landscape agrande */
+@media (min-width: 1024px) and (max-width: 1279px) and (orientation: landscape) {
+  .desktop-nav {
+    gap: 3.5rem;
+  }
+
+  .desktop-nav a {
+    font-size: 15px;
+  }
+
+  .auth-buttons button {
+    padding: 11px 20px;
+    font-size: 15px;
+  }
+
+  .contact-cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* desktop (1280px ou mais) */
+@media (min-width: 1280px) {
+  .mobile-menu,
+  .hamburger {
+    display: none;
+  }
+
+  .desktop-nav,
+  .auth-buttons {
+    display: flex;
+  }
+}
+
+/* mobile menro */
 @media (max-width: 480px) {
   header {
     padding: 12px 16px;
@@ -767,7 +924,7 @@ footer {
   }
 }
 
-/* Very Small Screens (max-width: 320px) */
+/* mobile menor ainda - teste */
 @media (max-width: 320px) {
   .hero-title {
     font-size: 20px;
