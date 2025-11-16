@@ -461,39 +461,16 @@ main {
   padding: 10px 32px;
   cursor: pointer;
   transition: background 0.2s, color 0.2s, border 0.2s;
-}
-
-.btn-primary {
   background: #6d7dfc;
   color: #fff;
   white-space: nowrap;
-}
-
-.btn-secondary {
-  background: #fff;
-  color: #7b91c7;
   border: 2px solid #6d7dfc;
+  margin: 0 auto;
 }
 
-.steps {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 20px;
-  text-align: left;
-}
-
-.steps li {
-  font-size: 15px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.steps li strong {
+.btn-primary:hover {
+  background: #fff;
   color: #6d7dfc;
-  font-weight: bold;
-  font-size: 16px;
 }
 
 /* AS BOXES DE INFORMAÇÃO (INFO-BOXES) */
@@ -686,12 +663,16 @@ footer {
   color: #555;
 }
 
-/* RESPONSIVIDADE */
+/* RESPONSIVIDADE OTIMIZADA - PÁGINA INICIAL */
 
-/* mobile portrait (até 767px) - acionar o menu hamburger como padrao */
+/* Mobile Portrait (até 767px) - Menu Hamburguer */
 @media (max-width: 767px) {
   header {
     padding: 16px 20px;
+  }
+
+  .logo img {
+    height: 36px;
   }
 
   .desktop-nav,
@@ -706,9 +687,118 @@ footer {
   .hamburger {
     display: flex;
   }
+
+  /* Hero mobile */
+  main {
+    margin-top: 80px;
+  }
+
+  .hero {
+    padding: 30px 16px;
+  }
+
+  .hero-img {
+    width: 200px;
+  }
+
+  .hero h1 {
+    white-space: normal;
+    font-size: 28px;
+    overflow-x: visible;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .actions {
+    gap: 16px;
+    flex-direction: column;
+  }
+
+  .btn {
+    min-width: 100%;
+    max-width: 100%;
+    font-size: 15px;
+  }
+
+  /* HERO CARDS - EMPILHADOS VERTICALMENTE */
+  .hero-cards {
+    flex-direction: column !important;
+    max-width: 100% !important;
+    margin: 38px auto 0 auto;
+    padding: 0 16px;
+    gap: 24px !important;
+  }
+
+  .hero-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    padding: 24px !important;
+  }
+
+  .hero-card.left,
+  .hero-card.right {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .hero-card h1 {
+    font-size: 1.5rem !important;
+  }
+
+  .hero-card.right h2 {
+    font-size: 1.3rem !important;
+  }
+
+  .hero-stats {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .stat {
+    min-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* INFO BOXES MOBILE */
+  .info-boxes {
+    flex-direction: column;
+    gap: 24px;
+    padding: 0 16px;
+  }
+
+  .info-link {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .info-box {
+    width: 100%;
+    height: 320px;
+  }
+
+  .testimonial-box {
+    margin: 30px 16px;
+  }
+
+  #feedback-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+  }
+
+  #feedback-box {
+    width: calc(100% - 32px);
+    right: 16px;
+    left: 16px;
+    bottom: 90px;
+  }
 }
 
-/* mobile landscape (altura pequena indica mobile em landscape) - tambem DEVE acionar o menu hamburg */
+/* Mobile Landscape (altura pequena indica mobile em landscape) - Menu Hamburguer */
 @media (max-height: 500px) and (orientation: landscape) {
   header {
     padding: 12px 20px;
@@ -734,9 +824,92 @@ footer {
   main {
     margin-top: 70px;
   }
+
+  .hero {
+    padding: 20px 16px;
+  }
+
+  .hero-img {
+    width: 160px;
+  }
+
+  .hero h1 {
+    font-size: 24px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .actions {
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  .btn {
+    min-width: 45%;
+    max-width: 48%;
+  }
+
+  /* HERO CARDS LANDSCAPE - LADO A LADO MAS MENOR */
+  .hero-cards {
+    flex-direction: row !important;
+    gap: 16px !important;
+    padding: 0 16px;
+    max-width: 100%;
+  }
+
+  .hero-card {
+    padding: 16px !important;
+    flex: 1 !important;
+  }
+
+  .hero-card h1 {
+    font-size: 1.1rem !important;
+  }
+
+  .hero-card.right h2 {
+    font-size: 1.2rem !important;
+  }
+
+  .hero-card p {
+    font-size: 0.9rem !important;
+  }
+
+  .hero-stats {
+    flex-direction: row !important;
+    gap: 8px !important;
+  }
+
+  .stat {
+    min-width: auto !important;
+    padding: 12px 14px !important;
+  }
+
+  .stat-value {
+    font-size: 1rem !important;
+  }
+
+  .stat-label {
+    font-size: 0.75rem !important;
+  }
+
+  .info-boxes {
+    flex-direction: row;
+    gap: 16px;
+    padding: 0 16px;
+  }
+
+  .info-link {
+    max-width: 32%;
+  }
+
+  .info-box {
+    height: 280px;
+  }
 }
 
-/* tablet portrait (768px - 1024px + portrait) - acionar o menu hamburger apenas aqui */
+/* Tablet Portrait (768px - 1024px + portrait) - Menu Hamburguer */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   header {
     padding: 20px 30px;
@@ -755,22 +928,41 @@ footer {
     display: flex;
   }
 
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  /* HERO CARDS - EMPILHADOS NO TABLET PORTRAIT */
   .hero-cards {
     flex-direction: column;
     max-width: 600px;
+    gap: 28px;
   }
 
-  .info-boxes {
-    flex-wrap: wrap;
-    gap: 40px;
+  .hero-card {
+    width: 100%;
+    padding: 28px;
+  }
+
+.info-boxes {
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    padding: 0 40px;
   }
 
   .info-link {
-    max-width: 45%;
+    max-width: 80%;
+    width: 80%;
+  }
+
+  .info-box {
+    width: 100%;
+    height: 380px;
   }
 }
 
-/* tablets landscape (768px - 1279px) - nao acionar o mn ham, apenas compactar o nav e ajustar outras partes */
+/* Tablet Landscape (768px - 1279px) - Menu Desktop Compacto */
 @media (min-width: 768px) and (max-width: 1279px) and (orientation: landscape) {
   header {
     padding: 18px 24px;
@@ -813,13 +1005,16 @@ footer {
     font-size: 16px;
   }
 
+  /* HERO CARDS - LADO A LADO NO TABLET LANDSCAPE */
   .hero-cards {
     max-width: 90%;
     gap: 28px;
+    flex-direction: row;
   }
 
   .hero-card {
     padding: 28px;
+    flex: 1;
   }
 
   .hero-card h1 {
@@ -846,7 +1041,9 @@ footer {
   }
 
   .info-link {
-    max-width: 45%;
+    flex: 1 1 calc(33.333% - 32px);
+    max-width: calc(33.333% - 22px);
+    min-width: 280px;
   }
 
   .info-box {
@@ -855,7 +1052,7 @@ footer {
   }
 }
 
-/* tablets landscape grande (1024px - 1279px) - algo parecido */
+/* Tablet Landscape Grande (1024px - 1279px) */
 @media (min-width: 1024px) and (max-width: 1279px) and (orientation: landscape) {
   nav {
     gap: 3.5rem;
@@ -883,7 +1080,7 @@ footer {
   }
 }
 
-/* desktop (1280px ou mais) */
+/* Desktop (1280px+) */
 @media (min-width: 1280px) {
   .mobile-menu,
   .hamburger {
@@ -896,111 +1093,7 @@ footer {
   }
 }
 
-/* mobile (max-width: 767px) */
-@media (max-width: 767px) {
-  header {
-    padding: 16px 20px;
-  }
-
-  .desktop-nav,
-  .auth-buttons {
-    display: none;
-  }
-
-  .mobile-menu {
-    display: block;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-
-  main {
-    margin-top: 80px;
-  }
-
-  .hero {
-    padding: 30px 16px;
-  }
-
-  .hero-img {
-    width: 200px;
-  }
-
-  .hero h1 {
-    white-space: normal;
-    font-size: 28px;
-    overflow-x: visible;
-  }
-
-  .hero p {
-    font-size: 16px;
-  }
-
-  .actions {
-    gap: 16px;
-  }
-
-  .btn {
-    min-width: 100%;
-    font-size: 15px;
-  }
-
-  .hero-cards {
-    padding: 0 16px;
-    gap: 24px;
-  }
-
-  .hero-card {
-    padding: 24px;
-  }
-
-  .hero-card h1 {
-    font-size: 1.5rem;
-  }
-
-  .hero-card h2 {
-    font-size: 1.3rem;
-  }
-
-  .hero-stats {
-    flex-direction: column;
-  }
-
-  .stat {
-    min-width: 100%;
-  }
-
-  .info-boxes {
-    flex-direction: column;
-    gap: 24px;
-    padding: 0 16px;
-  }
-
-  .info-link {
-    max-width: 100%;
-  }
-
-  .info-box {
-    height: 320px;
-  }
-
-  #feedback-btn {
-    bottom: 20px;
-    right: 20px;
-    width: 56px;
-    height: 56px;
-  }
-
-  #feedback-box {
-    width: calc(100% - 32px);
-    right: 16px;
-    left: 16px;
-    bottom: 90px;
-  }
-}
-
-/* mobile pequeno */
+/* Mobile pequeno */
 @media (max-width: 480px) {
   .hero h1 {
     font-size: 24px;
