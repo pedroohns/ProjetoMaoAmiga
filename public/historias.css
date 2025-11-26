@@ -263,6 +263,21 @@ footer {
   color: #555;
 }
 
-.conteudo {
-    padding-top: 870px;
+.hero-img {
+  width: 20em;
+  margin-bottom: -15px;
+  position: relative;
+  z-index: 2;   
+}
+
+.white-blur {
+  width: 250px;
+  height: 80px;
+  margin: -50px auto 24px;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.8) 60%, rgba(123, 145, 199, 0.15) 100%);
+  filter: blur(18px);
+  border-radius: 50px;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
 }
