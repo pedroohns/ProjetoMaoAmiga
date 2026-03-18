@@ -8,11 +8,11 @@ const pool = new Pool({
   user:     process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   ssl: {
-    rejectUnauthorized: false // necessário para o Supabase
+    rejectUnauthorized: false // necessario pra utilizar o supabase
   }
 });
 
-// Testa a conexão ao iniciar
+// testa a conexao ao iniciar
 pool.connect((err, client, release) => {
   if (err) {
     console.error('❌ Erro ao conectar ao banco de dados:', err.message);

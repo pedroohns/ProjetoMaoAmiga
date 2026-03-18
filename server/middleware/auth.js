@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-// Middleware que verifica se o token JWT é válido
-// Adiciona req.usuario com os dados do usuário logado
+// middleware que verifica se o JWT é valido
+// adiciona req.usuario com os dados do usuario logado
 function autenticar(req, res, next) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1]; // formato: "Bearer <token>"
@@ -20,7 +20,7 @@ function autenticar(req, res, next) {
   });
 }
 
-// Middleware opcional — não bloqueia, mas anexa o usuário se o token existir
+// middleware opcional — nao bloqueia, mas anexa o usuario se o token existir
 function autenticarOpcional(req, res, next) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];

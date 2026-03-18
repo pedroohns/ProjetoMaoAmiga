@@ -402,6 +402,7 @@ body {
   border: 1px solid rgba(109, 125, 252, 0.1);
   transition: box-shadow 0.2s, transform 0.2s;
   animation: fadeInUp 0.4s ease both;
+  margin-bottom: 10px;
 }
 
 .post-card:hover {

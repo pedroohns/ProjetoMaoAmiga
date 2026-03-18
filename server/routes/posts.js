@@ -5,7 +5,7 @@ const { autenticar, autenticarOpcional } = require('../middleware/auth');
 
 // ============================
 // GET /api/posts
-// Lista posts do feed com paginação e filtro por tipo
+// lista posts do feed com paginaçao e filtro por tipo
 // ============================
 router.get('/', autenticarOpcional, async (req, res) => {
   const { tipo, ordem = 'recentes', pagina = 1, limite = 10 } = req.query;
@@ -67,7 +67,7 @@ router.get('/', autenticarOpcional, async (req, res) => {
 
 // ============================
 // POST /api/posts
-// Cria um novo post (requer login)
+// cria um novo post (requer login)
 // ============================
 router.post('/', autenticar, async (req, res) => {
   const { tipo, conteudo } = req.body;
@@ -102,7 +102,7 @@ router.post('/', autenticar, async (req, res) => {
 
 // ============================
 // DELETE /api/posts/:id
-// Remove um post (só o dono pode apagar)
+// remove um post (so o dono do post pode apagar)
 // ============================
 router.delete('/:id', autenticar, async (req, res) => {
   const postId = req.params.id;
@@ -130,28 +130,28 @@ router.delete('/:id', autenticar, async (req, res) => {
 
 // ============================
 // POST /api/posts/:id/curtir
-// Curtir ou descurtir um post
+// curtir ou descurtir um post
 // ============================
 router.post('/:id/curtir', autenticar, async (req, res) => {
   const postId = req.params.id;
   const usuarioId = req.usuario.id;
 
   try {
-    // Verifica se já curtiu
+    // verifica se ja curtiu
     const jaCurtiu = await pool.query(
       'SELECT id FROM curtidas WHERE usuario_id = $1 AND post_id = $2',
       [usuarioId, postId]
     );
 
     if (jaCurtiu.rows.length > 0) {
-      // Descurtir
+      // descurtir
       await pool.query(
         'DELETE FROM curtidas WHERE usuario_id = $1 AND post_id = $2',
         [usuarioId, postId]
       );
       return res.status(200).json({ curtido: false, mensagem: 'Curtida removida.' });
     } else {
-      // Curtir
+      // curtir
       await pool.query(
         'INSERT INTO curtidas (usuario_id, post_id) VALUES ($1, $2)',
         [usuarioId, postId]
@@ -167,7 +167,7 @@ router.post('/:id/curtir', autenticar, async (req, res) => {
 
 // ============================
 // GET /api/posts/:id/comentarios
-// Lista comentários de um post
+// lista comentarios de um post
 // ============================
 router.get('/:id/comentarios', async (req, res) => {
   const postId = req.params.id;
@@ -199,7 +199,7 @@ router.get('/:id/comentarios', async (req, res) => {
 
 // ============================
 // POST /api/posts/:id/comentarios
-// Adiciona um comentário (requer login)
+// adiciona um comentario (requer login)
 // ============================
 router.post('/:id/comentarios', autenticar, async (req, res) => {
   const postId    = req.params.id;

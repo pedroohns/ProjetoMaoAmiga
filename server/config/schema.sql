@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS curtidas (
   usuario_id  INT                 NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
   post_id     INT                 NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
   criado_em   TIMESTAMP           NOT NULL DEFAULT NOW(),
-  UNIQUE (usuario_id, post_id)   -- um usuário só pode curtir um post uma vez
+  UNIQUE (usuario_id, post_id)   -- um usuario só pode curtir um post uma vez
 );
 
 -- ============================
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS seguidores (
 );
 
 -- ============================
--- ÍNDICES (para melhorar performance)
+-- INDICES (para melhorar performance)
 -- ============================
 CREATE INDEX IF NOT EXISTS idx_posts_usuario    ON posts(usuario_id);
 CREATE INDEX IF NOT EXISTS idx_posts_tipo       ON posts(tipo);
@@ -84,9 +84,9 @@ CREATE INDEX IF NOT EXISTS idx_comentarios_post ON comentarios(post_id);
 CREATE INDEX IF NOT EXISTS idx_seguidores_seguido ON seguidores(seguido_id);
 
 -- ============================
--- DADOS DE EXEMPLO (opcional)
+-- DADOS DE EXEMPLO (teste)
 -- ============================
--- Descomente abaixo para inserir dados de teste
+-- tem que tirar dos comentarios pra testar posteriormente
 
 /*
 INSERT INTO usuarios (nome, email, senha_hash, tipo, localidade) VALUES

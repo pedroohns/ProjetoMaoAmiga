@@ -9,7 +9,7 @@ const app = express();
 // MIDDLEWARES GLOBAIS
 // ============================
 app.use(cors({
-  origin: '*', // Em produção, troque pelo domínio do seu front-end
+  origin: '*', // em produçao, trocar pelo dominio do frontend 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -17,7 +17,7 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve os arquivos estáticos do front-end
+// serve os arquivos estaticos
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // ============================
@@ -26,12 +26,12 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use('/api/auth',  require('./routes/auth'));
 app.use('/api/posts', require('./routes/posts'));
 
-// Rota de saúde — útil pra checar se o servidor está de pé
+// rota pra checar se o servidor está de pé
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'ok', mensagem: 'Servidor Mão Amiga rodando!' });
 });
 
-// Qualquer outra rota serve o index.html (SPA fallback)
+// qualquer outra rota serve o index.html (SPA fallback)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });

@@ -7,12 +7,12 @@ require('dotenv').config();
 
 // ============================
 // POST /api/auth/cadastro
-// Cria um novo usuário
+// cria um novo usuario
 // ============================
 router.post('/cadastro', async (req, res) => {
   const { nome, email, senha, tipo, localidade } = req.body;
 
-  // Validações básicas
+  // validaçao (ja tinha antes)
   if (!nome || !email || !senha) {
     return res.status(400).json({ erro: 'Nome, e-mail e senha são obrigatórios.' });
   }
@@ -25,7 +25,7 @@ router.post('/cadastro', async (req, res) => {
   const tipoFinal = tiposValidos.includes(tipo) ? tipo : 'beneficiado';
 
   try {
-    // Verifica se o e-mail já está em uso
+    // verifica se o email ja esta em uso
     const emailExiste = await pool.query(
       'SELECT id FROM usuarios WHERE email = $1',
       [email.toLowerCase().trim()]
@@ -35,10 +35,10 @@ router.post('/cadastro', async (req, res) => {
       return res.status(409).json({ erro: 'Este e-mail já está cadastrado.' });
     }
 
-    // Gera o hash da senha (custo 10 = bom equilíbrio segurança/velocidade)
+    // hash da senha
     const senhaHash = await bcrypt.hash(senha, 10);
 
-    // Insere o usuário no banco
+    // insere o usuario dentor do banco
     const resultado = await pool.query(
       `INSERT INTO usuarios (nome, email, senha_hash, tipo, localidade)
        VALUES ($1, $2, $3, $4, $5)
@@ -54,7 +54,7 @@ router.post('/cadastro', async (req, res) => {
 
     const usuario = resultado.rows[0];
 
-    // Gera o token JWT
+    // gera o JWT
     const token = jwt.sign(
       { id: usuario.id, nome: usuario.nome, email: usuario.email, tipo: usuario.tipo },
       process.env.JWT_SECRET,
@@ -82,7 +82,7 @@ router.post('/cadastro', async (req, res) => {
 
 // ============================
 // POST /api/auth/login
-// Autentica um usuário existente
+// autentica o usuario existente
 // ============================
 router.post('/login', async (req, res) => {
   const { email, senha } = req.body;
@@ -92,7 +92,7 @@ router.post('/login', async (req, res) => {
   }
 
   try {
-    // Busca o usuário pelo e-mail
+    // busca o usuario por e-mail
     const resultado = await pool.query(
       'SELECT * FROM usuarios WHERE email = $1',
       [email.toLowerCase().trim()]
@@ -104,15 +104,15 @@ router.post('/login', async (req, res) => {
 
     const usuario = resultado.rows[0];
 
-    // Compara a senha com o hash
+    // senha = hash
     const senhaCorreta = await bcrypt.compare(senha, usuario.senha_hash);
 
     if (!senhaCorreta) {
-      // Mesma mensagem intencional — não revelamos qual dos dois está errado
+      // mensagem intencional sem revelar qual ta errado
       return res.status(401).json({ erro: 'E-mail ou senha incorretos.' });
     }
 
-    // Gera o token JWT
+    // gera o JWT
     const token = jwt.sign(
       { id: usuario.id, nome: usuario.nome, email: usuario.email, tipo: usuario.tipo },
       process.env.JWT_SECRET,
@@ -140,7 +140,7 @@ router.post('/login', async (req, res) => {
 
 // ============================
 // GET /api/auth/me
-// Retorna os dados do usuário logado
+// retorna os dados do usuario logado
 // ============================
 const { autenticar } = require('../middleware/auth');
 
