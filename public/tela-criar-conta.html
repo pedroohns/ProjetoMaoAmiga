@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,17 +8,12 @@
   <link rel="icon" href="imagens/maozinha.ico">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
 </head>
-
 <body>
-
   <div class="register-container">
     <div class="register-card">
-
       <img src="imagens/logo-blue.png" alt="Logo Mão Amiga" class="logo">
-
       <h2>Criar Conta</h2>
       <p class="subtitle">Preencha seus dados para começar</p>
-
       <form id="form-criar-conta">
         <div class="input-group">
           <input type="text" name="nome" placeholder="Nome completo" required>
@@ -33,9 +27,16 @@
         <div class="input-group">
           <input type="password" name="confirmarSenha" placeholder="Confirmar senha" required>
         </div>
+        <div class="input-group">
+          <select name="tipo" required>
+            <option value="" disabled selected>Como você quer participar?</option>
+            <option value="beneficiado">Preciso de ajuda</option>
+            <option value="doador">Quero doar</option>
+            <option value="voluntario">Quero ser voluntário</option>
+          </select>
+        </div>
         <button type="submit" class="btn-register">Criar Conta</button>
       </form>
-
       <p class="links">
         Já tem uma conta? <a href="tela-login.html">Entrar</a>
         <br>
@@ -44,8 +45,6 @@
       </p>
     </div>
   </div>
-
   <script src="tela-criar-conta.js"></script>
 </body>
-
 </html>

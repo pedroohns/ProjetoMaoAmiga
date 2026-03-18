@@ -1,15 +1,17 @@
+const API = 'https://projetomaoamiga-production.up.railway.app';
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form-criar-conta");
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const nome = form.nome.value.trim();
-    const email = form.email.value.trim();
-    const senha = form.senha.value.trim();
+    const nome          = form.nome.value.trim();
+    const email         = form.email.value.trim();
+    const senha         = form.senha.value.trim();
     const confirmarSenha = form.confirmarSenha.value.trim();
+    const tipo          = form.tipo ? form.tipo.value : 'beneficiado';
 
-    //remove mensagens antigas
     removerErros(form);
 
     let valido = true;
@@ -17,9 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!nome) {
       mostrarErro(form.nome, "Digite seu nome completo.");
       valido = false;
-    } else if (nome.lenght < 3 || !nome.includes(" ")) {
+    } else if (nome.length < 3 || !nome.includes(" ")) {
       mostrarErro(form.nome, "Digite seu nome completo (nome e sobrenome).");
-      valido = false
+      valido = false;
     }
 
     if (!email) {
@@ -46,11 +48,56 @@ document.addEventListener("DOMContentLoaded", () => {
       valido = false;
     }
 
-    if (valido) {
-      alert("Conta criada com sucesso!");
-      form.reset();
+    if (!valido) return;
+
+    // Desabilita o botão durante a requisição
+    const btnCriar = form.querySelector('.btn-register');
+    btnCriar.disabled = true;
+    btnCriar.textContent = 'Criando conta...';
+
+    try {
+      const resposta = await fetch(`${API}/api/auth/cadastro`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome, email, senha, tipo })
+      });
+
+      const dados = await resposta.json();
+
+      if (!resposta.ok) {
+        // Erro vindo da API (ex: e-mail já cadastrado)
+        mostrarMensagem(dados.erro || 'Erro ao criar conta.', 'red');
+        return;
+      }
+
+      // Salva o token e dados do usuário no localStorage
+      localStorage.setItem('token', dados.token);
+      localStorage.setItem('usuario', JSON.stringify(dados.usuario));
+
+      // Redireciona para a página inicial
+      window.location.href = 'index.html';
+
+    } catch (err) {
+      mostrarMensagem('Erro de conexão. Tente novamente.', 'red');
+    } finally {
+      btnCriar.disabled = false;
+      btnCriar.textContent = 'Criar Conta';
     }
   });
+
+  function mostrarMensagem(texto, cor) {
+    let msg = document.getElementById('mensagem-cadastro');
+    if (!msg) {
+      msg = document.createElement('p');
+      msg.id = 'mensagem-cadastro';
+      form.appendChild(msg);
+    }
+    msg.textContent = texto;
+    msg.style.color = cor;
+    msg.style.marginTop = '12px';
+    msg.style.textAlign = 'center';
+    msg.style.fontSize = '14px';
+  }
 
   function validarEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
