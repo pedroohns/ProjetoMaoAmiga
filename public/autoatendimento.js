@@ -83,10 +83,9 @@ async function sendToApi(userText) {
     const wantsFirefighter = txt.includes('bombeiro') || txt.includes('fogo') || txt.includes('incendio') || txt.includes('desastre');
     const wantsSamu = txt.includes('samu') || txt.includes('medico') || txt.includes('ambulancia') || txt.includes('acidente') || txt.includes('doente');
     const wantsJobs = txt.includes('emprego') || txt.includes('vaga') || txt.includes('trabalho');
-    // NOVO: Adiciona a intenção para o novo fluxo
     const wantsHowHelp = txt.includes('como ajuda') || txt.includes('como funciona') || txt.includes('como a mao amiga ajuda') || txt.includes('como o site ajuda');
 
-    // PRIORIDADE 1: FLUXO DE EMERGÊNCIA
+    // PRIORIDADE 1: FLUXO DE EMERGÊNCIA 
     if (conversationContext.emergencyFlow) {
         if (!conversationContext.addressProvided) {
             conversationContext.addressProvided = true;
@@ -245,7 +244,7 @@ async function sendToApi(userText) {
         return curiosidades[conversationContext.lastCuriosityIndex] + '<br><br>Se quiser ouvir outra curiosidade, diga "mais" ou "outra".';
     }
 
-    // PRIORIDADE 7: RESPOSTA PADRÃO
+    // RESPOSTA PADRÃO
     conversationContext.lastIntent = null;
     return 'Desculpe, não entendi. Você pode pedir apoio, uma piada, uma curiosidade, saber sobre doações, voluntariado ou perguntar quem somos nós.<br><br>Se quiser, me conte como está se sentindo!';
 }

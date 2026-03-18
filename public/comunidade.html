@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comunidade - Mão Amiga</title>
+  <link rel="shortcut icon" href="imagens/maozinha.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="comunidade.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- HEADER igual ao do projeto -->
+    <header>
+      <div class="header-wrapper">
+        <div class="logo">
+          <img src="imagens/logo.png" alt="Mão Amiga Logo">
+        </div>
+        <nav class="desktop-nav">
+          <a href="index.html">Página Inicial</a>
+          <a href="doacoes.html">Doações</a>
+          <a href="quem-somos.html">Quem somos</a>
+          <a href="fale-conosco.html">Fale Conosco</a>
+          <a href="autoatendimento.html">Autoatendimento</a>
+        </nav>
+        <div class="auth-buttons">
+          <button class="entrar" onclick="window.location.href='tela-login.html'">Entrar</button>
+          <button class="criar-conta" onclick="window.location.href='tela-criar-conta.html'">Criar Conta</button>
+        </div>
+        <div class="mobile-menu">
+          <input type="checkbox" id="menu-toggle" class="menu-toggle">
+          <label for="menu-toggle" class="hamburger">
+            <span></span><span></span><span></span>
+          </label>
+          <nav class="mobile-nav">
+            <a href="index.html">Início</a>
+            <a href="doacoes.html">Doações</a>
+            <a href="quem-somos.html">Quem somos</a>
+            <a href="fale-conosco.html">Fale Conosco</a>
+            <a href="autoatendimento.html">Autoatendimento</a>
+            <div class="mobile-auth-buttons">
+              <button class="mobile-entrar">Entrar</button>
+              <button class="mobile-criar-conta">Criar Conta</button>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="comunidade-main">
+
+      <!-- HERO da comunidade -->
+      <section class="comunidade-hero">
+        <div class="hero-text">
+          <img src="imagens/maozinha.png" alt="maos em oração" class="hero-img">
+          <h1>Com uma <span class="highlight">Comunidade Amiga</span>, você chega em qualquer lugar</h1>
+          <p>Conecte-se com doadores, beneficiados e voluntários. Compartilhe sua história, inspire pessoas e faça parte de uma rede de solidariedade genuína.</p>
+        </div>
+        <div class="hero-stats-row">
+          <div class="hs"><span>+5 mil</span><small>pessoas ajudadas</small></div>
+          <div class="hs-divider"></div>
+          <div class="hs"><span>+200</span><small>voluntários ativos</small></div>
+          <div class="hs-divider"></div>
+          <div class="hs"><span>+1.2k</span><small>histórias compartilhadas</small></div>
+        </div>
+      </section>
+
+      <!-- LAYOUT PRINCIPAL: sidebar esquerda + feed + sidebar direita -->
+      <div class="comunidade-layout">
+
+        <!-- SIDEBAR ESQUERDA: Perfil do usuário logado -->
+        <aside class="sidebar-perfil">
+          <div class="perfil-card">
+            <div class="perfil-avatar-wrap">
+              <img src="imagens/user.png" alt="Seu perfil" class="perfil-avatar">
+            </div>
+            <h3 class="perfil-nome">Visitante</h3>
+            <p class="perfil-local"><i class="fa-solid fa-location-dot"></i> Volta Redonda, RJ</p>
+            <div class="perfil-numeros">
+              <div><strong>0</strong><small>posts</small></div>
+              <div><strong>0</strong><small>seguindo</small></div>
+              <div><strong>0</strong><small>seguidores</small></div>
+            </div>
+            <button class="btn-entrar-perfil" onclick="window.location.href='tela-login.html'">
+              Entrar para participar
+            </button>
+          </div>
+
+          <div class="sidebar-section">
+            <h4>Filtrar por</h4>
+            <div class="filtros-lista">
+              <button class="filtro-btn active" data-filtro="todos">
+                <i class="fa-solid fa-star filtro-icon"></i> Todos
+              </button>
+              <button class="filtro-btn" data-filtro="historia">
+                <i class="fa-solid fa-book-open filtro-icon"></i> Histórias
+              </button>
+              <button class="filtro-btn" data-filtro="pedido">
+                <i class="fa-solid fa-hands-praying filtro-icon"></i> Pedidos de ajuda
+              </button>
+              <button class="filtro-btn" data-filtro="doacao">
+                <i class="fa-solid fa-gift filtro-icon"></i> Doações disponíveis
+              </button>
+              <button class="filtro-btn" data-filtro="voluntario">
+                <i class="fa-solid fa-handshake filtro-icon"></i> Voluntariado
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        <!-- FEED CENTRAL -->
+        <section class="feed-central">
+
+          <!-- Caixa de novo post -->
+          <div class="novo-post-card">
+            <div class="novo-post-top">
+              <img src="imagens/user.png" alt="Seu avatar" class="mini-avatar">
+              <button class="novo-post-trigger" id="abrirModal">
+                O que você quer compartilhar com a comunidade?
+              </button>
+            </div>
+            <div class="novo-post-tipos">
+              <button class="tipo-btn" data-tipo="historia" onclick="abrirModalComTipo('historia')">
+                <i class="fa-solid fa-book-open"></i> História
+              </button>
+              <button class="tipo-btn" data-tipo="pedido" onclick="abrirModalComTipo('pedido')">
+                <i class="fa-solid fa-hands-praying"></i> Pedido de ajuda
+              </button>
+              <button class="tipo-btn" data-tipo="doacao" onclick="abrirModalComTipo('doacao')">
+                <i class="fa-solid fa-gift"></i> Doação
+              </button>
+            </div>
+          </div>
+
+          <!-- Ordenação -->
+          <div class="feed-ordenacao">
+            <span>Ordenar por:</span>
+            <button class="ordem-btn active" data-ordem="recentes">Mais recentes</button>
+            <button class="ordem-btn" data-ordem="curtidos">Mais curtidos</button>
+          </div>
+
+          <!-- POSTS DO FEED -->
+          <div class="feed-posts" id="feedPosts">
+
+            <!-- post 1 -->
+            <article class="post-card" data-tipo="historia" data-curtidas="47">
+              <div class="post-header">
+                <img src="imagens/marlene.jpg" alt="Marlene" class="post-avatar">
+                <div class="post-info">
+                  <div class="post-nome-linha">
+                    <strong>Marlene Souza</strong>
+                    <span class="post-badge beneficiado">Beneficiada</span>
+                  </div>
+                  <span class="post-meta"><i class="fa-solid fa-location-dot"></i> Volta Redonda · 2 dias atrás</span>
+                </div>
+                <span class="post-tipo-tag historia">História</span>
+              </div>
+              <div class="post-corpo">
+                <p>Há seis meses eu não tinha onde morar com meus dois filhos. Encontrei o Mão Amiga numa busca desesperada no celular às 2h da manhã. Em menos de uma semana, recebi doações de roupas, alimentos e apoio emocional de pessoas que nunca me conheceram. Hoje tenho um quarto alugado, comida na mesa e meus filhos voltaram à escola. <strong>A solidariedade existe, eu vi com meus próprios olhos.</strong></p>
+              </div>
+              <div class="post-acoes">
+                <button class="acao-btn curtir" data-id="1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M12 21s-6.2-5.05-8.4-7.24A5.5 5.5 0 0 1 12 5.5a5.5 5.5 0 0 1 8.4 8.26C18.2 15.95 12 21 12 21z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                  <span class="curtidas-count">47</span>
+                </button>
+                <button class="acao-btn comentar" data-id="1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2"/></svg>
+                  <span>12 comentários</span>
+                </button>
+                <button class="acao-btn compartilhar">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="12" r="3" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="19" r="3" stroke="currentColor" stroke-width="2"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="currentColor" stroke-width="2"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="currentColor" stroke-width="2"/></svg>
+                  <span>Compartilhar</span>
+                </button>
+              </div>
+              <div class="comentarios-area" id="comentarios-1" style="display:none">
+                <div class="comentario">
+                  <img src="imagens/user.png" alt="" class="comentario-avatar">
+                  <div class="comentario-corpo">
+                    <strong>João Ferreira</strong>
+                    <p>Que história linda, Marlene! Muito feliz que você encontrou ajuda. Força sempre!</p>
+                  </div>
+                </div>
+                <div class="novo-comentario">
+                  <img src="imagens/user.png" alt="" class="comentario-avatar">
+                  <input type="text" placeholder="Escreva um comentário..." class="input-comentario">
+                  <button class="btn-enviar-comentario">Enviar</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- post 2 -->
+            <article class="post-card" data-tipo="doacao" data-curtidas="23">
+              <div class="post-header">
+                <img src="imagens/jovem-rapaz.jpg" alt="Ricardo" class="post-avatar">
+                <div class="post-info">
+                  <div class="post-nome-linha">
+                    <strong>Ricardo Almeida</strong>
+                    <span class="post-badge doador">Doador</span>
+                  </div>
+                  <span class="post-meta"><i class="fa-solid fa-location-dot"></i> Barra Mansa · 5 horas atrás</span>
+                </div>
+                <span class="post-tipo-tag doacao">Doação</span>
+              </div>
+              <div class="post-corpo">
+                <p>Tenho disponível para doação:</p>
+                <ul class="lista-doacao">
+                  <li><i class="fa-solid fa-basket-shopping"></i> Roupas masculinas — tamanhos M e G (bom estado)</li>
+                  <li><i class="fa-solid fa-book"></i> Livros didáticos do Ensino Médio</li>
+                  <li><i class="fa-solid fa-chair"></i> Cadeira de escritório (pequeno defeito no rodízio)</li>
+                </ul>
+                <p>Retirada em Barra Mansa ou posso entregar em Volta Redonda no fim de semana. Entre em contato pelo chat!</p>
+              </div>
+              <div class="post-acoes">
+                <button class="acao-btn curtir" data-id="2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M12 21s-6.2-5.05-8.4-7.24A5.5 5.5 0 0 1 12 5.5a5.5 5.5 0 0 1 8.4 8.26C18.2 15.95 12 21 12 21z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                  <span class="curtidas-count">23</span>
+                </button>
+                <button class="acao-btn comentar" data-id="2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2"/></svg>
+                  <span>5 comentários</span>
+                </button>
+                <button class="acao-btn compartilhar">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="12" r="3" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="19" r="3" stroke="currentColor" stroke-width="2"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="currentColor" stroke-width="2"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="currentColor" stroke-width="2"/></svg>
+                  <span>Compartilhar</span>
+                </button>
+              </div>
+              <div class="comentarios-area" id="comentarios-2" style="display:none">
+                <div class="novo-comentario">
+                  <img src="imagens/user.png" alt="" class="comentario-avatar">
+                  <input type="text" placeholder="Escreva um comentário..." class="input-comentario">
+                  <button class="btn-enviar-comentario">Enviar</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- post 3 -->
+            <article class="post-card" data-tipo="pedido" data-curtidas="61">
+              <div class="post-header">
+                <img src="imagens/mulher-idosa.jpg" alt="Dona Elza" class="post-avatar">
+                <div class="post-info">
+                  <div class="post-nome-linha">
+                    <strong>Elza Pereira</strong>
+                    <span class="post-badge beneficiado">Beneficiada</span>
+                  </div>
+                  <span class="post-meta"><i class="fa-solid fa-location-dot"></i> Volta Redonda · 1 semana atrás</span>
+                </div>
+                <span class="post-tipo-tag pedido">Pedido</span>
+              </div>
+              <div class="post-corpo">
+                <p>Sou aposentada, 71 anos, moro sozinha e estou com dificuldade para pagar o remédio do coração esse mês. O valor é R$ 68,00. Se alguém puder ajudar ou indicar algum programa de assistência farmacêutica, agradeço muito. Deus abençoe todos vocês que fazem parte desta comunidade.</p>
+              </div>
+              <div class="post-acoes">
+                <button class="acao-btn curtir" data-id="3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M12 21s-6.2-5.05-8.4-7.24A5.5 5.5 0 0 1 12 5.5a5.5 5.5 0 0 1 8.4 8.26C18.2 15.95 12 21 12 21z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                  <span class="curtidas-count">61</span>
+                </button>
+                <button class="acao-btn comentar" data-id="3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2"/></svg>
+                  <span>18 comentários</span>
+                </button>
+                <button class="acao-btn compartilhar">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="12" r="3" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="19" r="3" stroke="currentColor" stroke-width="2"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="currentColor" stroke-width="2"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="currentColor" stroke-width="2"/></svg>
+                  <span>Compartilhar</span>
+                </button>
+              </div>
+              <div class="comentarios-area" id="comentarios-3" style="display:none">
+                <div class="comentario">
+                  <img src="imagens/user.png" alt="" class="comentario-avatar">
+                  <div class="comentario-corpo">
+                    <strong>Ana Lima</strong>
+                    <p>Dona Elza, pelo Programa Farmácia Popular você pode conseguir esse remédio gratuitamente! Vou te mandar os detalhes no chat</p>
+                  </div>
+                </div>
+                <div class="novo-comentario">
+                  <img src="imagens/user.png" alt="" class="comentario-avatar">
+                  <input type="text" placeholder="Escreva um comentário..." class="input-comentario">
+                  <button class="btn-enviar-comentario">Enviar</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- post 4 -->
+            <article class="post-card" data-tipo="voluntario" data-curtidas="34">
+              <div class="post-header">
+                <img src="imagens/jovem-mae.avif" alt="Camila" class="post-avatar">
+                <div class="post-info">
+                  <div class="post-nome-linha">
+                    <strong>Camila Santos</strong>
+                    <span class="post-badge voluntario">Voluntária</span>
+                  </div>
+                  <span class="post-meta"><i class="fa-solid fa-location-dot"></i> Volta Redonda · 3 dias atrás</span>
+                </div>
+                <span class="post-tipo-tag voluntario">Voluntariado</span>
+              </div>
+              <div class="post-corpo">
+                <p>Sou professora e ofereço aulas gratuitas de reforço escolar (Português e Matemática) para crianças do 1º ao 5º ano. Atendo presencialmente no Centro de VR ou online pelo Google Meet. Tenho horários disponíveis às tardes de terça e quinta. Se você ou alguém que conhece precisa, me chame!</p>
+              </div>
+              <div class="post-acoes">
+                <button class="acao-btn curtir" data-id="4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M12 21s-6.2-5.05-8.4-7.24A5.5 5.5 0 0 1 12 5.5a5.5 5.5 0 0 1 8.4 8.26C18.2 15.95 12 21 12 21z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                  <span class="curtidas-count">34</span>
+                </button>
+                <button class="acao-btn comentar" data-id="4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2"/></svg>
+                  <span>7 comentários</span>
+                </button>
+                <button class="acao-btn compartilhar">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="12" r="3" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="19" r="3" stroke="currentColor" stroke-width="2"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="currentColor" stroke-width="2"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="currentColor" stroke-width="2"/></svg>
+                  <span>Compartilhar</span>
+                </button>
+              </div>
+              <div class="comentarios-area" id="comentarios-4" style="display:none">
+                <div class="novo-comentario">
+                  <img src="imagens/user.png" alt="" class="comentario-avatar">
+                  <input type="text" placeholder="Escreva um comentário..." class="input-comentario">
+                  <button class="btn-enviar-comentario">Enviar</button>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- SIDEBAR DA DIREITA: Pessoas sugeridas + trending -->
+        <aside class="sidebar-direita">
+
+          <div class="sidebar-section">
+            <h4>Pessoas para seguir</h4>
+            <div class="sugestoes-lista">
+
+              <div class="sugestao-item">
+                <img src="imagens/mulher2.jpg" alt="Ana" class="sugestao-avatar">
+                <div class="sugestao-info">
+                  <strong>Ana Lima</strong>
+                  <span class="post-badge voluntario" style="font-size:10px">Voluntária</span>
+                </div>
+                <button class="btn-seguir">Seguir</button>
+              </div>
+
+              <div class="sugestao-item">
+                <img src="imagens/idoso.jpg" alt="Carlos" class="sugestao-avatar">
+                <div class="sugestao-info">
+                  <strong>Carlos Mendes</strong>
+                  <span class="post-badge doador" style="font-size:10px">Doador</span>
+                </div>
+                <button class="btn-seguir">Seguir</button>
+              </div>
+
+              <div class="sugestao-item">
+                <img src="imagens/mulher.webp" alt="Fernanda" class="sugestao-avatar">
+                <div class="sugestao-info">
+                  <strong>Fernanda Cruz</strong>
+                  <span class="post-badge beneficiado" style="font-size:10px">Beneficiada</span>
+                </div>
+                <button class="btn-seguir">Seguir</button>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <h4>Em destaque esta semana</h4>
+            <div class="destaque-lista">
+              <div class="destaque-item">
+                <i class="fa-solid fa-gift destaque-icon"></i>
+                <div>
+                  <strong>Campanha do Agasalho</strong>
+                  <p>23 doações esta semana</p>
+                </div>
+              </div>
+              <div class="destaque-item">
+                <i class="fa-solid fa-book destaque-icon"></i>
+                <div>
+                  <strong>Reforço Escolar</strong>
+                  <p>8 vagas disponíveis</p>
+                </div>
+              </div>
+              <div class="destaque-item">
+                <i class="fa-solid fa-utensils destaque-icon"></i>
+                <div>
+                  <strong>Distribuição de Marmitas</strong>
+                  <p>Sábado, 10h — Centro VR</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </aside>
+
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="logo-footer">
+          <img src="imagens/logo-black.png" alt="Mão Amiga Logo">
+        </div>
+        <div class="footer-termo">
+          <a href="#">Termos de Uso</a>
+        </div>
+        <div class="social-icons">
+          <a href="#" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><path d="M 8 3 C 5.239 3 3 5.239 3 8 L 3 16 C 3 18.761 5.239 21 8 21 L 16 21 C 18.761 21 21 18.761 21 16 L 21 8 C 21 5.239 18.761 3 16 3 L 8 3 z M 18 5 C 18.552 5 19 5.448 19 6 C 19 6.552 18.552 7 18 7 C 17.448 7 17 6.552 17 6 C 17 5.448 17.448 5 18 5 z M 12 7 C 14.761 7 17 9.239 17 12 C 17 14.761 14.761 17 12 17 C 9.239 17 7 14.761 7 12 C 7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z"></path></svg></a>
+          <a href="#" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><path d="M12,2C6.477,2,2,6.477,2,12c0,5.013,3.693,9.153,8.505,9.876V14.65H8.031v-2.629h2.474v-1.749 c0-2.896,1.411-4.167,3.818-4.167c1.153,0,1.762,0.085,2.051,0.124v2.294h-1.642c-1.022,0-1.379,0.969-1.379,2.061v1.437h2.995 l-0.406,2.629h-2.588v7.247C18.235,21.236,22,17.062,22,12C22,6.477,17.523,2,12,2z"></path></svg></a>
+          <a href="#" title="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="26" height="26" viewBox="0 0 24 24"><path d="M19.077,4.928C17.191,3.041,14.683,2.001,12.011,2c-5.506,0-9.987,4.479-9.989,9.985 c-0.001,1.76,0.459,3.478,1.333,4.992L2,22l5.233-1.237c1.459,0.796,3.101,1.215,4.773,1.216h0.004 c5.505,0,9.986-4.48,9.989-9.985C22.001,9.325,20.963,6.816,19.077,4.928z M16.898,15.554c-0.208,0.583-1.227,1.145-1.685,1.186 c-0.458,0.042-0.887,0.207-2.995-0.624c-2.537-1-4.139-3.601-4.263-3.767c-0.125-0.167-1.019-1.353-1.019-2.581 S7.581,7.936,7.81,7.687c0.229-0.25,0.499-0.312,0.666-0.312c0.166,0,0.333,0,0.478,0.006c0.178,0.007,0.375,0.016,0.562,0.431 c0.222,0.494,0.707,1.728,0.769,1.853s0.104,0.271,0.021,0.437s-0.125,0.27-0.249,0.416c-0.125,0.146-0.262,0.325-0.374,0.437 c-0.125,0.124-0.255,0.26-0.11,0.509c0.146,0.25,0.646,1.067,1.388,1.728c0.954,0.85,1.757,1.113,2.007,1.239 c0.25,0.125,0.395,0.104,0.541-0.063c0.146-0.166,0.624-0.728,0.79-0.978s0.333-0.208,0.562-0.125s1.456,0.687,1.705,0.812 c0.25,0.125,0.416,0.187,0.478,0.291C17.106,14.471,17.106,14.971,16.898,15.554z"></path></svg></a>
+        </div>
+        <div class="copyright">© 2025 • Mão Amiga. Todos os direitos reservados.</div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- modal para sugerir post -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-card" id="modalCard">
+      <div class="modal-header">
+        <h3>Compartilhar com a comunidade</h3>
+        <button class="modal-close" id="fecharModal">&times;</button>
+      </div>
+      <div class="modal-tipo-select">
+        <button class="modal-tipo-btn active" data-tipo="historia"><i class="fa-solid fa-book-open"></i> História</button>
+        <button class="modal-tipo-btn" data-tipo="pedido"><i class="fa-solid fa-hands-praying"></i> Pedido</button>
+        <button class="modal-tipo-btn" data-tipo="doacao"><i class="fa-solid fa-gift"></i> Doação</button>
+        <button class="modal-tipo-btn" data-tipo="voluntario"><i class="fa-solid fa-handshake"></i> Voluntário</button>
+      </div>
+      <textarea class="modal-textarea" placeholder="Escreva sua mensagem para a comunidade..."></textarea>
+      <div class="modal-footer">
+        <span class="modal-aviso">Lembre-se: esta é uma comunidade de respeito e solidariedade.</span>
+        <button class="modal-publicar">Publicar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="comunidade.js"></script>
+</body>
+
+</html>
