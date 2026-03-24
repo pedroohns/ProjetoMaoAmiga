@@ -430,6 +430,10 @@
   white-space: nowrap;
 }
 
+.footer {
+    margin-top: 60px
+}
+
 .modal-publicar:hover { background: #5a6be8; }
 
 /* ============================
