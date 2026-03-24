@@ -1,273 +1,32 @@
-// ============================================
-// COMUNIDADE.JS — Mão Amiga
-// ============================================
+const API = 'https://projetomaoamiga-production.up.railway.app';
 
+// dados do usuario logado (null se não estiver logado)
+const usuario = JSON.parse(localStorage.getItem('usuario'));
+const token   = localStorage.getItem('token');
+
+// filtro e ordem ativos no momento
+let filtroAtivo = 'todos';
+let ordemAtiva  = 'recentes';
+
+// INICIALIZAÇAO
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ============================
-  // MODAL DE NOVO POST
-  // ============================
-  const overlay = document.getElementById('modalOverlay');
-  const btnAbrir = document.getElementById('abrirModal');
-  const btnFechar = document.getElementById('fecharModal');
-  const trigger = document.querySelector('.novo-post-trigger');
+  // atualiza o card de perfil na sidebar com dados reais
+  atualizarSidebarPerfil();
 
-  function abrirModal() {
-    overlay.classList.add('ativo');
-    document.body.style.overflow = 'hidden';
-  }
+  // carrega os posts da API
+  carregarFeed();
 
-  function fecharModal() {
-    overlay.classList.remove('ativo');
-    document.body.style.overflow = '';
-  }
+  // modal
+  iniciarModal();
 
-  if (trigger) trigger.addEventListener('click', abrirModal);
-  if (btnFechar) btnFechar.addEventListener('click', fecharModal);
-  if (overlay) {
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) fecharModal();
-    });
-  }
+  // filtros
+  iniciarFiltros();
 
-  // Seleção de tipo no modal
-  document.querySelectorAll('.modal-tipo-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.modal-tipo-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
+  // ordem
+  iniciarOrdenacao();
 
-  // Publicar post (demo — sem back-end ainda)
-  const btnPublicar = document.querySelector('.modal-publicar');
-  if (btnPublicar) {
-    btnPublicar.addEventListener('click', () => {
-      const texto = document.querySelector('.modal-textarea').value.trim();
-      const tipoAtivo = document.querySelector('.modal-tipo-btn.active');
-      const tipo = tipoAtivo ? tipoAtivo.dataset.tipo : 'historia';
-
-      if (!texto) {
-        document.querySelector('.modal-textarea').style.borderColor = '#ff0000';
-        document.querySelector('.modal-textarea').placeholder = 'Escreva algo antes de publicar!';
-        return;
-      }
-
-      criarPostNoFeed(texto, tipo);
-      fecharModal();
-      document.querySelector('.modal-textarea').value = '';
-    });
-  }
-
-  // ============================
-  // CRIAR POST NO FEED (demo)
-  // ============================
-  function criarPostNoFeed(texto, tipo) {
-    const feed = document.getElementById('feedPosts');
-    const tipoLabels = {
-      historia: 'História',
-      pedido: 'Pedido',
-      doacao: 'Doação',
-      voluntario: 'Voluntário'
-    };
-
-    const postId = 'novo-' + Date.now();
-    const article = document.createElement('article');
-    article.className = 'post-card';
-    article.dataset.tipo = tipo;
-    article.dataset.curtidas = '0';
-
-    article.innerHTML = `
-      <div class="post-header">
-        <img src="imagens/user.png" alt="Você" class="post-avatar">
-        <div class="post-info">
-          <div class="post-nome-linha">
-            <strong>Você</strong>
-            <span class="post-badge voluntario">Você</span>
-          </div>
-          <span class="post-meta"><i class="fa-solid fa-location-dot"></i> Volta Redonda · agora mesmo</span>
-        </div>
-        <span class="post-tipo-tag ${tipo}">${tipoLabels[tipo]}</span>
-      </div>
-      <div class="post-corpo">
-        <p>${texto.replace(/\n/g, '<br>')}</p>
-      </div>
-      <div class="post-acoes">
-        <button class="acao-btn curtir" data-id="${postId}">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M12 21s-6.2-5.05-8.4-7.24A5.5 5.5 0 0 1 12 5.5a5.5 5.5 0 0 1 8.4 8.26C18.2 15.95 12 21 12 21z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-          <span class="curtidas-count">0</span>
-        </button>
-        <button class="acao-btn comentar" data-id="${postId}">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2"/></svg>
-          <span>0 comentários</span>
-        </button>
-        <button class="acao-btn compartilhar">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="12" r="3" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="19" r="3" stroke="currentColor" stroke-width="2"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="currentColor" stroke-width="2"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="currentColor" stroke-width="2"/></svg>
-          <span>Compartilhar</span>
-        </button>
-      </div>
-      <div class="comentarios-area" id="comentarios-${postId}" style="display:none">
-        <div class="novo-comentario">
-          <img src="imagens/user.png" alt="" class="comentario-avatar">
-          <input type="text" placeholder="Escreva um comentário..." class="input-comentario">
-          <button class="btn-enviar-comentario">Enviar</button>
-        </div>
-      </div>
-    `;
-
-    // Inserir no topo do feed com animação
-    feed.insertBefore(article, feed.firstChild);
-    article.style.animationDelay = '0s';
-
-    // Registrar eventos no novo post
-    registrarEventosPost(article);
-
-    // Feedback visual
-    mostrarToast('Post publicado!');
-  }
-
-  // ============================
-  // CURTIDAS
-  // ============================
-  function registrarCurtida(btn) {
-    btn.addEventListener('click', () => {
-      const ativo = btn.classList.contains('ativo');
-      const contSpan = btn.querySelector('.curtidas-count');
-      let count = parseInt(contSpan.textContent);
-
-      if (ativo) {
-        btn.classList.remove('ativo');
-        contSpan.textContent = count - 1;
-      } else {
-        btn.classList.add('ativo');
-        contSpan.textContent = count + 1;
-        // Animação de pulsada
-        btn.style.transform = 'scale(1.2)';
-        setTimeout(() => btn.style.transform = '', 200);
-      }
-    });
-  }
-
-  // ============================
-  // COMENTÁRIOS
-  // ============================
-  function registrarComentar(btn) {
-    btn.addEventListener('click', () => {
-      const id = btn.dataset.id;
-      const area = document.getElementById('comentarios-' + id);
-      if (!area) return;
-
-      const visivel = area.style.display !== 'none';
-      area.style.display = visivel ? 'none' : 'flex';
-      if (!visivel) {
-        const input = area.querySelector('.input-comentario');
-        if (input) input.focus();
-      }
-    });
-  }
-
-  function registrarEnviarComentario(btnEnviar) {
-    btnEnviar.addEventListener('click', () => {
-      const area = btnEnviar.closest('.comentarios-area');
-      const input = area.querySelector('.input-comentario');
-      const texto = input.value.trim();
-      if (!texto) return;
-
-      const novoComentario = document.createElement('div');
-      novoComentario.className = 'comentario';
-      novoComentario.innerHTML = `
-        <img src="imagens/user.png" alt="" class="comentario-avatar">
-        <div class="comentario-corpo">
-          <strong>Você</strong>
-          <p>${texto}</p>
-        </div>
-      `;
-
-      // Inserir antes do campo de novo comentário
-      area.insertBefore(novoComentario, area.querySelector('.novo-comentario'));
-      input.value = '';
-
-      // Atualizar contador de comentários
-      const postCard = area.closest('.post-card');
-      const btnComentar = postCard.querySelector('.acao-btn.comentar span');
-      if (btnComentar) {
-        const match = btnComentar.textContent.match(/\d+/);
-        const atual = match ? parseInt(match[0]) : 0;
-        btnComentar.textContent = `${atual + 1} comentários`;
-      }
-    });
-
-    // Enter para enviar
-    const input = btnEnviar.closest('.novo-comentario').querySelector('.input-comentario');
-    if (input) {
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') btnEnviar.click();
-      });
-    }
-  }
-
-  // ============================
-  // REGISTRAR EVENTOS EM UM POST
-  // ============================
-  function registrarEventosPost(postCard) {
-    postCard.querySelectorAll('.acao-btn.curtir').forEach(registrarCurtida);
-    postCard.querySelectorAll('.acao-btn.comentar').forEach(registrarComentar);
-    postCard.querySelectorAll('.btn-enviar-comentario').forEach(registrarEnviarComentario);
-  }
-
-  // Registrar em todos os posts existentes
-  document.querySelectorAll('.post-card').forEach(registrarEventosPost);
-
-  // ============================
-  // FILTROS DE TIPO
-  // ============================
-  document.querySelectorAll('.filtro-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filtro = btn.dataset.filtro;
-      filtrarFeed(filtro);
-    });
-  });
-
-  function filtrarFeed(filtro) {
-    const posts = document.querySelectorAll('.post-card');
-    posts.forEach(post => {
-      if (filtro === 'todos' || post.dataset.tipo === filtro) {
-        post.style.display = '';
-        post.style.animation = 'fadeInUp 0.3s ease both';
-      } else {
-        post.style.display = 'none';
-      }
-    });
-  }
-
-  // ============================
-  // ORDENAÇÃO
-  // ============================
-  document.querySelectorAll('.ordem-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.ordem-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      ordenarFeed(btn.dataset.ordem);
-    });
-  });
-
-  function ordenarFeed(ordem) {
-    const feed = document.getElementById('feedPosts');
-    const posts = Array.from(feed.querySelectorAll('.post-card'));
-
-    if (ordem === 'curtidos') {
-      posts.sort((a, b) => parseInt(b.dataset.curtidas) - parseInt(a.dataset.curtidas));
-    }
-    // 'recentes' já está na ordem padrão do DOM
-
-    posts.forEach(p => feed.appendChild(p));
-  }
-
-  // ============================
-  // SEGUIR PESSOAS
-  // ============================
+  // seguir pessoas estatico sidebar
   document.querySelectorAll('.btn-seguir').forEach(btn => {
     btn.addEventListener('click', () => {
       if (btn.classList.contains('seguindo')) {
@@ -280,26 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ============================
-  // TOAST DE NOTIFICAÇÃO
-  // ============================
-  function mostrarToast(mensagem) {
-    const toast = document.createElement('div');
-    toast.style.cssText = `
-      position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
-      background: #111; color: #fff; padding: 12px 24px; border-radius: 100px;
-      font-size: 0.9rem; font-weight: 600; z-index: 9999;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      animation: fadeInUp 0.3s ease;
-    `;
-    toast.textContent = mensagem;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3000);
-  }
-
-  // ============================
-  // COMPARTILHAR (Web Share API ou fallback)
-  // ============================
+  // compartilhar
   document.addEventListener('click', (e) => {
     if (e.target.closest('.acao-btn.compartilhar')) {
       if (navigator.share) {
@@ -310,18 +50,492 @@ document.addEventListener('DOMContentLoaded', () => {
         }).catch(() => {});
       } else {
         navigator.clipboard.writeText(window.location.href).then(() => {
-          mostrarToast('Link copiado! 🔗');
-        }).catch(() => {
-          mostrarToast('Link: ' + window.location.href);
+          mostrarToast('Link copiado!');
         });
       }
     }
   });
-
 });
 
-// Função global para o onclick do HTML
+// SIDEBAR - PERFIL DO USUARIO
+function atualizarSidebarPerfil() {
+  if (!usuario) return;
+
+  const nomeEl  = document.querySelector('.perfil-nome');
+  const btnEl   = document.querySelector('.btn-entrar-perfil');
+
+  if (nomeEl) nomeEl.textContent = usuario.nome.split(' ')[0];
+
+  if (btnEl) {
+    btnEl.textContent = 'Meu perfil';
+    btnEl.onclick = () => window.location.href = 'index.html';
+  }
+}
+
+// CARREGAR FEED DA API
+async function carregarFeed() {
+  const feed = document.getElementById('feedPosts');
+  feed.innerHTML = `<div class="feed-loading">Carregando publicações...</div>`;
+
+  try {
+    const tipo  = filtroAtivo !== 'todos' ? `&tipo=${filtroAtivo}` : '';
+    const ordem = `ordem=${ordemAtiva}`;
+
+    const headers = token
+      ? { 'Authorization': `Bearer ${token}` }
+      : {};
+
+    const resposta = await fetch(`${API}/api/posts?${ordem}${tipo}`, { headers });
+    const dados    = await resposta.json();
+
+    feed.innerHTML = '';
+
+    if (!dados.posts || dados.posts.length === 0) {
+      feed.innerHTML = `
+        <div class="feed-vazio">
+          <i class="fa-solid fa-seedling"></i>
+          <p>Nenhuma publicação ainda. Seja o primeiro a compartilhar!</p>
+        </div>
+      `;
+      return;
+    }
+
+    dados.posts.forEach(post => {
+      const card = criarCardPost(post);
+      feed.appendChild(card);
+      registrarEventosPost(card, post);
+    });
+
+  } catch (err) {
+    feed.innerHTML = `
+      <div class="feed-vazio">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Erro ao carregar publicações. Tente novamente.</p>
+      </div>
+    `;
+    console.error('Erro ao carregar feed:', err);
+  }
+}
+
+// CRIAÇAO DO CARD DE POST A PARTIR DA API
+function criarCardPost(post) {
+  const tipoLabels = {
+    historia:  'História',
+    pedido:    'Pedido',
+    doacao:    'Doação',
+    voluntario: 'Voluntário'
+  };
+
+  const tipoBadgeUsuario = {
+    doador:      'doador',
+    beneficiado: 'beneficiado',
+    voluntario:  'voluntario'
+  };
+
+  const tempoPassado = calcularTempo(post.criado_em);
+  const localidade   = post.usuario_localidade || 'Brasil';
+  const fotoPerfil   = post.usuario_foto || 'imagens/user.png';
+  const jaCurtiu     = post.curtido_por_mim;
+
+  const article = document.createElement('article');
+  article.className = 'post-card';
+  article.dataset.tipo     = post.tipo;
+  article.dataset.curtidas = post.total_curtidas;
+  article.dataset.postId   = post.id;
+
+  article.innerHTML = `
+    <div class="post-header">
+      <img src="${fotoPerfil}" alt="${post.usuario_nome}" class="post-avatar"
+           onerror="this.src='imagens/user.png'">
+      <div class="post-info">
+        <div class="post-nome-linha">
+          <strong>${post.usuario_nome}</strong>
+          <span class="post-badge ${tipoBadgeUsuario[post.usuario_tipo] || 'voluntario'}">
+            ${post.usuario_tipo === 'beneficiado' ? 'Beneficiado' :
+              post.usuario_tipo === 'doador' ? 'Doador' : 'Voluntário'}
+          </span>
+        </div>
+        <span class="post-meta">
+          <i class="fa-solid fa-location-dot"></i> ${localidade} · ${tempoPassado}
+        </span>
+      </div>
+      <span class="post-tipo-tag ${post.tipo}">${tipoLabels[post.tipo]}</span>
+    </div>
+    <div class="post-corpo">
+      <p>${post.conteudo.replace(/\n/g, '<br>')}</p>
+    </div>
+    <div class="post-acoes">
+      <button class="acao-btn curtir ${jaCurtiu ? 'ativo' : ''}" data-id="${post.id}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+          <path d="M12 21s-6.2-5.05-8.4-7.24A5.5 5.5 0 0 1 12 5.5a5.5 5.5 0 0 1 8.4 8.26C18.2 15.95 12 21 12 21z"
+            stroke="currentColor" stroke-width="2" ${jaCurtiu ? 'fill="currentColor"' : 'fill="none"'}/>
+        </svg>
+        <span class="curtidas-count">${post.total_curtidas}</span>
+      </button>
+      <button class="acao-btn comentar" data-id="${post.id}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span>${post.total_comentarios} comentários</span>
+      </button>
+      <button class="acao-btn compartilhar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+          <circle cx="18" cy="5" r="3" stroke="currentColor" stroke-width="2"/>
+          <circle cx="6" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+          <circle cx="18" cy="19" r="3" stroke="currentColor" stroke-width="2"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="currentColor" stroke-width="2"/>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span>Compartilhar</span>
+      </button>
+    </div>
+    <div class="comentarios-area" id="comentarios-${post.id}" style="display:none">
+      <div class="comentarios-lista"></div>
+      <div class="novo-comentario">
+        <img src="${usuario?.foto_url || 'imagens/user.png'}" alt="" class="comentario-avatar"
+             onerror="this.src='imagens/user.png'">
+        <input type="text" placeholder="${usuario ? 'Escreva um comentário...' : 'Faça login para comentar'}"
+               class="input-comentario" ${!usuario ? 'disabled' : ''}>
+        <button class="btn-enviar-comentario" ${!usuario ? 'disabled' : ''}>Enviar</button>
+      </div>
+    </div>
+  `;
+
+  return article;
+}
+
+// REGISTRAR OS EVENTOS NO POST
+function registrarEventosPost(card, post) {
+  // CURTIR
+  const btnCurtir = card.querySelector('.acao-btn.curtir');
+  if (btnCurtir) {
+    btnCurtir.addEventListener('click', () => curtirPost(btnCurtir, post.id));
+  }
+
+  // COMENTAR ABRIR E FECHAR
+  const btnComentar = card.querySelector('.acao-btn.comentar');
+  if (btnComentar) {
+    btnComentar.addEventListener('click', () => toggleComentarios(post.id));
+  }
+
+  // ENVIAR COMENTARIO
+  const btnEnviar = card.querySelector('.btn-enviar-comentario');
+  if (btnEnviar) {
+    btnEnviar.addEventListener('click', () => enviarComentario(post.id, card));
+    const input = card.querySelector('.input-comentario');
+    if (input) {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') enviarComentario(post.id, card);
+      });
+    }
+  }
+}
+
+// CURTIR E DESCURTIR
+async function curtirPost(btn, postId) {
+  if (!usuario || !token) {
+    mostrarToast('Faça login para curtir!');
+    return;
+  }
+
+  const contSpan = btn.querySelector('.curtidas-count');
+  const ativo    = btn.classList.contains('ativo');
+  const count    = parseInt(contSpan.textContent);
+
+  // atualiza visualmente antes da resposta 
+  btn.classList.toggle('ativo');
+  contSpan.textContent = ativo ? count - 1 : count + 1;
+  btn.style.transform = 'scale(1.2)';
+  setTimeout(() => btn.style.transform = '', 200);
+
+  try {
+    await fetch(`${API}/api/posts/${postId}/curtir`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+  } catch (err) {
+    // reverte se der erro
+    btn.classList.toggle('ativo');
+    contSpan.textContent = count;
+    mostrarToast('Erro ao curtir. Tente novamente.');
+  }
+}
+
+// TOGGLE DA AREA DE COMENTARIOS
+async function toggleComentarios(postId) {
+  const area = document.getElementById(`comentarios-${postId}`);
+  if (!area) return;
+
+  const visivel = area.style.display !== 'none';
+
+  if (visivel) {
+    area.style.display = 'none';
+    return;
+  }
+
+  area.style.display = 'flex';
+
+  // carrega cometarios da API que nao foram carrregados
+  const lista = area.querySelector('.comentarios-lista');
+  if (lista && lista.children.length === 0) {
+    lista.innerHTML = '<p style="font-size:0.85rem;color:#999;padding:8px 0">Carregando...</p>';
+
+    try {
+      const resposta = await fetch(`${API}/api/posts/${postId}/comentarios`);
+      const dados    = await resposta.json();
+
+      lista.innerHTML = '';
+
+      if (dados.comentarios.length === 0) {
+        lista.innerHTML = '<p style="font-size:0.85rem;color:#999;padding:8px 0">Nenhum comentário ainda. Seja o primeiro!</p>';
+        return;
+      }
+
+      dados.comentarios.forEach(c => {
+        const div = document.createElement('div');
+        div.className = 'comentario';
+        div.innerHTML = `
+          <img src="${c.usuario_foto || 'imagens/user.png'}" alt="" class="comentario-avatar"
+               onerror="this.src='imagens/user.png'">
+          <div class="comentario-corpo">
+            <strong>${c.usuario_nome}</strong>
+            <p>${c.conteudo}</p>
+          </div>
+        `;
+        lista.appendChild(div);
+      });
+
+    } catch (err) {
+      lista.innerHTML = '<p style="font-size:0.85rem;color:#999;padding:8px 0">Erro ao carregar comentários.</p>';
+    }
+  }
+
+  // foco no input
+  const input = area.querySelector('.input-comentario');
+  if (input && usuario) input.focus();
+}
+
+// ENVIAR COMENTARIO
+async function enviarComentario(postId, card) {
+  if (!usuario || !token) {
+    mostrarToast('Faça login para comentar!');
+    return;
+  }
+
+  const area   = card.querySelector('.comentarios-area');
+  const input  = area.querySelector('.input-comentario');
+  const texto  = input.value.trim();
+  if (!texto) return;
+
+  const btnEnviar = area.querySelector('.btn-enviar-comentario');
+  btnEnviar.disabled  = true;
+  btnEnviar.textContent = '...';
+
+  try {
+    const resposta = await fetch(`${API}/api/posts/${postId}/comentarios`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ conteudo: texto })
+    });
+
+    const dados = await resposta.json();
+
+    if (!resposta.ok) {
+      mostrarToast(dados.erro || 'Erro ao comentar.');
+      return;
+    }
+
+    // adiciona o comentario na lista visualmente
+    const lista = area.querySelector('.comentarios-lista');
+    const msgVazia = lista.querySelector('p');
+    if (msgVazia) msgVazia.remove();
+
+    const div = document.createElement('div');
+    div.className = 'comentario';
+    div.innerHTML = `
+      <img src="${usuario.foto_url || 'imagens/user.png'}" alt="" class="comentario-avatar"
+           onerror="this.src='imagens/user.png'">
+      <div class="comentario-corpo">
+        <strong>${usuario.nome}</strong>
+        <p>${texto}</p>
+      </div>
+    `;
+    lista.appendChild(div);
+    input.value = '';
+
+    // atualizar o contador
+    const btnComentar = card.querySelector('.acao-btn.comentar span');
+    if (btnComentar) {
+      const match = btnComentar.textContent.match(/\d+/);
+      const atual = match ? parseInt(match[0]) : 0;
+      btnComentar.textContent = `${atual + 1} comentários`;
+    }
+
+  } catch (err) {
+    mostrarToast('Erro de conexão. Tente novamente.');
+  } finally {
+    btnEnviar.disabled = false;
+    btnEnviar.textContent = 'Enviar';
+  }
+}
+
+// MODAL DE NOVO POST
+function iniciarModal() {
+  const overlay  = document.getElementById('modalOverlay');
+  const trigger  = document.querySelector('.novo-post-trigger');
+  const btnFechar = document.getElementById('fecharModal');
+
+  function abrirModal() {
+    if (!usuario) {
+      mostrarToast('Faça login para publicar!');
+      setTimeout(() => window.location.href = 'tela-login.html', 1500);
+      return;
+    }
+    overlay.classList.add('ativo');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function fecharModal() {
+    overlay.classList.remove('ativo');
+    document.body.style.overflow = '';
+  }
+
+  if (trigger)   trigger.addEventListener('click', abrirModal);
+  if (btnFechar) btnFechar.addEventListener('click', fecharModal);
+  if (overlay) {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) fecharModal();
+    });
+  }
+
+  // seleçao do tipo de modal
+  document.querySelectorAll('.modal-tipo-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.modal-tipo-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  // publicar bnotao
+  const btnPublicar = document.querySelector('.modal-publicar');
+  if (btnPublicar) {
+    btnPublicar.addEventListener('click', () => publicarPost(fecharModal));
+  }
+}
+
+// PUBLICAR POST NA API
+async function publicarPost(fecharModal) {
+  const textarea  = document.querySelector('.modal-textarea');
+  const tipoAtivo = document.querySelector('.modal-tipo-btn.active');
+  const texto     = textarea.value.trim();
+  const tipo      = tipoAtivo ? tipoAtivo.dataset.tipo : 'historia';
+
+  if (!texto) {
+    textarea.style.borderColor = '#f472b6';
+    textarea.placeholder = 'Escreva algo antes de publicar!';
+    return;
+  }
+
+  const btnPublicar = document.querySelector('.modal-publicar');
+  btnPublicar.disabled = true;
+  btnPublicar.textContent = 'Publicando...';
+
+  try {
+    const resposta = await fetch(`${API}/api/posts`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ tipo, conteudo: texto })
+    });
+
+    const dados = await resposta.json();
+
+    if (!resposta.ok) {
+      mostrarToast(dados.erro || 'Erro ao publicar.');
+      return;
+    }
+
+    fecharModal();
+    textarea.value = '';
+    mostrarToast('Post publicado!');
+
+    // recarrega o feed pra mostrar o novo post
+    carregarFeed();
+
+  } catch (err) {
+    mostrarToast('Erro de conexão. Tente novamente.');
+  } finally {
+    btnPublicar.disabled = false;
+    btnPublicar.textContent = 'Publicar';
+  }
+}
+
+// FILTROS
+function iniciarFiltros() {
+  document.querySelectorAll('.filtro-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filtroAtivo = btn.dataset.filtro;
+      carregarFeed();
+    });
+  });
+}
+
+// ORDENAÇÃO
+function iniciarOrdenacao() {
+  document.querySelectorAll('.ordem-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.ordem-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      ordemAtiva = btn.dataset.ordem;
+      carregarFeed();
+    });
+  });
+}
+
+// UTILITARIOS
+function calcularTempo(dataISO) {
+  const agora    = new Date();
+  const data     = new Date(dataISO);
+  const diffSeg  = Math.floor((agora - data) / 1000);
+  const diffMin  = Math.floor(diffSeg / 60);
+  const diffHora = Math.floor(diffMin / 60);
+  const diffDia  = Math.floor(diffHora / 24);
+
+  if (diffSeg < 60)  return 'agora mesmo';
+  if (diffMin < 60)  return `${diffMin} min atrás`;
+  if (diffHora < 24) return `${diffHora}h atrás`;
+  if (diffDia < 7)   return `${diffDia} dias atrás`;
+  return data.toLocaleDateString('pt-BR');
+}
+
+function mostrarToast(mensagem) {
+  const toast = document.createElement('div');
+  toast.style.cssText = `
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+    background: #111; color: #fff; padding: 12px 24px; border-radius: 100px;
+    font-size: 0.9rem; font-weight: 600; z-index: 9999;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    animation: fadeInUp 0.3s ease;
+  `;
+  toast.textContent = mensagem;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
+// funçap global para o onclick do HTML
 function abrirModalComTipo(tipo) {
+  if (!usuario) {
+    mostrarToast('Faça login para publicar!');
+    setTimeout(() => window.location.href = 'tela-login.html', 1500);
+    return;
+  }
   document.getElementById('modalOverlay').classList.add('ativo');
   document.body.style.overflow = 'hidden';
   document.querySelectorAll('.modal-tipo-btn').forEach(b => {

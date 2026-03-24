@@ -1,19 +1,10 @@
-/* ============================================
-   COMUNIDADE.CSS — Mão Amiga
-   Feed social / comunidade de solidariedade
-   ============================================ */
-
-/* Fontes específicas desta página */
+/* fontes */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,400&display=swap');
 
-/* Override de fundo para a comunidade */
 body {
   background: linear-gradient(180deg, #7b91c7 0%, #e6eaff 18%, #f0f4ff 100%);
 }
 
-/* ============================
-   HERO DA COMUNIDADE
-   ============================ */
 .comunidade-main {
   margin-top: 100px;
   padding: 0 20px 60px;
@@ -108,9 +99,7 @@ body {
   margin: 0 8px;
 }
 
-/* ============================
-   LAYOUT PRINCIPAL
-   ============================ */
+/* LAYOUT PRINCIPAL */
 .comunidade-layout {
   display: grid;
   grid-template-columns: 260px 1fr 260px;
@@ -119,9 +108,7 @@ body {
   margin-top: 32px;
 }
 
-/* ============================
-   SIDEBAR ESQUERDA
-   ============================ */
+/* SIDEBAR DA ESQUERDA */
 .sidebar-perfil {
   display: flex;
   flex-direction: column;
@@ -225,7 +212,7 @@ body {
   transform: translateY(-1px);
 }
 
-/* Seção genérica de sidebar */
+/* seçao generica da sidebar  */
 .sidebar-section {
   background: #fff;
   border-radius: 20px;
@@ -243,7 +230,7 @@ body {
   margin-bottom: 14px;
 }
 
-/* Filtros */
+/* filtros */
 .filtros-lista {
   display: flex;
   flex-direction: column;
@@ -283,16 +270,14 @@ body {
   text-align: center;
 }
 
-/* ============================
-   FEED CENTRAL
-   ============================ */
+/* FEED CENTRAL */
 .feed-central {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* Card de novo post */
+/* card de novo post */
 .novo-post-card {
   background: #fff;
   border-radius: 20px;
@@ -364,7 +349,7 @@ body {
   color: #6d7dfc;
 }
 
-/* Ordenação */
+/* ordenaçao do feed */
 .feed-ordenacao {
   display: flex;
   align-items: center;
@@ -393,7 +378,7 @@ body {
   background: rgba(109, 125, 252, 0.06);
 }
 
-/* Posts */
+/* posts */
 .post-card {
   background: #fff;
   border-radius: 20px;
@@ -459,7 +444,7 @@ body {
   margin-right: 2px;
 }
 
-/* Badges de tipo de usuário */
+/* os badges */
 .post-badge {
   font-size: 11px;
   font-weight: 700;
@@ -482,7 +467,7 @@ body {
   color: #4338ca;
 }
 
-/* Tags de tipo de post */
+/* tags de qual tipo de post é */
 .post-tipo-tag {
   font-size: 11px;
   font-weight: 700;
@@ -511,7 +496,7 @@ body {
   color: #065f46;
 }
 
-/* Corpo do post */
+/* corpo do post */
 .post-corpo {
   font-size: 0.96rem;
   line-height: 1.75;
@@ -546,7 +531,7 @@ body {
   margin-right: 4px;
 }
 
-/* Ações do post */
+/* açoes do post */
 .post-acoes {
   display: flex;
   gap: 4px;
@@ -583,7 +568,7 @@ body {
   stroke: #f472b6;
 }
 
-/* Área de comentários */
+/* seçao de comentarios*/
 .comentarios-area {
   margin-top: 16px;
   padding-top: 16px;
@@ -666,9 +651,7 @@ body {
   background: #5a6be8;
 }
 
-/* ============================
-   SIDEBAR DIREITA
-   ============================ */
+/* SIDEBAR DA DIREITA */
 .sidebar-direita {
   display: flex;
   flex-direction: column;
@@ -764,9 +747,7 @@ body {
   margin: 0;
 }
 
-/* ============================
-   MODAL DE NOVO POST
-   ============================ */
+/* MODAL */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -916,9 +897,7 @@ body {
   transform: translateY(-1px);
 }
 
-/* ============================
-   RESPONSIVIDADE
-   ============================ */
+/* RESPONSIVIDADE */
 @media (max-width: 1100px) {
   .comunidade-layout {
     grid-template-columns: 240px 1fr;
@@ -1007,4 +986,27 @@ body {
     font-size: 0.78rem;
     padding: 7px 10px;
   }
+}
+
+/* ESTADOS DO POST */ 
+.feed-loading,
+.feed-vazio {
+  text-align: center;
+  padding: 48px 24px;
+  color: #999;
+  font-size: 0.95rem;
+  background: #fff;
+  border-radius: 20px;
+  border: 1px solid rgba(109, 125, 252, 0.1);
+}
+ 
+.feed-vazio i {
+  font-size: 2rem;
+  color: #c7d2fe;
+  display: block;
+  margin-bottom: 12px;
+}
+ 
+.feed-vazio p {
+  color: #aaa;
 }
