@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil - Mão Amiga</title>
+  <link rel="shortcut icon" href="imagens/maozinha.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="perfil.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <header>
+      <div class="header-wrapper">
+        <div class="logo">
+          <img src="imagens/logo.png" alt="Mão Amiga Logo">
+        </div>
+        <nav class="desktop-nav">
+          <a href="index.html">Página Inicial</a>
+          <a href="doacoes.html">Doações</a>
+          <a href="quem-somos.html">Quem somos</a>
+          <a href="comunidade.html">Comunidade</a>
+          <a href="fale-conosco.html">Fale Conosco</a>
+        </nav>
+        <div class="auth-buttons">
+          <button class="entrar">Entrar</button>
+          <button class="criar-conta">Criar Conta</button>
+        </div>
+        <div class="mobile-menu">
+          <input type="checkbox" id="menu-toggle" class="menu-toggle">
+          <label for="menu-toggle" class="hamburger">
+            <span></span><span></span><span></span>
+          </label>
+          <nav class="mobile-nav">
+            <a href="index.html">Página Inicial</a>
+            <a href="doacoes.html">Doações</a>
+            <a href="quem-somos.html">Quem somos</a>
+            <a href="comunidade.html">Comunidade</a>
+            <a href="fale-conosco.html">Fale Conosco</a>
+            <div class="mobile-auth-buttons">
+              <button class="mobile-entrar">Entrar</button>
+              <button class="mobile-criar-conta">Criar Conta</button>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="perfil-main">
+      <!-- Conteúdo carregado via JS -->
+      <div id="perfil-conteudo">
+        <div class="perfil-loading">
+          <i class="fa-solid fa-spinner fa-spin"></i>
+          <p>Carregando perfil...</p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="logo-footer">
+          <img src="imagens/logo-black.png" alt="Mão Amiga Logo">
+        </div>
+        <div class="footer-termo"><a href="#">Termos de Uso</a></div>
+        <div class="social-icons">
+          <a href="#" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><path d="M 8 3 C 5.239 3 3 5.239 3 8 L 3 16 C 3 18.761 5.239 21 8 21 L 16 21 C 18.761 21 21 18.761 21 16 L 21 8 C 21 5.239 18.761 3 16 3 L 8 3 z M 18 5 C 18.552 5 19 5.448 19 6 C 19 6.552 18.552 7 18 7 C 17.448 7 17 6.552 17 6 C 17 5.448 17.448 5 18 5 z M 12 7 C 14.761 7 17 9.239 17 12 C 17 14.761 14.761 17 12 17 C 9.239 17 7 14.761 7 12 C 7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z"></path></svg></a>
+          <a href="#" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><path d="M12,2C6.477,2,2,6.477,2,12c0,5.013,3.693,9.153,8.505,9.876V14.65H8.031v-2.629h2.474v-1.749 c0-2.896,1.411-4.167,3.818-4.167c1.153,0,1.762,0.085,2.051,0.124v2.294h-1.642c-1.022,0-1.379,0.969-1.379,2.061v1.437h2.995 l-0.406,2.629h-2.588v7.247C18.235,21.236,22,17.062,22,12C22,6.477,17.523,2,12,2z"></path></svg></a>
+        </div>
+        <div class="copyright">© 2025 • Mão Amiga. Todos os direitos reservados.</div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Modal de edição -->
+  <div class="modal-overlay" id="modalEditar">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Editar perfil</h3>
+        <button class="modal-close" id="fecharModalEditar">&times;</button>
+      </div>
+      <div class="editar-form">
+        <label>Nome completo</label>
+        <input type="text" id="editar-nome" placeholder="Seu nome completo">
+
+        <label>Localidade</label>
+        <input type="text" id="editar-localidade" placeholder="Ex: Volta Redonda, RJ">
+
+        <label>Bio</label>
+        <textarea id="editar-bio" placeholder="Conte um pouco sobre você..."></textarea>
+      </div>
+      <div class="modal-footer">
+        <span class="modal-aviso">As alterações serão visíveis para todos.</span>
+        <button class="modal-publicar" id="btnSalvarPerfil">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="perfil.js"></script>
+</body>
+
+</html>

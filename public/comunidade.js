@@ -68,7 +68,7 @@ function atualizarSidebarPerfil() {
 
   if (btnEl) {
     btnEl.textContent = 'Meu perfil';
-    btnEl.onclick = () => window.location.href = 'index.html';
+    btnEl.onclick = () => window.location.href = 'perfil.html';
   }
 }
 

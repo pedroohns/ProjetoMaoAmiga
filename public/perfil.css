@@ -1,0 +1,466 @@
+/* ============================================
+   PERFIL.CSS — Mão Amiga
+   ============================================ */
+
+.perfil-main {
+  margin-top: 100px;
+  padding: 0 20px 60px;
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================
+   LOADING / ERRO
+   ============================ */
+.perfil-loading,
+.perfil-erro {
+  text-align: center;
+  padding: 80px 24px;
+  color: #999;
+}
+
+.perfil-loading i,
+.perfil-erro i {
+  font-size: 2rem;
+  color: #c7d2fe;
+  display: block;
+  margin-bottom: 12px;
+}
+
+/* ============================
+   CARD DE PERFIL
+   ============================ */
+.perfil-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 36px;
+  box-shadow: 0 2px 16px rgba(109, 125, 252, 0.08);
+  border: 1px solid rgba(109, 125, 252, 0.12);
+  margin-bottom: 24px;
+  animation: fadeInUp 0.4s ease both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.perfil-topo {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+.perfil-avatar-grande {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #6d7dfc;
+  flex-shrink: 0;
+}
+
+.perfil-info {
+  flex: 1;
+}
+
+.perfil-nome-linha {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.perfil-nome-linha h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111;
+  font-family: 'Inter', sans-serif;
+}
+
+.perfil-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 100px;
+}
+
+.perfil-badge.doador      { background: rgba(251,191,36,.15); color: #b45309; }
+.perfil-badge.beneficiado { background: rgba(244,114,182,.15); color: #be185d; }
+.perfil-badge.voluntario  { background: rgba(109,125,252,.12); color: #4338ca; }
+
+.perfil-localidade {
+  font-size: 0.88rem;
+  color: #999;
+  margin-bottom: 10px;
+}
+
+.perfil-localidade i {
+  color: #6d7dfc;
+  margin-right: 4px;
+}
+
+.perfil-bio {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.perfil-membro {
+  font-size: 0.8rem;
+  color: #bbb;
+}
+
+.perfil-acoes {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-editar-perfil {
+  padding: 9px 20px;
+  border-radius: 100px;
+  border: 1.5px solid #6d7dfc;
+  background: transparent;
+  color: #6d7dfc;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-editar-perfil:hover {
+  background: #6d7dfc;
+  color: #fff;
+}
+
+.btn-seguir-perfil {
+  padding: 9px 20px;
+  border-radius: 100px;
+  border: none;
+  background: #6d7dfc;
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-seguir-perfil:hover {
+  background: #5a6be8;
+}
+
+.btn-seguir-perfil.seguindo {
+  background: transparent;
+  border: 1.5px solid #6d7dfc;
+  color: #6d7dfc;
+}
+
+/* ============================
+   CONTADORES
+   ============================ */
+.perfil-contadores {
+  display: flex;
+  gap: 0;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.contador {
+  flex: 1;
+  text-align: center;
+}
+
+.contador strong {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #6d7dfc;
+}
+
+.contador span {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+/* ============================
+   POSTS DO PERFIL
+   ============================ */
+.perfil-posts-titulo {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.perfil-posts-titulo i {
+  color: #6d7dfc;
+}
+
+.perfil-post-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(109, 125, 252, 0.07);
+  border: 1px solid rgba(109, 125, 252, 0.1);
+  margin-bottom: 14px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: fadeInUp 0.3s ease both;
+  cursor: pointer;
+}
+
+.perfil-post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(109, 125, 252, 0.14);
+}
+
+.perfil-post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.post-tipo-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.post-tipo-tag.historia  { background: rgba(109,125,252,.1);   color: #6d7dfc; }
+.post-tipo-tag.doacao    { background: rgba(251,191,36,.15);   color: #b45309; }
+.post-tipo-tag.pedido    { background: rgba(244,114,182,.15);  color: #be185d; }
+.post-tipo-tag.voluntario { background: rgba(52,211,153,.15);  color: #065f46; }
+
+.perfil-post-tempo {
+  font-size: 0.78rem;
+  color: #bbb;
+}
+
+.perfil-post-conteudo {
+  font-size: 0.93rem;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.perfil-post-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 0.82rem;
+  color: #999;
+}
+
+.perfil-post-stats span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.perfil-post-stats i {
+  color: #c7d2fe;
+}
+
+.perfil-posts-vazio {
+  text-align: center;
+  padding: 40px;
+  color: #bbb;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(109,125,252,.1);
+}
+
+.perfil-posts-vazio i {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 10px;
+  color: #e0e7ff;
+}
+
+/* ============================
+   MODAL DE EDIÇÃO
+   ============================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.modal-overlay.ativo {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-card {
+  background: #fff;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 480px;
+  padding: 28px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  transform: translateY(20px);
+  transition: transform 0.25s;
+}
+
+.modal-overlay.ativo .modal-card {
+  transform: translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.modal-close {
+  background: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  transition: background 0.15s;
+}
+
+.modal-close:hover { background: #e0e0e0; }
+
+.editar-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.editar-form label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: -6px;
+}
+
+.editar-form input,
+.editar-form textarea {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1.5px solid #e2e8f0;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+  color: #333;
+}
+
+.editar-form input:focus,
+.editar-form textarea:focus {
+  border-color: #6d7dfc;
+}
+
+.editar-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.modal-aviso {
+  font-size: 0.8rem;
+  color: #999;
+  flex: 1;
+}
+
+.modal-publicar {
+  padding: 12px 28px;
+  border-radius: 12px;
+  border: none;
+  background: #6d7dfc;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.modal-publicar:hover { background: #5a6be8; }
+
+/* ============================
+   RESPONSIVIDADE
+   ============================ */
+@media (max-width: 767px) {
+  .perfil-main {
+    margin-top: 80px;
+    padding: 0 12px 40px;
+  }
+
+  .perfil-card {
+    padding: 20px;
+  }
+
+  .perfil-topo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .perfil-nome-linha {
+    justify-content: center;
+  }
+
+  .perfil-acoes {
+    justify-content: center;
+  }
+
+  .perfil-contadores {
+    gap: 0;
+  }
+}
+
