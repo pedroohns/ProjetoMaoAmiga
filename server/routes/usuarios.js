@@ -3,16 +3,14 @@ const router  = express.Router();
 const pool    = require('../config/db');
 const { autenticar, autenticarOpcional } = require('../middleware/auth');
 
-// ============================
 // GET /api/usuarios/:id
-// Retorna o perfil público de um usuário
-// ============================
+// retorna o perfil publico de um usuario
 router.get('/:id', autenticarOpcional, async (req, res) => {
   const { id } = req.params;
   const quemVe = req.usuario?.id || null;
 
   try {
-    // Dados do usuário
+    // dados do usuario
     const resultado = await pool.query(
       `SELECT id, nome, tipo, localidade, foto_url, bio, criado_em
        FROM usuarios WHERE id = $1`,
@@ -25,7 +23,7 @@ router.get('/:id', autenticarOpcional, async (req, res) => {
 
     const usuario = resultado.rows[0];
 
-    // Contadores
+    // contadores
     const contadores = await pool.query(
       `SELECT
          (SELECT COUNT(*) FROM posts      WHERE usuario_id = $1) AS total_posts,
@@ -34,7 +32,7 @@ router.get('/:id', autenticarOpcional, async (req, res) => {
       [id]
     );
 
-    // Verifica se quem está vendo já segue este usuário
+    // verifica se quem esta vendo ja segue este usuario
     let seguindo = false;
     if (quemVe && quemVe !== parseInt(id)) {
       const seg = await pool.query(
@@ -44,7 +42,7 @@ router.get('/:id', autenticarOpcional, async (req, res) => {
       seguindo = seg.rows.length > 0;
     }
 
-    // Posts do usuário
+    // posts do usuario
     const posts = await pool.query(
       `SELECT
          p.id, p.tipo, p.conteudo, p.criado_em,
@@ -74,10 +72,8 @@ router.get('/:id', autenticarOpcional, async (req, res) => {
   }
 });
 
-// ============================
 // PUT /api/usuarios/:id
-// Edita o próprio perfil (só o dono pode editar)
-// ============================
+// edita o proprio perfil (so o dono pode editar)
 router.put('/:id', autenticar, async (req, res) => {
   const { id } = req.params;
 
@@ -102,7 +98,7 @@ router.put('/:id', autenticar, async (req, res) => {
 
     const usuarioAtualizado = resultado.rows[0];
 
-    // Atualiza o localStorage do front com os novos dados
+    // atualiza o localstorage do front com os novos dados
     return res.status(200).json({
       mensagem: 'Perfil atualizado com sucesso!',
       usuario: usuarioAtualizado,
@@ -114,10 +110,8 @@ router.put('/:id', autenticar, async (req, res) => {
   }
 });
 
-// ============================
 // POST /api/usuarios/:id/seguir
-// Seguir ou deixar de seguir um usuário
-// ============================
+// seguir ou deixar de seguir um usuario
 router.post('/:id/seguir', autenticar, async (req, res) => {
   const seguidoId  = parseInt(req.params.id);
   const seguidorId = req.usuario.id;

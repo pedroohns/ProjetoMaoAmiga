@@ -1,12 +1,8 @@
-// ============================================
-// PERFIL.JS — Mão Amiga
-// ============================================
-
 const API      = 'https://projetomaoamiga-production.up.railway.app';
 const usuario  = JSON.parse(localStorage.getItem('usuario'));
 const token    = localStorage.getItem('token');
 
-// Pega o ID do perfil pela URL: perfil.html?id=3
+// pega o ID do perfil pela URL: perfil.html?id=3 
 const params   = new URLSearchParams(window.location.search);
 const perfilId = params.get('id') || usuario?.id;
 
@@ -25,9 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   iniciarModalEditar();
 });
 
-// ============================
-// CARREGAR PERFIL
-// ============================
+// CARREGAR O PERFIL 
 async function carregarPerfil() {
   try {
     const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
@@ -50,9 +44,7 @@ async function carregarPerfil() {
   }
 }
 
-// ============================
-// RENDERIZAR PERFIL
-// ============================
+// RENDERIZAÇAO DO PERFIL
 function renderizarPerfil(perfil, posts) {
   const ehMeuPerfil = usuario && usuario.id === perfil.id;
 
@@ -69,7 +61,7 @@ function renderizarPerfil(perfil, posts) {
     voluntario: 'Voluntário'
   };
 
-  // Monta os posts
+  // montagem dos posts
   const postsHTML = posts.length === 0
     ? `<div class="perfil-posts-vazio">
          <i class="fa-solid fa-pen-to-square"></i>
@@ -89,7 +81,7 @@ function renderizarPerfil(perfil, posts) {
         </div>
       `).join('');
 
-  // Monta botão de ação (editar se for meu perfil, seguir se for de outro)
+  // monta botao de açao (editar se for meu perfil, seguir se for de outro)
   const btnAcao = ehMeuPerfil
     ? `<button class="btn-editar-perfil" id="btnAbrirEditar">
          <i class="fa-solid fa-pen"></i> Editar perfil
@@ -151,7 +143,7 @@ function renderizarPerfil(perfil, posts) {
     ${postsHTML}
   `;
 
-  // Registra eventos após renderizar
+  // registra eventos apos renderizar
   const btnEditar = document.getElementById('btnAbrirEditar');
   if (btnEditar) {
     btnEditar.addEventListener('click', () => abrirModalEditar(perfil));
@@ -163,9 +155,7 @@ function renderizarPerfil(perfil, posts) {
   }
 }
 
-// ============================
-// SEGUIR / DEIXAR DE SEGUIR
-// ============================
+// SEGUIR/DEIXAR DE SEGUIR
 async function seguirUsuario(btn, idAlvo) {
   if (!token) {
     window.location.href = 'tela-login.html';
@@ -193,9 +183,7 @@ async function seguirUsuario(btn, idAlvo) {
   }
 }
 
-// ============================
-// MODAL DE EDIÇÃO
-// ============================
+// MODAL DE EDIÇAO
 function iniciarModalEditar() {
   const modal    = document.getElementById('modalEditar');
   const btnFechar = document.getElementById('fecharModalEditar');
@@ -262,11 +250,11 @@ async function salvarPerfil() {
       return;
     }
 
-    // Atualiza o localStorage com os novos dados
+    // atualiza o localstorage com os novos dados 
     const usuarioAtualizado = { ...usuario, ...dados.usuario };
     localStorage.setItem('usuario', JSON.stringify(usuarioAtualizado));
 
-    // Fecha o modal e recarrega o perfil
+    // fecha o modal e recarrega o perfil
     document.getElementById('modalEditar').classList.remove('ativo');
     document.body.style.overflow = '';
     carregarPerfil();
@@ -279,9 +267,7 @@ async function salvarPerfil() {
   }
 }
 
-// ============================
-// UTILITÁRIOS
-// ============================
+// UTILITARIOS 
 function calcularTempo(dataISO) {
   const agora    = new Date();
   const data     = new Date(dataISO);

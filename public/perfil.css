@@ -1,7 +1,3 @@
-/* ============================================
-   PERFIL.CSS — Mão Amiga
-   ============================================ */
-
 .perfil-main {
   margin-top: 100px;
   padding: 0 20px 60px;
@@ -10,9 +6,7 @@
   margin-right: auto;
 }
 
-/* ============================
-   LOADING / ERRO
-   ============================ */
+/* LOADING/ERRO */
 .perfil-loading,
 .perfil-erro {
   text-align: center;
@@ -28,9 +22,7 @@
   margin-bottom: 12px;
 }
 
-/* ============================
-   CARD DE PERFIL
-   ============================ */
+/* CARD DE PERFIL */
 .perfil-card {
   background: #fff;
   border-radius: 24px;
@@ -166,9 +158,7 @@
   color: #6d7dfc;
 }
 
-/* ============================
-   CONTADORES
-   ============================ */
+/* CONTADORES */
 .perfil-contadores {
   display: flex;
   gap: 0;
@@ -194,9 +184,7 @@
   color: #999;
 }
 
-/* ============================
-   POSTS DO PERFIL
-   ============================ */
+/* POSTS DO PERFIL */
 .perfil-posts-titulo {
   font-size: 1rem;
   font-weight: 700;
@@ -298,9 +286,7 @@
   color: #e0e7ff;
 }
 
-/* ============================
-   MODAL DE EDIÇÃO
-   ============================ */
+/* MODAL DE EDIÇAO */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -436,9 +422,7 @@
 
 .modal-publicar:hover { background: #5a6be8; }
 
-/* ============================
-   RESPONSIVIDADE
-   ============================ */
+/* RESPONSIVIDADE */
 @media (max-width: 767px) {
   .perfil-main {
     margin-top: 80px;
