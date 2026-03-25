@@ -52,7 +52,7 @@ Pedro Henrique de Souza Silva (ativo)
 Maria Clara Mendonça  
 João Gabriel Iost  
 Pedro Henrique Carvalho  
-Gabriel Trindade
+Gabriel Trindade  
 Renan Alves
 
 ---
