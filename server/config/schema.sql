@@ -1,7 +1,6 @@
 -- ============================================
 -- BANCO DE DADOS — Mão Amiga
--- Execute este script no PostgreSQL para
--- criar todas as tabelas necessárias.
+-- execute este script no PostgreSQL para criar todas as tabelas necessarias.
 --
 -- Como rodar:
 --   psql -U postgres -c "CREATE DATABASE mao_amiga;"
@@ -51,7 +50,7 @@ CREATE TABLE IF NOT EXISTS curtidas (
 );
 
 -- ============================
--- COMENTÁRIOS
+-- COMENTARIOS
 -- ============================
 CREATE TABLE IF NOT EXISTS comentarios (
   id          SERIAL PRIMARY KEY,
@@ -69,8 +68,8 @@ CREATE TABLE IF NOT EXISTS seguidores (
   seguidor_id INT                 NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
   seguido_id  INT                 NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
   criado_em   TIMESTAMP           NOT NULL DEFAULT NOW(),
-  UNIQUE (seguidor_id, seguido_id),           -- não pode seguir duas vezes
-  CHECK (seguidor_id != seguido_id)           -- não pode seguir a si mesmo
+  UNIQUE (seguidor_id, seguido_id),           -- nao pode seguir duas vezes
+  CHECK (seguidor_id != seguido_id)           -- nao pode seguir a si mesmo
 );
 
 -- ============================

@@ -5,7 +5,7 @@ require('dotenv').config();
 // adiciona req.usuario com os dados do usuario logado
 function autenticar(req, res, next) {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // formato: "Bearer <token>"
+  const token = authHeader && authHeader.split(' ')[1]; // formato: "bearer <token>"
 
   if (!token) {
     return res.status(401).json({ erro: 'Token não fornecido. Faça login para continuar.' });

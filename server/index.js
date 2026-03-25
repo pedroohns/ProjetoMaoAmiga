@@ -36,7 +36,7 @@ app.get('*', (req, res) => {
 // INICIA O SERVIDOR
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
-  console.log(`📁 Front-end servido em http://localhost:${PORT}/index.html`);
-  console.log(`🔗 API disponível em http://localhost:${PORT}/api`);
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
+  console.log(`Front-end servido em http://localhost:${PORT}/index.html`);
+  console.log(`API disponível em http://localhost:${PORT}/api`);
 });
