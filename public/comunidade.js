@@ -1,102 +1,66 @@
+// ============================================
+// COMUNIDADE.JS — Mão Amiga
+// ===========================================
+// que loucura
+
 const API = 'https://projetomaoamiga-production.up.railway.app';
 
-// dados do usuario logado (null se não estiver logado)
 const usuario = JSON.parse(localStorage.getItem('usuario'));
 const token   = localStorage.getItem('token');
 
-// filtro e ordem ativos no momento
 let filtroAtivo = 'todos';
 let ordemAtiva  = 'recentes';
 
 // INICIALIZAÇAO
 document.addEventListener('DOMContentLoaded', () => {
-
-  // atualiza o card de perfil na sidebar com dados reais
   atualizarSidebarPerfil();
-
-  // carrega os posts da API
   carregarFeed();
-
-  // modal
   iniciarModal();
-
-  // filtros
   iniciarFiltros();
-
-  // ordem
   iniciarOrdenacao();
 
-  // seguir pessoas estatico sidebar
   document.querySelectorAll('.btn-seguir').forEach(btn => {
     btn.addEventListener('click', () => {
-      if (btn.classList.contains('seguindo')) {
-        btn.classList.remove('seguindo');
-        btn.textContent = 'Seguir';
-      } else {
-        btn.classList.add('seguindo');
-        btn.textContent = 'Seguindo ✓';
-      }
+      btn.classList.toggle('seguindo');
+      btn.textContent = btn.classList.contains('seguindo') ? 'Seguindo ✓' : 'Seguir';
     });
   });
 
-  // compartilhar
   document.addEventListener('click', (e) => {
     if (e.target.closest('.acao-btn.compartilhar')) {
       if (navigator.share) {
-        navigator.share({
-          title: 'Mão Amiga — Comunidade',
-          text: 'Veja essa publicação na comunidade Mão Amiga!',
-          url: window.location.href
-        }).catch(() => {});
+        navigator.share({ title: 'Mão Amiga — Comunidade', url: window.location.href }).catch(() => {});
       } else {
-        navigator.clipboard.writeText(window.location.href).then(() => {
-          mostrarToast('Link copiado!');
-        });
+        navigator.clipboard.writeText(window.location.href).then(() => mostrarToast('Link copiado!'));
       }
     }
   });
 });
 
-// SIDEBAR - PERFIL DO USUARIO
+// SIDEBAR DO PERFIL
 function atualizarSidebarPerfil() {
   if (!usuario) return;
-
-  const nomeEl  = document.querySelector('.perfil-nome');
-  const btnEl   = document.querySelector('.btn-entrar-perfil');
-
+  const nomeEl = document.querySelector('.perfil-nome');
+  const btnEl  = document.querySelector('.btn-entrar-perfil');
   if (nomeEl) nomeEl.textContent = usuario.nome.split(' ')[0];
-
-  if (btnEl) {
-    btnEl.textContent = 'Meu perfil';
-    btnEl.onclick = () => window.location.href = 'perfil.html';
-  }
+  if (btnEl) { btnEl.textContent = 'Meu perfil'; btnEl.onclick = () => window.location.href = 'perfil.html'; }
 }
 
-// CARREGAR FEED DA API
+// CARREGAR FEED
 async function carregarFeed() {
   const feed = document.getElementById('feedPosts');
-  feed.innerHTML = `<div class="feed-loading">Carregando publicações...</div>`;
+  feed.innerHTML = `<div class="feed-loading"><i class="fa-solid fa-spinner fa-spin"></i><p>Carregando publicações...</p></div>`;
 
   try {
-    const tipo  = filtroAtivo !== 'todos' ? `&tipo=${filtroAtivo}` : '';
-    const ordem = `ordem=${ordemAtiva}`;
-
-    const headers = token
-      ? { 'Authorization': `Bearer ${token}` }
-      : {};
-
-    const resposta = await fetch(`${API}/api/posts?${ordem}${tipo}`, { headers });
+    const tipo   = filtroAtivo !== 'todos' ? `&tipo=${filtroAtivo}` : '';
+    const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
+    const resposta = await fetch(`${API}/api/posts?ordem=${ordemAtiva}${tipo}`, { headers });
     const dados    = await resposta.json();
 
     feed.innerHTML = '';
 
     if (!dados.posts || dados.posts.length === 0) {
-      feed.innerHTML = `
-        <div class="feed-vazio">
-          <i class="fa-solid fa-seedling"></i>
-          <p>Nenhuma publicação ainda. Seja o primeiro a compartilhar!</p>
-        </div>
-      `;
+      feed.innerHTML = `<div class="feed-vazio"><i class="fa-solid fa-seedling"></i><p>Nenhuma publicação ainda. Seja o primeiro a compartilhar!</p></div>`;
       return;
     }
 
@@ -107,35 +71,20 @@ async function carregarFeed() {
     });
 
   } catch (err) {
-    feed.innerHTML = `
-      <div class="feed-vazio">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <p>Erro ao carregar publicações. Tente novamente.</p>
-      </div>
-    `;
-    console.error('Erro ao carregar feed:', err);
+    feed.innerHTML = `<div class="feed-vazio"><i class="fa-solid fa-circle-exclamation"></i><p>Erro ao carregar publicações. Tente novamente.</p></div>`;
   }
 }
 
-// CRIAÇAO DO CARD DE POST A PARTIR DA API
+// CRIAR CARD DE POST
 function criarCardPost(post) {
-  const tipoLabels = {
-    historia:  'História',
-    pedido:    'Pedido',
-    doacao:    'Doação',
-    voluntario: 'Voluntário'
-  };
-
-  const tipoBadgeUsuario = {
-    doador:      'doador',
-    beneficiado: 'beneficiado',
-    voluntario:  'voluntario'
-  };
-
-  const tempoPassado = calcularTempo(post.criado_em);
-  const localidade   = post.usuario_localidade || 'Brasil';
-  const fotoPerfil   = post.usuario_foto || 'imagens/user.png';
-  const jaCurtiu     = post.curtido_por_mim;
+  const tipoLabels     = { historia: 'História', pedido: 'Pedido', doacao: 'Doação', voluntario: 'Voluntário' };
+  const tipoBadge      = { doador: 'doador', beneficiado: 'beneficiado', voluntario: 'voluntario' };
+  const tipoNome       = { doador: 'Doador', beneficiado: 'Beneficiado', voluntario: 'Voluntário' };
+  const tempoPassado   = calcularTempo(post.criado_em);
+  const localidade     = post.usuario_localidade || 'Brasil';
+  const fotoPerfil     = post.usuario_foto || 'imagens/user.png';
+  const jaCurtiu       = post.curtido_por_mim;
+  const ehMeuPost      = usuario && usuario.id === post.usuario_id;
 
   const article = document.createElement('article');
   article.className = 'post-card';
@@ -150,16 +99,21 @@ function criarCardPost(post) {
       <div class="post-info">
         <div class="post-nome-linha">
           <strong>${post.usuario_nome}</strong>
-          <span class="post-badge ${tipoBadgeUsuario[post.usuario_tipo] || 'voluntario'}">
-            ${post.usuario_tipo === 'beneficiado' ? 'Beneficiado' :
-              post.usuario_tipo === 'doador' ? 'Doador' : 'Voluntário'}
+          <span class="post-badge ${tipoBadge[post.usuario_tipo] || 'voluntario'}">
+            ${tipoNome[post.usuario_tipo] || 'Membro'}
           </span>
         </div>
         <span class="post-meta">
           <i class="fa-solid fa-location-dot"></i> ${localidade} · ${tempoPassado}
         </span>
       </div>
-      <span class="post-tipo-tag ${post.tipo}">${tipoLabels[post.tipo]}</span>
+      <div class="post-header-direita">
+        <span class="post-tipo-tag ${post.tipo}">${tipoLabels[post.tipo]}</span>
+        ${ehMeuPost ? `
+          <button class="btn-excluir-post" data-id="${post.id}" title="Excluir post">
+            <i class="fa-solid fa-trash"></i>
+          </button>` : ''}
+      </div>
     </div>
     <div class="post-corpo">
       <p>${post.conteudo.replace(/\n/g, '<br>')}</p>
@@ -204,45 +158,28 @@ function criarCardPost(post) {
   return article;
 }
 
-// REGISTRAR OS EVENTOS NO POST
+// REGISTRAR EVENTOS EM UM POST
 function registrarEventosPost(card, post) {
-  // CURTIR
-  const btnCurtir = card.querySelector('.acao-btn.curtir');
-  if (btnCurtir) {
-    btnCurtir.addEventListener('click', () => curtirPost(btnCurtir, post.id));
-  }
+  card.querySelector('.acao-btn.curtir')?.addEventListener('click', (e) => curtirPost(e.currentTarget, post.id));
+  card.querySelector('.acao-btn.comentar')?.addEventListener('click', () => toggleComentarios(post.id));
+  card.querySelector('.btn-enviar-comentario')?.addEventListener('click', () => enviarComentario(post.id, card));
+  card.querySelector('.input-comentario')?.addEventListener('keydown', (e) => { if (e.key === 'Enter') enviarComentario(post.id, card); });
 
-  // COMENTAR ABRIR E FECHAR
-  const btnComentar = card.querySelector('.acao-btn.comentar');
-  if (btnComentar) {
-    btnComentar.addEventListener('click', () => toggleComentarios(post.id));
-  }
-
-  // ENVIAR COMENTARIO
-  const btnEnviar = card.querySelector('.btn-enviar-comentario');
-  if (btnEnviar) {
-    btnEnviar.addEventListener('click', () => enviarComentario(post.id, card));
-    const input = card.querySelector('.input-comentario');
-    if (input) {
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') enviarComentario(post.id, card);
-      });
-    }
+  // excluir post
+  const btnExcluir = card.querySelector('.btn-excluir-post');
+  if (btnExcluir) {
+    btnExcluir.addEventListener('click', () => excluirPost(post.id, card));
   }
 }
 
-// CURTIR E DESCURTIR
+// CURTIR / DESCURTIR
 async function curtirPost(btn, postId) {
-  if (!usuario || !token) {
-    mostrarToast('Faça login para curtir!');
-    return;
-  }
+  if (!usuario || !token) { mostrarToast('Faça login para curtir!'); return; }
 
   const contSpan = btn.querySelector('.curtidas-count');
   const ativo    = btn.classList.contains('ativo');
   const count    = parseInt(contSpan.textContent);
 
-  // atualiza visualmente antes da resposta 
   btn.classList.toggle('ativo');
   contSpan.textContent = ativo ? count - 1 : count + 1;
   btn.style.transform = 'scale(1.2)';
@@ -253,120 +190,143 @@ async function curtirPost(btn, postId) {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${token}` }
     });
-  } catch (err) {
-    // reverte se der erro
+  } catch {
     btn.classList.toggle('ativo');
     contSpan.textContent = count;
     mostrarToast('Erro ao curtir. Tente novamente.');
   }
 }
 
-// TOGGLE DA AREA DE COMENTARIOS
+// EXCLUIR POST
+async function excluirPost(postId, card) {
+  if (!confirm('Tem certeza que deseja excluir este post?')) return;
+
+  try {
+    const resposta = await fetch(`${API}/api/posts/${postId}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if (resposta.ok) {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(-10px)';
+      card.style.transition = 'all 0.3s ease';
+      setTimeout(() => card.remove(), 300);
+      mostrarToast('Post excluído.');
+    } else {
+      mostrarToast('Erro ao excluir post.');
+    }
+  } catch {
+    mostrarToast('Erro de conexão.');
+  }
+}
+
+// TOGGLE COMENTARIOS
 async function toggleComentarios(postId) {
   const area = document.getElementById(`comentarios-${postId}`);
   if (!area) return;
 
-  const visivel = area.style.display !== 'none';
-
-  if (visivel) {
-    area.style.display = 'none';
-    return;
-  }
+  if (area.style.display !== 'none') { area.style.display = 'none'; return; }
 
   area.style.display = 'flex';
-
-  // carrega cometarios da API que nao foram carrregados
   const lista = area.querySelector('.comentarios-lista');
+
   if (lista && lista.children.length === 0) {
     lista.innerHTML = '<p style="font-size:0.85rem;color:#999;padding:8px 0">Carregando...</p>';
 
     try {
       const resposta = await fetch(`${API}/api/posts/${postId}/comentarios`);
       const dados    = await resposta.json();
-
       lista.innerHTML = '';
 
       if (dados.comentarios.length === 0) {
-        lista.innerHTML = '<p style="font-size:0.85rem;color:#999;padding:8px 0">Nenhum comentário ainda. Seja o primeiro!</p>';
+        lista.innerHTML = '<p style="font-size:0.85rem;color:#999;padding:8px 0">Nenhum comentário ainda.</p>';
         return;
       }
 
       dados.comentarios.forEach(c => {
-        const div = document.createElement('div');
-        div.className = 'comentario';
-        div.innerHTML = `
-          <img src="${c.usuario_foto || 'imagens/user.png'}" alt="" class="comentario-avatar"
-               onerror="this.src='imagens/user.png'">
-          <div class="comentario-corpo">
-            <strong>${c.usuario_nome}</strong>
-            <p>${c.conteudo}</p>
-          </div>
-        `;
-        lista.appendChild(div);
+        lista.appendChild(criarElementoComentario(c, postId));
       });
 
-    } catch (err) {
+    } catch {
       lista.innerHTML = '<p style="font-size:0.85rem;color:#999;padding:8px 0">Erro ao carregar comentários.</p>';
     }
   }
 
-  // foco no input
   const input = area.querySelector('.input-comentario');
   if (input && usuario) input.focus();
 }
 
-// ENVIAR COMENTARIO
-async function enviarComentario(postId, card) {
-  if (!usuario || !token) {
-    mostrarToast('Faça login para comentar!');
-    return;
+// CRIAR ELEMENTO DE COMENTARIO
+function criarElementoComentario(c, postId) {
+  const ehMeuComentario = usuario && usuario.id === c.usuario_id;
+  const div = document.createElement('div');
+  div.className = 'comentario';
+  div.dataset.comentarioId = c.id;
+  div.innerHTML = `
+    <img src="${c.usuario_foto || 'imagens/user.png'}" alt="" class="comentario-avatar"
+         onerror="this.src='imagens/user.png'">
+    <div class="comentario-corpo">
+      <div class="comentario-nome-linha">
+        <strong>${c.usuario_nome}</strong>
+        ${ehMeuComentario ? `
+          <button class="btn-excluir-comentario" title="Excluir comentário">
+            <i class="fa-solid fa-trash"></i>
+          </button>` : ''}
+      </div>
+      <p>${c.conteudo}</p>
+    </div>
+  `;
+
+  // evento de excluir comentario
+  const btnExcluir = div.querySelector('.btn-excluir-comentario');
+  if (btnExcluir) {
+    btnExcluir.addEventListener('click', () => excluirComentario(c.id, postId, div));
   }
 
-  const area   = card.querySelector('.comentarios-area');
-  const input  = area.querySelector('.input-comentario');
-  const texto  = input.value.trim();
+  return div;
+}
+
+// ENVIAR COMENTARIO
+async function enviarComentario(postId, card) {
+  if (!usuario || !token) { mostrarToast('Faça login para comentar!'); return; }
+
+  const area      = card.querySelector('.comentarios-area');
+  const input     = area.querySelector('.input-comentario');
+  const texto     = input.value.trim();
   if (!texto) return;
 
   const btnEnviar = area.querySelector('.btn-enviar-comentario');
-  btnEnviar.disabled  = true;
+  btnEnviar.disabled = true;
   btnEnviar.textContent = '...';
 
   try {
     const resposta = await fetch(`${API}/api/posts/${postId}/comentarios`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({ conteudo: texto })
     });
 
     const dados = await resposta.json();
+    if (!resposta.ok) { mostrarToast(dados.erro || 'Erro ao comentar.'); return; }
 
-    if (!resposta.ok) {
-      mostrarToast(dados.erro || 'Erro ao comentar.');
-      return;
-    }
-
-    // adiciona o comentario na lista visualmente
-    const lista = area.querySelector('.comentarios-lista');
+    const lista    = area.querySelector('.comentarios-lista');
     const msgVazia = lista.querySelector('p');
     if (msgVazia) msgVazia.remove();
 
-    const div = document.createElement('div');
-    div.className = 'comentario';
-    div.innerHTML = `
-      <img src="${usuario.foto_url || 'imagens/user.png'}" alt="" class="comentario-avatar"
-           onerror="this.src='imagens/user.png'">
-      <div class="comentario-corpo">
-        <strong>${usuario.nome}</strong>
-        <p>${texto}</p>
-      </div>
-    `;
-    lista.appendChild(div);
+    // monta comentario com os dados retornados
+    const novoComentario = criarElementoComentario({
+      id:           dados.comentario.id,
+      usuario_id:   usuario.id,
+      usuario_nome: usuario.nome,
+      usuario_foto: usuario.foto_url || null,
+      conteudo:     texto
+    }, postId);
+
+    lista.appendChild(novoComentario);
     input.value = '';
 
-    // atualizar o contador
+    // atualiza contador
     const btnComentar = card.querySelector('.acao-btn.comentar span');
     if (btnComentar) {
       const match = btnComentar.textContent.match(/\d+/);
@@ -374,26 +334,51 @@ async function enviarComentario(postId, card) {
       btnComentar.textContent = `${atual + 1} comentários`;
     }
 
-  } catch (err) {
-    mostrarToast('Erro de conexão. Tente novamente.');
-  } finally {
+  } catch { mostrarToast('Erro de conexão.'); }
+  finally {
     btnEnviar.disabled = false;
     btnEnviar.textContent = 'Enviar';
   }
 }
 
+// EXCLUIR COMENTARIO
+async function excluirComentario(comentarioId, postId, elemento) {
+  if (!confirm('Excluir este comentário?')) return;
+
+  try {
+    const resposta = await fetch(`${API}/api/posts/${postId}/comentarios/${comentarioId}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if (resposta.ok) {
+      elemento.style.opacity = '0';
+      elemento.style.transition = 'opacity 0.2s';
+      setTimeout(() => elemento.remove(), 200);
+      mostrarToast('Comentário excluído.');
+
+      // atualiza o contador no post
+      const card        = document.querySelector(`[data-post-id="${postId}"]`);
+      const btnComentar = card?.querySelector('.acao-btn.comentar span');
+      if (btnComentar) {
+        const match = btnComentar.textContent.match(/\d+/);
+        const atual = match ? parseInt(match[0]) : 1;
+        btnComentar.textContent = `${Math.max(0, atual - 1)} comentários`;
+      }
+    } else {
+      mostrarToast('Erro ao excluir comentário.');
+    }
+  } catch { mostrarToast('Erro de conexão.'); }
+}
+
 // MODAL DE NOVO POST
 function iniciarModal() {
-  const overlay  = document.getElementById('modalOverlay');
-  const trigger  = document.querySelector('.novo-post-trigger');
+  const overlay   = document.getElementById('modalOverlay');
+  const trigger   = document.querySelector('.novo-post-trigger');
   const btnFechar = document.getElementById('fecharModal');
 
   function abrirModal() {
-    if (!usuario) {
-      mostrarToast('Faça login para publicar!');
-      setTimeout(() => window.location.href = 'tela-login.html', 1500);
-      return;
-    }
+    if (!usuario) { mostrarToast('Faça login para publicar!'); setTimeout(() => window.location.href = 'tela-login.html', 1500); return; }
     overlay.classList.add('ativo');
     document.body.style.overflow = 'hidden';
   }
@@ -403,15 +388,10 @@ function iniciarModal() {
     document.body.style.overflow = '';
   }
 
-  if (trigger)   trigger.addEventListener('click', abrirModal);
-  if (btnFechar) btnFechar.addEventListener('click', fecharModal);
-  if (overlay) {
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) fecharModal();
-    });
-  }
+  trigger?.addEventListener('click', abrirModal);
+  btnFechar?.addEventListener('click', fecharModal);
+  overlay?.addEventListener('click', (e) => { if (e.target === overlay) fecharModal(); });
 
-  // seleçao do tipo de modal
   document.querySelectorAll('.modal-tipo-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.modal-tipo-btn').forEach(b => b.classList.remove('active'));
@@ -419,25 +399,17 @@ function iniciarModal() {
     });
   });
 
-  // publicar bnotao
-  const btnPublicar = document.querySelector('.modal-publicar');
-  if (btnPublicar) {
-    btnPublicar.addEventListener('click', () => publicarPost(fecharModal));
-  }
+  document.querySelector('.modal-publicar')?.addEventListener('click', () => publicarPost(fecharModal));
 }
 
-// PUBLICAR POST NA API
+// PUBLICAR POST
 async function publicarPost(fecharModal) {
   const textarea  = document.querySelector('.modal-textarea');
   const tipoAtivo = document.querySelector('.modal-tipo-btn.active');
   const texto     = textarea.value.trim();
   const tipo      = tipoAtivo ? tipoAtivo.dataset.tipo : 'historia';
 
-  if (!texto) {
-    textarea.style.borderColor = '#f472b6';
-    textarea.placeholder = 'Escreva algo antes de publicar!';
-    return;
-  }
+  if (!texto) { textarea.style.borderColor = '#f472b6'; textarea.placeholder = 'Escreva algo antes de publicar!'; return; }
 
   const btnPublicar = document.querySelector('.modal-publicar');
   btnPublicar.disabled = true;
@@ -446,33 +418,20 @@ async function publicarPost(fecharModal) {
   try {
     const resposta = await fetch(`${API}/api/posts`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({ tipo, conteudo: texto })
     });
 
     const dados = await resposta.json();
-
-    if (!resposta.ok) {
-      mostrarToast(dados.erro || 'Erro ao publicar.');
-      return;
-    }
+    if (!resposta.ok) { mostrarToast(dados.erro || 'Erro ao publicar.'); return; }
 
     fecharModal();
     textarea.value = '';
     mostrarToast('Post publicado!');
-
-    // recarrega o feed pra mostrar o novo post
     carregarFeed();
 
-  } catch (err) {
-    mostrarToast('Erro de conexão. Tente novamente.');
-  } finally {
-    btnPublicar.disabled = false;
-    btnPublicar.textContent = 'Publicar';
-  }
+  } catch { mostrarToast('Erro de conexão.'); }
+  finally { btnPublicar.disabled = false; btnPublicar.textContent = 'Publicar'; }
 }
 
 // FILTROS
@@ -487,7 +446,7 @@ function iniciarFiltros() {
   });
 }
 
-// ORDENAÇÃO
+// ORDENAÇAO
 function iniciarOrdenacao() {
   document.querySelectorAll('.ordem-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -501,10 +460,10 @@ function iniciarOrdenacao() {
 
 // UTILITARIOS
 function calcularTempo(dataISO) {
-  const agora    = new Date();
-  const data     = new Date(dataISO);
-  const diffSeg  = Math.floor((agora - data) / 1000);
-  const diffMin  = Math.floor(diffSeg / 60);
+  const agora   = new Date();
+  const data    = new Date(dataISO);
+  const diffSeg = Math.floor((agora - data) / 1000);
+  const diffMin = Math.floor(diffSeg / 60);
   const diffHora = Math.floor(diffMin / 60);
   const diffDia  = Math.floor(diffHora / 24);
 
@@ -517,29 +476,16 @@ function calcularTempo(dataISO) {
 
 function mostrarToast(mensagem) {
   const toast = document.createElement('div');
-  toast.style.cssText = `
-    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
-    background: #111; color: #fff; padding: 12px 24px; border-radius: 100px;
-    font-size: 0.9rem; font-weight: 600; z-index: 9999;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    animation: fadeInUp 0.3s ease;
-  `;
+  toast.style.cssText = `position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:12px 24px;border-radius:100px;font-size:0.9rem;font-weight:600;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,0.3);animation:fadeInUp 0.3s ease;`;
   toast.textContent = mensagem;
   document.body.appendChild(toast);
   setTimeout(() => toast.remove(), 3000);
 }
 
-// funçap global para o onclick do HTML
 function abrirModalComTipo(tipo) {
-  if (!usuario) {
-    mostrarToast('Faça login para publicar!');
-    setTimeout(() => window.location.href = 'tela-login.html', 1500);
-    return;
-  }
+  if (!usuario) { mostrarToast('Faça login para publicar!'); setTimeout(() => window.location.href = 'tela-login.html', 1500); return; }
   document.getElementById('modalOverlay').classList.add('ativo');
   document.body.style.overflow = 'hidden';
-  document.querySelectorAll('.modal-tipo-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.tipo === tipo);
-  });
+  document.querySelectorAll('.modal-tipo-btn').forEach(b => b.classList.toggle('active', b.dataset.tipo === tipo));
   document.querySelector('.modal-textarea').focus();
 }

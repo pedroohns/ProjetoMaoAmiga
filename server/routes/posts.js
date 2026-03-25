@@ -3,10 +3,8 @@ const router  = express.Router();
 const pool    = require('../config/db');
 const { autenticar, autenticarOpcional } = require('../middleware/auth');
 
-// ============================
 // GET /api/posts
 // lista posts do feed com paginaçao e filtro por tipo
-// ============================
 router.get('/', autenticarOpcional, async (req, res) => {
   const { tipo, ordem = 'recentes', pagina = 1, limite = 10 } = req.query;
   const offset = (pagina - 1) * limite;
@@ -65,10 +63,8 @@ router.get('/', autenticarOpcional, async (req, res) => {
   }
 });
 
-// ============================
 // POST /api/posts
 // cria um novo post (requer login)
-// ============================
 router.post('/', autenticar, async (req, res) => {
   const { tipo, conteudo } = req.body;
 
@@ -100,10 +96,8 @@ router.post('/', autenticar, async (req, res) => {
   }
 });
 
-// ============================
 // DELETE /api/posts/:id
-// remove um post (so o dono do post pode apagar)
-// ============================
+// remove um post (só o dono pode apagar)
 router.delete('/:id', autenticar, async (req, res) => {
   const postId = req.params.id;
 
@@ -128,10 +122,8 @@ router.delete('/:id', autenticar, async (req, res) => {
   }
 });
 
-// ============================
 // POST /api/posts/:id/curtir
 // curtir ou descurtir um post
-// ============================
 router.post('/:id/curtir', autenticar, async (req, res) => {
   const postId = req.params.id;
   const usuarioId = req.usuario.id;
@@ -165,10 +157,8 @@ router.post('/:id/curtir', autenticar, async (req, res) => {
   }
 });
 
-// ============================
 // GET /api/posts/:id/comentarios
 // lista comentarios de um post
-// ============================
 router.get('/:id/comentarios', async (req, res) => {
   const postId = req.params.id;
 
@@ -197,10 +187,8 @@ router.get('/:id/comentarios', async (req, res) => {
   }
 });
 
-// ============================
 // POST /api/posts/:id/comentarios
 // adiciona um comentario (requer login)
-// ============================
 router.post('/:id/comentarios', autenticar, async (req, res) => {
   const postId    = req.params.id;
   const { conteudo } = req.body;
@@ -230,6 +218,35 @@ router.post('/:id/comentarios', autenticar, async (req, res) => {
   } catch (err) {
     console.error('Erro ao comentar:', err);
     return res.status(500).json({ erro: 'Erro interno ao publicar comentário.' });
+  }
+});
+
+// DELETE /api/posts/:postId/comentarios/:id
+// remove um comentario (so o dono pode apagar)
+router.delete('/:postId/comentarios/:id', autenticar, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const comentario = await pool.query(
+      'SELECT * FROM comentarios WHERE id = $1',
+      [id]
+    );
+
+    if (comentario.rows.length === 0) {
+      return res.status(404).json({ erro: 'Comentário não encontrado.' });
+    }
+
+    if (comentario.rows[0].usuario_id !== req.usuario.id) {
+      return res.status(403).json({ erro: 'Você não tem permissão para apagar este comentário.' });
+    }
+
+    await pool.query('DELETE FROM comentarios WHERE id = $1', [id]);
+
+    return res.status(200).json({ mensagem: 'Comentário removido com sucesso.' });
+
+  } catch (err) {
+    console.error('Erro ao deletar comentário:', err);
+    return res.status(500).json({ erro: 'Erro interno ao remover comentário.' });
   }
 });
 

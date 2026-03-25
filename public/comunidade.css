@@ -1010,3 +1010,58 @@ body {
 .feed-vazio p {
   color: #aaa;
 }
+
+/* EXCLUIR POST E COMENTARIO */
+
+.post-header-direita {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-excluir-post {
+  background: transparent;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 13px;
+  transition: color 0.15s, background 0.15s;
+  line-height: 1;
+}
+
+.btn-excluir-post:hover {
+  color: #e24b4a;
+  background: rgba(226, 75, 74, 0.08);
+}
+
+.comentario-nome-linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3px;
+}
+
+.btn-excluir-comentario {
+  background: transparent;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 11px;
+  transition: color 0.15s, background 0.15s;
+  line-height: 1;
+  opacity: 0;
+}
+
+.comentario:hover .btn-excluir-comentario {
+  opacity: 1;
+}
+
+.btn-excluir-comentario:hover {
+  color: #e24b4a;
+  background: rgba(226, 75, 74, 0.08);
+}

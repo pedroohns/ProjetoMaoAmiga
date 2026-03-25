@@ -1,11 +1,16 @@
 // ============================================
-// SCRIPT.JS — Mão Amiga
+// SCRIPT.JS - Mão Amiga
 // ============================================
 // agora ele vai mostrar se voce ta logado ou nao na tela,
-// ele vai aparecer seu nome e um botao de sair caso voce esteja logado, se nao, vai aparecer normalmente os botoes
-// de entrar e criar conta
+// ele vai aparecer seu nome e um botao de sair caso voce esteja logado, se nao, vai aparecer normalmente os botoes de entrar e criar conta
+// tambem tem o redirecionamento dos botoes do hero, para as paginas de receber doaçoes e doar
+// e o script do menu mobile, que mostra o menu quando clica no icone e esconde quando clica fora ou no icone novamente
+// vamos ver se vai dar certo, se nao der, conserto depois, o importante é ter um script basico pra trabalhar e ir melhorando aos poucos
+// antes tinha dado certo, entao vamos ver como vai se sair agora
 
 document.addEventListener('DOMContentLoaded', function () {
+
+  // HEADER DINÂMICO
   const usuario = JSON.parse(localStorage.getItem('usuario'));
   const token   = localStorage.getItem('token');
 
@@ -13,17 +18,30 @@ document.addEventListener('DOMContentLoaded', function () {
   const mobileAuthButtons = document.querySelector('.mobile-auth-buttons');
 
   if (usuario && token) {
-    // --- USUARIO LOGADO ---
+    // USUARIO LOGADO
+    const primeiroNome = usuario.nome.split(' ')[0];
+    const fotoUrl      = usuario.foto_url || null;
+    const perfilHref   = `perfil.html`;
+
+    // avatar: foto real ou inicial do nome
+    const avatarHTML  = fotoUrl ? `<img src="${fotoUrl}" alt="${primeiroNome}" class="header-avatar-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : '';
+    const inicialHTML = `<span class="header-avatar-inicial" ${fotoUrl ? 'style="display:none"' : ''}>${primeiroNome.charAt(0).toUpperCase()}</span>`;
 
     // desktop
     if (authButtons) {
       authButtons.innerHTML = `
         <div class="usuario-logado">
-          <span class="usuario-nome">
-            <i class="fa-solid fa-circle-user"></i>
-            ${usuario.nome.split(' ')[0]}
-          </span>
-          <button class="btn-sair" id="btnSair">Sair</button>
+          <a href="${perfilHref}" class="usuario-perfil-link">
+            <div class="header-avatar">
+              ${avatarHTML}
+              ${inicialHTML}
+            </div>
+            <span class="usuario-nome">${primeiroNome}</span>
+          </a>
+          <button class="btn-sair" id="btnSair">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            Sair
+          </button>
         </div>
       `;
     }
@@ -31,17 +49,20 @@ document.addEventListener('DOMContentLoaded', function () {
     // mobile
     if (mobileAuthButtons) {
       mobileAuthButtons.innerHTML = `
-        <span class="mobile-usuario-nome">
-          <i class="fa-solid fa-circle-user"></i>
-          ${usuario.nome.split(' ')[0]}
-        </span>
+        <a href="${perfilHref}" class="mobile-usuario-link">
+          <div class="header-avatar header-avatar-sm">
+            ${fotoUrl ? `<img src="${fotoUrl}" alt="${primeiroNome}" class="header-avatar-img">` : ''}
+            <span class="header-avatar-inicial" ${fotoUrl ? 'style="display:none"' : ''}>${primeiroNome.charAt(0).toUpperCase()}</span>
+          </div>
+          <span>${primeiroNome}</span>
+        </a>
         <button class="mobile-sair" id="btnSairMobile">Sair</button>
       `;
     }
 
-    // evento de logout desktop e mobile
+    // logout
     document.addEventListener('click', function (e) {
-      if (e.target.id === 'btnSair' || e.target.id === 'btnSairMobile') {
+      if (e.target.closest('#btnSair') || e.target.closest('#btnSairMobile')) {
         localStorage.removeItem('token');
         localStorage.removeItem('usuario');
         window.location.href = 'index.html';
@@ -49,57 +70,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
   } else {
-    // --- USUARIO DESLOGADO ---
-
-    // botao entrar desktop
+    // USUARIO DESLOGADO
     const btnEntrar = document.querySelector('.entrar');
-    if (btnEntrar) {
-      btnEntrar.addEventListener('click', function () {
-        window.location.href = 'tela-login.html';
-      });
-    }
+    if (btnEntrar) btnEntrar.addEventListener('click', () => window.location.href = 'tela-login.html');
 
-    // botao criar conta desktop
     const btnCriarConta = document.querySelector('.criar-conta');
-    if (btnCriarConta) {
-      btnCriarConta.addEventListener('click', function () {
-        window.location.href = 'tela-criar-conta.html';
-      });
-    }
+    if (btnCriarConta) btnCriarConta.addEventListener('click', () => window.location.href = 'tela-criar-conta.html');
 
-    // botao entrar mobile
     const btnMobileEntrar = document.querySelector('.mobile-entrar');
-    if (btnMobileEntrar) {
-      btnMobileEntrar.addEventListener('click', function () {
-        window.location.href = 'tela-login.html';
-      });
-    }
+    if (btnMobileEntrar) btnMobileEntrar.addEventListener('click', () => window.location.href = 'tela-login.html');
 
-    // botao criar conta mobile
     const btnMobileCriarConta = document.querySelector('.mobile-criar-conta');
-    if (btnMobileCriarConta) {
-      btnMobileCriarConta.addEventListener('click', function () {
-        window.location.href = 'tela-criar-conta.html';
-      });
-    }
+    if (btnMobileCriarConta) btnMobileCriarConta.addEventListener('click', () => window.location.href = 'tela-criar-conta.html');
   }
 
-  // ============================
-  // REDIRECIONAMENTO BOTOES DA HERO
-  // ============================
+  // REDIRECIONAMENTO BOTOES HERO
   const btnReceber = document.getElementById('btn-receber');
   const btnDoar    = document.getElementById('btn-doar');
 
-  if (btnReceber) {
-    btnReceber.addEventListener('click', function () {
-      window.location.href = 'receber-doaçoes.html';
-    });
-  }
-
-  if (btnDoar) {
-    btnDoar.addEventListener('click', function () {
-      window.location.href = 'quero-doar.html';
-    });
-  }
-
+  if (btnReceber) btnReceber.addEventListener('click', () => window.location.href = 'receber-doaçoes.html');
+  if (btnDoar)    btnDoar.addEventListener('click',    () => window.location.href = 'quero-doar.html');
 });
