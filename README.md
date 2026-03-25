@@ -1,9 +1,9 @@
 # Mão Amiga - Plataforma de Apoio Social
 
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-ffb703?style=for-the-badge)
-![Vercel](https://img.shields.io/badge/frontend-vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
-![Railway](https://img.shields.io/badge/backend-railway-7b2cbf?style=for-the-badge&logo=railway&logoColor=white)
-![Supabase](https://img.shields.io/badge/database-supabase-3ecf8e?style=for-the-badge&logo=supabase&logoColor=white)
+![Status](https://img.shields.io/badge/status-em%20desenvolvimento-ffb703?style=for-the-badge)<br>
+![Vercel](https://img.shields.io/badge/frontend-vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)<br>
+![Railway](https://img.shields.io/badge/backend-railway-7b2cbf?style=for-the-badge&logo=railway&logoColor=white)<br>
+![Supabase](https://img.shields.io/badge/database-supabase-3ecf8e?style=for-the-badge&logo=supabase&logoColor=white)<br>
 ![Tech](https://img.shields.io/badge/stack-html%20css%20js-264653?style=for-the-badge&logo=javascript&logoColor=yellow)
 
 O Mão Amiga é uma plataforma voltada para conectar pessoas em situação de vulnerabilidade com voluntários dispostos a ajudar. A proposta é oferecer um ambiente simples, acessível e direto, onde usuários podem solicitar ou oferecer apoio de forma prática.
