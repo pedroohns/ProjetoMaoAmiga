@@ -2,22 +2,18 @@ const { Pool } = require('pg');
 require('dotenv').config();
 
 const pool = new Pool({
-  host:     process.env.DB_HOST,
-  port:     process.env.DB_PORT,
-  database: process.env.DB_NAME,
-  user:     process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
+  connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false // necessario pra utilizar o supabase
+    rejectUnauthorized: false
   }
 });
 
-// testa a conexao ao iniciar
+//teste de conexao
 pool.connect((err, client, release) => {
   if (err) {
-    console.error('Erro ao conectar ao banco de dados:', err.message);
+    console.error('erro ao conectar ao banco de dados:', err.message);
   } else {
-    console.log('Banco de dados conectado com sucesso!');
+    console.log('banco de dados conectado com sucesso!');
     release();
   }
 });
