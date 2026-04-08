@@ -35,6 +35,13 @@ body {
 }
 
 
+/* CONTAINER */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 /* HEADER */
 header {
   position: fixed;
@@ -1191,8 +1198,9 @@ pra depois ser implementado em todas as paginas de forma funcional */
 }
 
 .btn-sair:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: #fff;
+  background: #6d7dfc;
+  border-color: #6d7dfc;
+  color: #fff;
 }
 
 /* Mobile */

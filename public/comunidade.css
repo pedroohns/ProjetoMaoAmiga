@@ -1012,7 +1012,6 @@ body {
 }
 
 /* EXCLUIR POST E COMENTARIO */
-
 .post-header-direita {
   display: flex;
   align-items: center;
@@ -1064,4 +1063,15 @@ body {
 .btn-excluir-comentario:hover {
   color: #e24b4a;
   background: rgba(226, 75, 74, 0.08);
+}
+
+/* nome do autor clicavel no post */
+.post-autor-link {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.15s;
+}
+ 
+.post-autor-link:hover strong {
+  color: #6d7dfc;
 }

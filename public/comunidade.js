@@ -98,7 +98,7 @@ function criarCardPost(post) {
            onerror="this.src='imagens/user.png'">
       <div class="post-info">
         <div class="post-nome-linha">
-          <strong>${post.usuario_nome}</strong>
+          <a href="perfil.html?id=${post.usuario_id}" class="post-autor-link"><strong>${post.usuario_nome}</strong></a>
           <span class="post-badge ${tipoBadge[post.usuario_tipo] || 'voluntario'}">
             ${tipoNome[post.usuario_tipo] || 'Membro'}
           </span>

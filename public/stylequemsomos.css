@@ -369,6 +369,97 @@ footer {
   line-height: 1.5;
 }
 
+/* HEADER DINAMICO - deu certo no teste, entao manter e dar uma melhorada,
+pra depois ser implementado em todas as paginas de forma funcional */
+
+.usuario-logado {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.usuario-perfil-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  padding: 6px 12px 6px 6px;
+  border-radius: 100px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.usuario-perfil-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* avatar circular com inicial */
+.header-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #6d7dfc;
+  border: 2px solid #fff;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header-avatar-inicial {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.header-avatar-sm {
+  width: 28px;
+  height: 28px;
+}
+
+.usuario-nome {
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.btn-sair {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  background: transparent;
+  color: #000;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.btn-sair:hover {
+  background: #6d7dfc;
+  border-color: #6d7dfc;
+  color: #fff;
+}
+
 /* RESPONSIVIDADE */
 
 /* mobile portrait */
