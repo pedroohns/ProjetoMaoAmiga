@@ -6,14 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const nome          = form.nome.value.trim();
-    const email         = form.email.value.trim();
-    const senha         = form.senha.value.trim();
+    const nome           = form.nome.value.trim();
+    const email          = form.email.value.trim();
+    const senha          = form.senha.value.trim();
     const confirmarSenha = form.confirmarSenha.value.trim();
-    const tipo          = form.tipo ? form.tipo.value : 'beneficiado';
+    const tipo           = form.tipo ? form.tipo.value : 'beneficiado';
 
     removerErros(form);
-
     let valido = true;
 
     if (!nome) {
@@ -50,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!valido) return;
 
-    // Desabilita o botão durante a requisição
     const btnCriar = form.querySelector('.btn-register');
     btnCriar.disabled = true;
     btnCriar.textContent = 'Criando conta...';
@@ -65,17 +63,20 @@ document.addEventListener("DOMContentLoaded", () => {
       const dados = await resposta.json();
 
       if (!resposta.ok) {
-        // Erro vindo da API (ex: e-mail já cadastrado)
         mostrarMensagem(dados.erro || 'Erro ao criar conta.', 'red');
         return;
       }
 
-      // Salva o token e dados do usuário no localStorage
       localStorage.setItem('token', dados.token);
       localStorage.setItem('usuario', JSON.stringify(dados.usuario));
 
-      // Redireciona para a página inicial
-      window.location.href = 'index.html';
+      // beneficiados vao pro formulario de cadastro completo
+      // doadores e voluntarios vao pra página inicial
+      if (tipo === 'beneficiado') {
+        window.location.href = 'receber-doa%C3%A7oes.html';
+      } else {
+        window.location.href = 'index.html';
+      }
 
     } catch (err) {
       mostrarMensagem('Erro de conexão. Tente novamente.', 'red');

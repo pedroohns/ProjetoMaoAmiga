@@ -10,7 +10,7 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  // HEADER DINÂMICO
+  // HEADER DINAMICO
   const usuario = JSON.parse(localStorage.getItem('usuario'));
   const token   = localStorage.getItem('token');
 
@@ -88,6 +88,26 @@ document.addEventListener('DOMContentLoaded', function () {
   const btnReceber = document.getElementById('btn-receber');
   const btnDoar    = document.getElementById('btn-doar');
 
-  if (btnReceber) btnReceber.addEventListener('click', () => window.location.href = 'receber-doaçoes.html');
+  if (btnReceber) btnReceber.addEventListener('click', () => window.location.href = 'receber-doa%C3%A7oes.html');
   if (btnDoar)    btnDoar.addEventListener('click',    () => window.location.href = 'quero-doar.html');
+
+  // BANNER do beneficiado com cadastro incompleto
+  if (usuario && token && usuario.tipo === 'beneficiado' && !usuario.cadastro_completo) {
+    const paginaAtual = window.location.pathname.split('/').pop();
+    const paginasIgnoradas = ['receber-doa%C3%A7oes.html', 'tela-login.html', 'tela-criar-conta.html'];
+
+    if (!paginasIgnoradas.includes(paginaAtual)) {
+      const banner = document.createElement('div');
+      banner.id = 'banner-cadastro';
+      banner.innerHTML = `
+        <i class="fa-solid fa-circle-info"></i>
+        <span>Complete seu cadastro para ter acesso às doações disponíveis para você!</span>
+        <a href="receber-doa%C3%A7oes.html">Completar agora</a>
+        <button onclick="document.getElementById('banner-cadastro').remove()" title="Fechar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      `;
+      document.body.appendChild(banner);
+    }
+  }
 });

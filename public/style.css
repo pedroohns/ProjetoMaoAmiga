@@ -1234,3 +1234,80 @@ pra depois ser implementado em todas as paginas de forma funcional */
 .mobile-sair:hover {
   background: rgba(255, 255, 255, 0.15);
 }
+
+/* BANNER DO cadastro incompleto */
+#banner-cadastro {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border: 1.5px solid rgba(109, 125, 252, 0.3);
+  border-radius: 16px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 32px rgba(109, 125, 252, 0.15);
+  z-index: 999;
+  max-width: 520px;
+  width: calc(100% - 48px);
+  animation: fadeInUp 0.4s ease;
+}
+ 
+#banner-cadastro i.fa-circle-info {
+  color: #6d7dfc;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+ 
+#banner-cadastro span {
+  font-size: 0.88rem;
+  color: #444;
+  flex: 1;
+  line-height: 1.4;
+}
+ 
+#banner-cadastro a {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  background: #6d7dfc;
+  padding: 7px 16px;
+  border-radius: 100px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+ 
+#banner-cadastro a:hover {
+  background: #5a6be8;
+}
+ 
+#banner-cadastro button {
+  background: transparent;
+  border: none;
+  color: #bbb;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 0.9rem;
+  transition: color 0.15s;
+  flex-shrink: 0;
+}
+ 
+#banner-cadastro button:hover {
+  color: #666;
+}
+ 
+@media (max-width: 767px) {
+  #banner-cadastro {
+    bottom: 16px;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+ 
+  #banner-cadastro span {
+    font-size: 0.82rem;
+  }
+}

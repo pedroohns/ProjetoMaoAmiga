@@ -42,7 +42,7 @@ router.post('/cadastro', async (req, res) => {
     const resultado = await pool.query(
       `INSERT INTO usuarios (nome, email, senha_hash, tipo, localidade)
        VALUES ($1, $2, $3, $4, $5)
-       RETURNING id, nome, email, tipo, localidade, criado_em`,
+       RETURNING id, nome, email, tipo, localidade, criado_em, cadastro_completo`,
       [
         nome.trim(),
         email.toLowerCase().trim(),
@@ -65,12 +65,13 @@ router.post('/cadastro', async (req, res) => {
       mensagem: 'Conta criada com sucesso!',
       token,
       usuario: {
-        id:         usuario.id,
-        nome:       usuario.nome,
-        email:      usuario.email,
-        tipo:       usuario.tipo,
-        localidade: usuario.localidade,
-        criado_em:  usuario.criado_em,
+        id:                usuario.id,
+        nome:              usuario.nome,
+        email:             usuario.email,
+        tipo:              usuario.tipo,
+        localidade:        usuario.localidade,
+        criado_em:         usuario.criado_em,
+        cadastro_completo: usuario.cadastro_completo,
       }
     });
 
@@ -123,12 +124,13 @@ router.post('/login', async (req, res) => {
       mensagem: 'Login realizado com sucesso!',
       token,
       usuario: {
-        id:         usuario.id,
-        nome:       usuario.nome,
-        email:      usuario.email,
-        tipo:       usuario.tipo,
-        localidade: usuario.localidade,
-        foto_url:   usuario.foto_url,
+        id:                usuario.id,
+        nome:              usuario.nome,
+        email:             usuario.email,
+        tipo:              usuario.tipo,
+        localidade:        usuario.localidade,
+        foto_url:          usuario.foto_url,
+        cadastro_completo: usuario.cadastro_completo,
       }
     });
 

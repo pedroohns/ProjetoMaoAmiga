@@ -19,9 +19,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // ROTAS DA API
-app.use('/api/auth',     require('./routes/auth'));
-app.use('/api/posts',    require('./routes/posts'));
-app.use('/api/usuarios', require('./routes/usuarios'));
+app.use('/api/auth',         require('./routes/auth'));
+app.use('/api/posts',        require('./routes/posts'));
+app.use('/api/usuarios',     require('./routes/usuarios'));
+app.use('/api/beneficiados', require('./routes/beneficiados'));
 
 // rota de saude pra ver se o sevidor ta funcionando
 app.get('/api/health', (req, res) => {
