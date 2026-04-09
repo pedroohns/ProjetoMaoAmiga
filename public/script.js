@@ -6,7 +6,7 @@
 // tambem tem o redirecionamento dos botoes do hero, para as paginas de receber doaçoes e doar
 // e o script do menu mobile, que mostra o menu quando clica no icone e esconde quando clica fora ou no icone novamente
 // vamos ver se vai dar certo, se nao der, conserto depois, o importante é ter um script basico pra trabalhar e ir melhorando aos poucos
-// antes tinha dado certo, entao vamos ver como vai se sair agora
+// antes tinha dado certo, entao vamos ver como vai se sair agora 
 
 document.addEventListener('DOMContentLoaded', function () {
 
