@@ -87,21 +87,15 @@ nav a {
   color: rgba(255, 255, 255, 0.92);
   font-weight: 500;
   font-size: 14px;
-  padding: 6px 0;
-  transition: color 0.2s;
+  padding: 6px 6px;
+  border-radius: 100px;
+  border: 1.5px solid transparent; 
+  transition: all 0.2s ease;
   white-space: nowrap;
 }
 
 nav a:hover,
 nav a.active {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  padding: 6px 6px 6px 6px;
-  border-radius: 100px;
-  border: 1.5px solid rgba(255, 255, 255, 0.35);
-  transition: background 0.2s, border-color 0.2s;
   background: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.6);
   color: #fff;
