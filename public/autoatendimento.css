@@ -45,77 +45,7 @@ body {
   overflow: hidden;
 }
 
-/* HEADER */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px 40px;
-  box-shadow: 0 2px 12px rgba(123, 145, 199, 0.08);
-  backdrop-filter: blur(8px);
-}
 
-.logo img {
-  height: 44px;
-}
-
-nav {
-  display: flex;
-  gap: 5rem;
-}
-
-nav a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: 500;
-  font-size: 16px;
-  padding: 8px 0;
-  transition: color 0.2s;
-}
-
-nav a:hover,
-nav a.active {
-  color: #6366f1;
-}
-
-.auth-buttons .entrar {
-  background: transparent;
-  color: #fff;
-}
-
-.auth-buttons .entrar:hover {
-  background: #fff;
-  color: #111;
-}
-
-.auth-buttons .criar-conta {
-  background: #fff;
-  color: #111;
-  border: none;
-  box-shadow: 0 2px 8px rgba(123, 145, 199, 0.08);
-}
-
-.auth-buttons .criar-conta:hover {
-  background: #6d7dfc;
-  color: #e6eaff;
-}
-
-.header-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 96%;
-}
-
-.desktop-nav {
-  display: flex;
-  gap: 5rem;
-}
 
 /* Menu hamburguer */
 .menu-toggle {

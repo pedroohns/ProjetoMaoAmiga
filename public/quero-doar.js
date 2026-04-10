@@ -1,38 +1,3 @@
-//novo codigo para botao entrar
-document.addEventListener('DOMContentLoaded', function () {
-  const btnEntrar = document.querySelector('.entrar');
-  if (btnEntrar) {
-    btnEntrar.addEventListener('click', function () {
-      window.location.href = 'tela-login.html';
-    });
-  }
-
-  //novo codigo para botao criar conta
-  const btnCriarConta = document.querySelector('.criar-conta');
-  if (btnCriarConta) {
-    btnCriarConta.addEventListener('click', function () {
-      window.location.href = 'tela-criar-conta.html';
-    });
-  }
-
-  //codigo pro entrar do menu hamburger
-  const btnMobileEntrar = document.querySelector('.mobile-entrar');
-  if (btnMobileEntrar) {
-    btnMobileEntrar.addEventListener('click', function () {
-      window.location.href = 'tela-login.html';
-    });
-  }
-
-  //codigo do criar conta pro menu hamburger
-  const btnMobileCriarConta = document.querySelector('.mobile-criar-conta');
-  if (btnMobileCriarConta) {
-    btnMobileCriarConta.addEventListener('click', function () {
-      window.location.href = 'tela-criar-conta.html';
-    });
-  }
-
-});
-
 //apenas um teste, "validaçao" para os cards de doação
 function selectAmount(button, amount) {
   const card = button.closest('.donation-card');
