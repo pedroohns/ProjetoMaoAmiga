@@ -79,7 +79,7 @@ header:hover {
 
 nav {
   display: flex;
-  gap: 2.5rem;
+  gap: 3rem;
 }
 
 nav a {
@@ -94,7 +94,17 @@ nav a {
 
 nav a:hover,
 nav a.active {
-  color: #6d7dfc;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  padding: 6px 6px 6px 6px;
+  border-radius: 100px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  transition: background 0.2s, border-color 0.2s;
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
 }
 
 .auth-buttons {
