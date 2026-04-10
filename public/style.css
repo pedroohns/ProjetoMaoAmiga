@@ -45,16 +45,24 @@ body {
 /* HEADER */
 header {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 48px);
+  max-width: 1200px;
   z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px 40px;
-  box-shadow: 0 2px 12px rgba(123, 145, 199, 0.08);
-  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 24px rgba(100, 120, 200, 0.13), 0 1.5px 0 rgba(255,255,255,0.35) inset;
+  transition: box-shadow 0.3s;
+}
+
+header:hover {
+  box-shadow: 0 8px 32px rgba(100, 120, 200, 0.18), 0 1.5px 0 rgba(255,255,255,0.35) inset;
 }
 
 .header-wrapper {
@@ -62,63 +70,74 @@ header {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  gap: 16px;
 }
 
 .logo img {
-  height: 44px;
+  height: 36px;
 }
 
 nav {
   display: flex;
-  gap: 5rem;
+  gap: 2.5rem;
 }
 
 nav a {
   text-decoration: none;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.92);
   font-weight: 500;
-  font-size: 16px;
-  padding: 8px 0;
+  font-size: 14px;
+  padding: 6px 0;
   transition: color 0.2s;
+  white-space: nowrap;
 }
 
 nav a:hover,
 nav a.active {
-  color: #6366f1;
+  color: #6d7dfc;
+}
+
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .auth-buttons button {
-  margin-left: 12px;
-  padding: 12px 24px;
-  border: 1.5px solid #c7d2fe;
-  border-radius: 12px;
-  background: #fff;
+  padding: 8px 18px;
+  border-radius: 100px;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 16px;
-  transition: background 0.2s, color 0.2s;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .auth-buttons .entrar {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.15);
   color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4px);
 }
 
 .auth-buttons .entrar:hover {
-  background: #fff;
-  color: #111;
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.7);
 }
 
 .auth-buttons .criar-conta {
-  background: #fff;
-  color: #111;
+  background: rgba(255, 255, 255, 0.92);
+  color: #6d7dfc;
   border: none;
-  box-shadow: 0 2px 8px rgba(123, 145, 199, 0.08);
+  box-shadow: 0 2px 12px rgba(100, 120, 200, 0.18);
 }
 
 .auth-buttons .criar-conta:hover {
   background: #6d7dfc;
-  color: #e6eaff;
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(100, 120, 200, 0.28);
+  
 }
 
 /* Menu hamburguer */
@@ -225,7 +244,7 @@ nav a.active {
 
 /* MAIN HERO */
 main {
-  margin-top: 120px;
+  margin-top: 96px;
   flex: 1;
 }
 
@@ -674,11 +693,14 @@ footer {
 
 @media (max-width: 767px) {
   header {
-    padding: 16px 20px;
+    top: 10px;
+    width: calc(100% - 24px);
+    padding: 8px 14px;
+    border-radius: 16px;
   }
 
   .logo img {
-    height: 36px;
+    height: 30px;
   }
 
   .desktop-nav,
@@ -1189,7 +1211,7 @@ pra depois ser implementado em todas as paginas de forma funcional */
   border-radius: 100px;
   border: 1.5px solid rgba(255, 255, 255, 0.5);
   background: transparent;
-  color: #000;
+  color: #fff;
   font-weight: 600;
   font-size: 13px;
   cursor: pointer;
@@ -1198,9 +1220,8 @@ pra depois ser implementado em todas as paginas de forma funcional */
 }
 
 .btn-sair:hover {
-  background: #6d7dfc;
-  border-color: #6d7dfc;
-  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #fff;
 }
 
 /* Mobile */
@@ -1235,7 +1256,9 @@ pra depois ser implementado em todas as paginas de forma funcional */
   background: rgba(255, 255, 255, 0.15);
 }
 
-/* BANNER DO cadastro incompleto */
+/* ============================
+   BANNER — cadastro incompleto
+   ============================ */
 #banner-cadastro {
   position: fixed;
   bottom: 24px;
@@ -1254,20 +1277,20 @@ pra depois ser implementado em todas as paginas de forma funcional */
   width: calc(100% - 48px);
   animation: fadeInUp 0.4s ease;
 }
- 
+
 #banner-cadastro i.fa-circle-info {
   color: #6d7dfc;
   font-size: 1.1rem;
   flex-shrink: 0;
 }
- 
+
 #banner-cadastro span {
   font-size: 0.88rem;
   color: #444;
   flex: 1;
   line-height: 1.4;
 }
- 
+
 #banner-cadastro a {
   font-size: 0.85rem;
   font-weight: 700;
@@ -1280,11 +1303,11 @@ pra depois ser implementado em todas as paginas de forma funcional */
   transition: background 0.2s;
   flex-shrink: 0;
 }
- 
+
 #banner-cadastro a:hover {
   background: #5a6be8;
 }
- 
+
 #banner-cadastro button {
   background: transparent;
   border: none;
@@ -1295,19 +1318,278 @@ pra depois ser implementado em todas as paginas de forma funcional */
   transition: color 0.15s;
   flex-shrink: 0;
 }
- 
+
 #banner-cadastro button:hover {
   color: #666;
 }
- 
+
 @media (max-width: 767px) {
   #banner-cadastro {
     bottom: 16px;
     padding: 12px 16px;
     gap: 10px;
   }
- 
+
   #banner-cadastro span {
     font-size: 0.82rem;
+  }
+}
+
+/* ============================
+   LOGIN POPOVER
+   ============================ */
+#login-popover {
+  position: absolute;
+  z-index: 500;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  padding: 22px 20px;
+  width: 300px;
+  box-shadow: 0 16px 48px rgba(80, 100, 200, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: popoverIn 0.2s cubic-bezier(.2,.9,.3,1) both;
+  transition: opacity 0.18s, transform 0.18s;
+}
+
+@keyframes popoverIn {
+  from { opacity: 0; transform: translateY(-10px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.popover-titulo {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+#login-popover input {
+  padding: 11px 14px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(109, 125, 252, 0.2);
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  color: #222;
+}
+
+#login-popover input:focus {
+  border-color: #6d7dfc;
+  background: #fff;
+}
+
+#pop-erro {
+  font-size: 0.8rem;
+  color: #be185d;
+  min-height: 16px;
+}
+
+#pop-btn-entrar {
+  padding: 11px;
+  border-radius: 12px;
+  border: none;
+  background: #6d7dfc;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+#pop-btn-entrar:hover {
+  background: #5a6be8;
+  transform: translateY(-1px);
+}
+
+#pop-btn-entrar:disabled {
+  opacity: 0.7;
+  transform: none;
+}
+
+.popover-links {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+
+.popover-links a {
+  color: #6d7dfc;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.popover-links a:hover { text-decoration: underline; }
+.popover-links span { color: #bbb; }
+
+/* MODAL DE CADASTRO */
+#modal-cadastro {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 40, 80, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+#modal-cadastro.ativo {
+  opacity: 1;
+}
+
+.modal-cadastro-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 28px;
+  padding: 32px 28px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 24px 64px rgba(60, 80, 180, 0.18);
+  transform: translateY(20px);
+  transition: transform 0.25s cubic-bezier(.2,.9,.3,1);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+}
+
+#modal-cadastro.ativo .modal-cadastro-card {
+  transform: translateY(0);
+}
+
+.modal-cadastro-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-logo {
+  height: 36px;
+}
+
+.modal-cadastro-fechar {
+  background: rgba(0,0,0,0.07);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #555;
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-cadastro-fechar:hover { background: rgba(0,0,0,0.13); }
+
+.modal-cadastro-card h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 4px;
+}
+
+.modal-cadastro-sub {
+  font-size: 0.88rem;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+#form-cadastro-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#form-cadastro-modal input,
+#form-cadastro-modal select {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(109, 125, 252, 0.2);
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 0.2s;
+  color: #222;
+  font-family: 'Inter', sans-serif;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+#form-cadastro-modal select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa3b2' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+
+#form-cadastro-modal input:focus,
+#form-cadastro-modal select:focus {
+  border-color: #6d7dfc;
+  background: #fff;
+}
+
+#modal-cadastro-erro {
+  font-size: 0.82rem;
+  color: #be185d;
+  min-height: 16px;
+}
+
+.modal-cadastro-btn {
+  padding: 13px;
+  border-radius: 12px;
+  border: none;
+  background: #6d7dfc;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.modal-cadastro-btn:hover {
+  background: #5a6be8;
+  transform: translateY(-1px);
+}
+
+.modal-cadastro-btn:disabled {
+  opacity: 0.7;
+  transform: none;
+}
+
+.modal-cadastro-login {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 14px;
+}
+
+.modal-cadastro-login a {
+  color: #6d7dfc;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.modal-cadastro-login a:hover { text-decoration: underline; }
+
+@media (max-width: 767px) {
+  .modal-cadastro-card {
+    padding: 24px 18px;
   }
 }
