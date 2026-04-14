@@ -1,6 +1,7 @@
 # Mão Amiga - Plataforma de Apoio Social
 
 O Mão Amiga é uma plataforma voltada para conectar pessoas em situação de vulnerabilidade com voluntários dispostos a ajudar. A proposta é oferecer um ambiente simples, acessível e direto, onde usuários podem solicitar ou oferecer apoio de forma prática.
+<br>
 (ALGUMAS FUNCIONALIDADES ESTÃO COMPROMETIDAS - CORREÇÕES EM ANDAMENTO)
 ---
 
