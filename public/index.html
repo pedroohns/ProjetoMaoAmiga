@@ -26,7 +26,6 @@
 
         <nav class="desktop-nav">
           <a href="doaçoes.html">Doações</a>
-          <a href="quem-somos.html">Quem somos</a>
           <a href="comunidade.html">Comunidade</a>
           <a href="fale-conosco.html">Fale Conosco</a>
           <a href="autoatendimento.html">Autoatendimento</a>
@@ -48,7 +47,6 @@
 
           <nav class="mobile-nav">
             <a href="doaçoes.html">Doações</a>
-            <a href="quem-somos.html">Quem somos</a>
             <a href="comunidade.html">Comunidade</a>
             <a href="fale-conosco.html">Fale Conosco</a>
             <a href="autoatendimento.html">Autoatendimento</a>
@@ -62,115 +60,67 @@
       </div>
     </header>
     <main>
-      <div class="hero">
-        <img src="imagens/maozinha.png" alt="mãos em oração" class="hero-img">
-        <div class="white-blur"></div>
-        <h1>Uma <span class="highlight">Mão Amiga</span> é tudo que precisamos para transformar desespero em esperança.
-        </h1>
-        <p>O Apoio Social conecta pessoas em busca de ajuda. Com uma comunidade acolhedora, você pode compartilhar
-          experiências e se conectar com voluntários prontos para ajudar.</p>
-        <a href="#" class="cta-link">ENCONTRE AQUI O QUE VOCÊ PRECISA</a>
-        <div class="actions">
-          <button id="btn-receber" class="btn pink">
-            <!-- presente // PINK -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
-              <rect x="3" y="8" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2" />
-              <path d="M12 8V21M3 12h18" stroke="currentColor" stroke-width="2" />
-              <path d="M7.5 8a2.5 2.5 0 1 1 5 0" stroke="currentColor" stroke-width="2" />
-              <path d="M16.5 8a2.5 2.5 0 1 0-5 0" stroke="currentColor" stroke-width="2" />
-            </svg>
-            RECEBER DOAÇÕES
-          </button>
-          <button id="btn-doar" type="button" class="btn orange">
-            <!-- coraçao // ORANGE -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
-              <path d="M12 21s-6.2-5.05-8.4-7.24A5.5 5.5 0 0 1 12 5.5a5.5 5.5 0 0 1 8.4 8.26C18.2 15.95 12 21 12 21z"
-                stroke="currentColor" stroke-width="2" fill="none" />
-            </svg>
-            QUERO DOAR
-          </button>
-        </div>
+      <section class="hero">
+        <div class="hero-top">
+          <div class="hero-content">
+            <h1>Uma <span class="highlight">Mão Amiga</span> é tudo que precisamos para transformar desespero em esperança.</h1>
+            <p>O Apoio Social conecta pessoas em busca de ajuda. Com uma comunidade acolhedora, você pode compartilhar experiências e se conectar com voluntários prontos para ajudar.</p>
+            <a href="#" class="cta-link">ENCONTRE AQUI O QUE VOCÊ PRECISA</a>
+            <div class="actions">
+              <button id="btn-receber" class="btn pink">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+                  <rect x="3" y="8" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2" />
+                  <path d="M12 8V21M3 12h18" stroke="currentColor" stroke-width="2" />
+                  <path d="M7.5 8a2.5 2.5 0 1 1 5 0" stroke="currentColor" stroke-width="2" />
+                  <path d="M16.5 8a2.5 2.5 0 1 0-5 0" stroke="currentColor" stroke-width="2" />
+                </svg>
+                RECEBER DOAÇÕES
+              </button>
+              <button id="btn-doar" type="button" class="btn orange">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+                  <path d="M12 21s-6.2-5.05-8.4-7.24A5.5 5.5 0 0 1 12 5.5a5.5 5.5 0 0 1 8.4 8.26C18.2 15.95 12 21 12 21z" stroke="currentColor" stroke-width="2" fill="none" />
+                </svg>
+                QUERO DOAR
+              </button>
+            </div>
 
-        <section class="hero-cards">
-          <div class="hero-card right">
-            <h2>
-              Descubra o Projeto <span class="highlight">Mão Amiga</span>:<br>Conectando Vidas e Esperanças
-            </h2>
-            <p>
-              O projeto Mão Amiga é uma iniciativa que visa unir pessoas que precisam de apoio com aqueles dispostos a
-              oferecer ajuda. Através de uma rede solidária, você pode encontrar recursos, compartilhar suas histórias e
-              se conectar com voluntários dedicados a transformar vidas.
-            </p>
-            <div class="hero-stats">
-              <div class="stat">
-                <span class="stat-value">+5 mil</span>
-                <span class="stat-label">Pessoas auxiliadas</span>
+            <div class="access-search" aria-label="Busca de acessibilidade do site">
+              <label for="site-search" class="sr-only">Buscar uma página ou recurso do site</label>
+              <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                <input type="search" id="site-search" placeholder="Buscar página, recurso ou assunto..." autocomplete="off">
+                <button id="site-search-btn" type="button">Buscar</button>
               </div>
-              <div class="stat">
-                <span class="stat-value">+200</span>
-                <span class="stat-label">Voluntários Dísponiveis</span>
-              </div>
-              <div class="stat">
-                <span class="stat-value">1º</span>
-                <span class="stat-label">Em oferecer ajuda aos que precisam.</span>
-              </div>
+              <p class="search-helper">Digite, por exemplo: “doações”, “autoatendimento”, “comunidade” ou “quem somos”.</p>
+              <ul id="site-search-results" class="search-results" aria-live="polite"></ul>
             </div>
           </div>
 
-          <div class="hero-card left">
-            <div class="hero-logo">
-            </div>
-            <h1>
-              Histórias que <span class="highlight">Inspiram</span>:
-            </h1>
-            <p>
-              A Ana foi mãe solteira que, após sofrer um acidente, encontrou no Mão Amiga a ajuda necessária para
-              recomeçar. Com o apoio da comunidade, ela conseguiu doações e hoje é voluntária, ajudando outras pessoas a
-              encontrarem esperança. Sua história é um exemplo de como a solidariedade pode transformar vidas.
-            </p>
-            <div class="hero-actions">
-              <button class="btn-primary">Faça Parte!</button>
-            </div>
+          <div class="hero-visual">
+            <img src="imagens/maozinha.png" alt="mãos em oração" class="hero-img">
+            <div class="white-blur"></div>
+          </div>
+        </div>
+
+        <section class="quem-somos-preview" aria-labelledby="quem-somos-preview-title">
+          <h2 id="quem-somos-preview-title">Quem Somos</h2>
+          <p>A <span class="highlight"><strong>Mão Amiga</strong></span> é uma plataforma de apoio social criada para conectar pessoas que precisam de ajuda com quem pode oferecer apoio. Acreditamos que a solidariedade transforma vidas e fortalece comunidades.</p>
+          <div class="valores-grid">
+            <article class="valor-card">
+              <h3>Missão</h3>
+              <p>Oferecer apoio, dignidade e oportunidade a quem mais precisa por meio da união de voluntários e iniciativas sociais.</p>
+            </article>
+            <article class="valor-card">
+              <h3>Visão</h3>
+              <p>Ser referência nacional em apoio comunitário, promovendo inclusão, solidariedade e transformação social.</p>
+            </article>
+            <article class="valor-card">
+              <h3>Valores</h3>
+              <p>Empatia, respeito, cooperação, transparência e comprometimento com a mudança social.</p>
+            </article>
           </div>
         </section>
-
-        <div class="info-boxes">
-          <a href="#" class="info-link">
-            <div class="info-box img1">
-              <h3>Histórias da Comunidade</h3>
-              <p>Fique sabendo daqueles que receberam ajuda.</p>
-            </div>
-          </a>
-
-          <a href="#" class="info-link">
-            <div class="info-box img2">
-              <h3>Benefícios Sociais</h3>
-              <p>Saiba mais sobre os benefícios</p>
-            </div>
-          </a>
-
-          <a href="#" class="info-link">
-            <div class="info-box img3">
-              <h3>Direitos Sociais</h3>
-              <p>Saiba mais sobre seus direitos e como exercê-los.</p>
-            </div>
-          </a>
-        </div>
-
-        <div class="testimonial-box">
-          <div class="hero-logo">
-          </div>
-          <div class="avatar">
-            <img src="imagens/user.png" alt="foto do usuario amarildo">
-          </div>
-          <h3><strong>Amarildo Barbosa</strong></h3>
-          <p class="subtitle">72 anos, Rio de Janeiro</p>
-          <blockquote>
-            "Graças ao apoio do projeto Mão Amiga, consegui doações que transformaram minha vida."
-          </blockquote>
-          <div class="stars">★ ★ ★ ★ ★</div>
-          <button class="review-btn">Cadastre-se para ver todas as avaliações</button>
-        </div>
+      </section>
 
     </main>
 

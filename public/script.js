@@ -110,6 +110,106 @@ document.addEventListener('DOMContentLoaded', function () {
   if (btnReceber) btnReceber.addEventListener('click', () => window.location.href = 'receber-doa%C3%A7oes.html');
   if (btnDoar)    btnDoar.addEventListener('click',    () => window.location.href = 'quero-doar.html');
 
+  // BUSCA DE ACESSIBILIDADE DA HOME
+  const searchInput = document.getElementById('site-search');
+  const searchBtn = document.getElementById('site-search-btn');
+  const searchResults = document.getElementById('site-search-results');
+
+  const acessibilidadeRotas = [
+    {
+      titulo: 'Doações',
+      descricao: 'Acesse a página com campanhas, contribuições e apoio disponível.',
+      href: 'doaçoes.html',
+      termos: ['doação', 'doacoes', 'doar', 'ajuda', 'campanha']
+    },
+    {
+      titulo: 'Receber Doações',
+      descricao: 'Cadastre sua necessidade e receba apoio da comunidade.',
+      href: 'receber-doa%C3%A7oes.html',
+      termos: ['receber', 'preciso de ajuda', 'beneficiado', 'cadastro']
+    },
+    {
+      titulo: 'Quero Doar',
+      descricao: 'Veja como contribuir com doações e apoio comunitário.',
+      href: 'quero-doar.html',
+      termos: ['quero doar', 'doar', 'contribuir', 'doação']
+    },
+    {
+      titulo: 'Comunidade',
+      descricao: 'Participe das histórias, discussões e trocas da comunidade.',
+      href: 'comunidade.html',
+      termos: ['comunidade', 'histórias', 'apoio social']
+    },
+    {
+      titulo: 'Quem Somos',
+      descricao: 'Conheça o propósito, missão, visão e valores do projeto Mão Amiga.',
+      href: 'quem-somos.html',
+      termos: ['quem somos', 'missão', 'visão', 'valores', 'projeto']
+    },
+    {
+      titulo: 'Fale Conosco',
+      descricao: 'Entre em contato com a equipe do Mão Amiga.',
+      href: 'fale-conosco.html',
+      termos: ['contato', 'fale conosco', 'atendimento', 'mensagem']
+    },
+    {
+      titulo: 'Autoatendimento',
+      descricao: 'Consulte orientações e recursos para resolver dúvidas rapidamente.',
+      href: 'autoatendimento.html',
+      termos: ['autoatendimento', 'dúvida', 'ajuda rápida', 'orientações']
+    }
+  ];
+
+  function renderSearchResults(resultados, termoPesquisado) {
+    if (!searchResults) return;
+
+    if (!termoPesquisado) {
+      searchResults.innerHTML = '';
+      return;
+    }
+
+    if (!resultados.length) {
+      searchResults.innerHTML = `<li>Nenhum resultado para <strong>${termoPesquisado}</strong>. Tente outro termo.</li>`;
+      return;
+    }
+
+    searchResults.innerHTML = resultados.map((item) => `
+      <li>
+        <a href="${item.href}">${item.titulo}</a>
+        <p>${item.descricao}</p>
+      </li>
+    `).join('');
+  }
+
+  function pesquisarSite() {
+    if (!searchInput) return;
+    const termo = searchInput.value.trim().toLowerCase();
+
+    if (!termo) {
+      renderSearchResults([], '');
+      return;
+    }
+
+    const resultados = acessibilidadeRotas.filter((item) => {
+      const emTitulo = item.titulo.toLowerCase().includes(termo);
+      const emDescricao = item.descricao.toLowerCase().includes(termo);
+      const emTermos = item.termos.some((chave) => chave.includes(termo) || termo.includes(chave));
+      return emTitulo || emDescricao || emTermos;
+    });
+
+    renderSearchResults(resultados, termo);
+  }
+
+  if (searchBtn && searchInput) {
+    searchBtn.addEventListener('click', pesquisarSite);
+    searchInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        pesquisarSite();
+      }
+    });
+  }
+
   // BANNER do beneficiado com cadastro incompleto
   if (usuario && token && usuario.tipo === 'beneficiado' && !usuario.cadastro_completo) {
     const paginaAtual = window.location.pathname.split('/').pop();
