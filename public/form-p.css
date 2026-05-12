@@ -5,7 +5,7 @@
 
     #feedback-btn {
       position: fixed;
-      bottom: 20px;
+      bottom: 70px;
       right: 20px;
       background-color: #2196f3;
       color: white;
@@ -21,7 +21,7 @@
 
     #feedback-box {
       position: fixed;
-      bottom: 100px;
+      bottom: 140px;
       right: 20px;
       width: 350px;
       background-color: white;
