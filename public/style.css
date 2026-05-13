@@ -204,7 +204,7 @@ nav a.active {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Botões de autenticação no menu mobile */
+/* botoes de autenticação no menu mobile */
 .mobile-auth-buttons {
   display: flex;
   gap: 12px;
@@ -251,7 +251,6 @@ main {
   flex: 1;
 }
 
-/* ===== HERO ===== */
 .hero {
   padding: 48px 48px 56px;
   max-width: 1400px;
@@ -505,7 +504,7 @@ main {
   border: 0;
 }
 
-/* ===== ANIMAÇÕES DE ENTRADA DO HERO ===== */
+/* ===== ANIMAÇOES DE ENTRADA DO HERO ===== */
 .reveal-tag  { animation: heroIn 0.55s 0.05s ease both; }
 .reveal-h1   { animation: heroIn 0.55s 0.15s ease both; }
 .reveal-p    { animation: heroIn 0.55s 0.25s ease both; }
@@ -518,7 +517,7 @@ main {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== QUEM SOMOS — SEÇÃO INLINE ===== */
+/* ===== QUEM SOMOS ===== */
 .quem-somos-preview {
   background: linear-gradient(180deg, #fff 0%, #f4f6ff 100%);
   padding: 80px 48px;
@@ -1234,7 +1233,7 @@ pra depois ser implementado em todas as paginas de forma funcional */
 }
 
 /* ============================
-   BANNER — cadastro incompleto
+   BANNER - cadastro incompleto
    ============================ */
 #banner-cadastro {
   position: fixed;
