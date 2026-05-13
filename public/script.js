@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // HEADER DINÂMICO
+  // HEADER DINAMICO
   const usuario = JSON.parse(localStorage.getItem('usuario'));
   const token   = localStorage.getItem('token');
 
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const fotoUrl      = usuario.foto_url || null;
     const perfilHref   = `perfil.html`;
 
-    // avatar: foto real ou inicial do nome
+    // avatar: foto real ou inicial do nome (por enquanto so inicial)
     const avatarHTML  = fotoUrl ? `<img src="${fotoUrl}" alt="${primeiroNome}" class="header-avatar-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : '';
     const inicialHTML = `<span class="header-avatar-inicial" ${fotoUrl ? 'style="display:none"' : ''}>${primeiroNome.charAt(0).toUpperCase()}</span>`;
 
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (btnReceber) btnReceber.addEventListener('click', () => window.location.href = 'receber-doa%C3%A7oes.html');
   if (btnDoar)    btnDoar.addEventListener('click',    () => window.location.href = 'quero-doar.html');
 
-  // BANNER — beneficiado com cadastro incompleto
+  // BANNER - beneficiado com cadastro incompleto
   if (usuario && token && usuario.tipo === 'beneficiado' && !usuario.cadastro_completo) {
     const paginaAtual = window.location.pathname.split('/').pop();
     const paginasIgnoradas = ['receber-doa%C3%A7oes.html', 'tela-login.html', 'tela-criar-conta.html'];
@@ -161,13 +161,13 @@ function toggleLoginPopover() {
 
   document.body.appendChild(popover);
 
-  // Posiciona abaixo do botão
+  // posiciona abaixo do botao
   const top  = rect.bottom + window.scrollY + 10;
   const left = rect.right  + window.scrollX - popover.offsetWidth;
   popover.style.top  = `${top}px`;
   popover.style.left = `${Math.max(12, left)}px`;
 
-  // Reposiciona após render (offsetWidth real)
+  // reposiciona apos render (offsetWidth)
   requestAnimationFrame(() => {
     const l = rect.right + window.scrollX - popover.offsetWidth;
     popover.style.left = `${Math.max(12, l)}px`;
@@ -175,7 +175,7 @@ function toggleLoginPopover() {
 
   document.getElementById('pop-email').focus();
 
-  // Enter nos campos
+  // enter
   popover.querySelectorAll('input').forEach(inp => {
     inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') fazerLoginPopover(); });
   });
@@ -346,7 +346,7 @@ function fecharModalCadastro() {
   document.body.style.overflow = '';
 }
 
-// ===== SCROLL REVEAL da section Quem Somos =====
+// ===== SCROLL REVEAL da section Quem Somos ===== 
 (function() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
@@ -360,7 +360,7 @@ function fecharModalCadastro() {
   document.querySelectorAll('.qs-reveal').forEach(el => observer.observe(el));
 })();
 
-// BUSCA DE ACESSIBILIDADE DA HOME
+// BUSCA DE ACESSIBILIDADE DA HOME - fazer parecido com a autoatendimento.js
   const searchInput = document.getElementById('site-search');
   const searchBtn = document.getElementById('site-search-btn');
   const searchResults = document.getElementById('site-search-results');
