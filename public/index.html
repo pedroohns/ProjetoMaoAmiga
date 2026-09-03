@@ -1,184 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mão Amiga - Plataforma de Apoio Social</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-  <link rel="stylesheet" href="form-p.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
   <link rel="shortcut icon" href="imagens/maozinha.ico" type="image/x-icon">
   <script src="script.js" defer></script>
-  <script src="form-p.js"></script>
 </head>
+<body class="page-home" data-page="home">
+<div class="site-shell">
+  <header class="site-header">
+    <div class="header-wrapper">
+      <a class="logo-link" href="index.html"><img src="imagens/logo.png" alt="Mão Amiga"></a>
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a data-nav="donations" href="doaçoes.html">Doações</a>
+        <a data-nav="community" href="comunidade.html">Comunidade</a>
+        <a data-nav="contact" href="fale-conosco.html">Fale Conosco</a>
+        <a data-nav="selfservice" href="autoatendimento.html">Autoatendimento</a>
+      </nav>
+      <div class="auth-buttons">
+        <button class="btn-auth" data-auth-action="login">Entrar</button>
+        <button class="btn-auth primary" data-auth-action="signup">Criar Conta</button>
+      </div>
+      <button class="mobile-toggle" aria-label="Abrir menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+      <nav class="mobile-nav" aria-label="Navegação móvel">
+        <a href="doaçoes.html">Doações</a><a href="comunidade.html">Comunidade</a><a href="fale-conosco.html">Fale Conosco</a><a href="autoatendimento.html">Autoatendimento</a>
+        <button data-auth-action="login">Entrar</button><button data-auth-action="signup">Criar Conta</button>
+      </nav>
+    </div>
+  </header>
 
-<body>
-  <div class="container">
-
-    <header>
-      <div class="header-wrapper">
-        <div class="logo">
-          <img src="imagens/logo.png" alt="Mão Amiga Logo">
-        </div>
-        <nav class="desktop-nav">
-          <a href="doaçoes.html">Doações</a>
-          <a href="comunidade.html">Comunidade</a>
-          <a href="fale-conosco.html">Fale Conosco</a>
-          <a href="autoatendimento.html">Autoatendimento</a>
-        </nav>
-        <div class="auth-buttons">
-          <button class="entrar">Entrar</button>
-          <button class="criar-conta">Criar Conta</button>
-        </div>
-        <div class="mobile-menu">
-          <input type="checkbox" id="menu-toggle" class="menu-toggle">
-          <label for="menu-toggle" class="hamburger">
-            <span></span><span></span><span></span>
-          </label>
-          <nav class="mobile-nav">
-            <a href="doaçoes.html">Doações</a>
-            <a href="comunidade.html">Comunidade</a>
-            <a href="fale-conosco.html">Fale Conosco</a>
-            <a href="autoatendimento.html">Autoatendimento</a>
-            <div class="mobile-auth-buttons">
-              <button class="mobile-entrar">Entrar</button>
-              <button class="mobile-criar-conta">Criar Conta</button>
+  <main>
+    <section class="home-hero">
+      <div class="home-hero-grid">
+        <div class="home-copy">
+          <h1>Uma <span class="highlight">Mão Amiga</span> é tudo que precisamos para transformar desespero em esperança.</h1>
+          <p>O Apoio Social conecta pessoas em busca de ajuda. Com uma comunidade acolhedora, você pode compartilhar experiências e se conectar com voluntários prontos para ajudar.</p>
+          <a class="cta-link" href="doaçoes.html"><i class="fa-solid fa-arrow-right"></i> ENCONTRE AQUI O QUE VOCÊ PRECISA</a>
+          <div class="hero-actions">
+            <button id="btn-receber" class="outline-btn pink"><i class="fa-solid fa-gift"></i> RECEBER DOAÇÕES</button>
+            <button id="btn-doar" class="outline-btn orange"><i class="fa-regular fa-heart"></i> QUERO DOAR</button>
+          </div>
+          <div class="access-search" aria-label="Busca de páginas do site">
+            <div class="search-shell">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input id="site-search" type="search" placeholder="Buscar página, recurso ou assunto…" autocomplete="off">
+              <button id="site-search-btn" type="button" aria-label="Buscar"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
-          </nav>
+            <ul id="site-search-results" class="search-results" aria-live="polite"></ul>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-art"><img src="imagens/maozinha.png" alt="Mãos em oração"></div>
         </div>
       </div>
-    </header>
+    </section>
 
-    <main>
-
-      <!-- ===== HERO ===== -->
-      <section class="hero">
-        <div class="hero-top">
-
-          <div class="hero-content">
-            <h1 class="reveal-h1">Uma <span class="highlight">Mão Amiga</span> é tudo que precisamos para transformar desespero em esperança.</h1>
-            <p class="reveal-p">O Apoio Social conecta pessoas em busca de ajuda. Com uma comunidade acolhedora, você pode compartilhar experiências e se conectar com voluntários prontos para ajudar.</p>
-
-            <a href="#" class="cta-link reveal-cta">
-              <i class="fa-solid fa-arrow-right"></i>
-              ENCONTRE AQUI O QUE VOCÊ PRECISA
-            </a>
-
-            <div class="actions reveal-actions">
-              <button id="btn-receber" class="btn pink">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
-                  <rect x="3" y="8" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2" />
-                  <path d="M12 8V21M3 12h18" stroke="currentColor" stroke-width="2" />
-                  <path d="M7.5 8a2.5 2.5 0 1 1 5 0" stroke="currentColor" stroke-width="2" />
-                  <path d="M16.5 8a2.5 2.5 0 1 0-5 0" stroke="currentColor" stroke-width="2" />
-                </svg>
-                RECEBER DOAÇÕES
-              </button>
-              <button id="btn-doar" type="button" class="btn orange">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
-                  <path d="M12 21s-6.2-5.05-8.4-7.24A5.5 5.5 0 0 1 12 5.5a5.5 5.5 0 0 1 8.4 8.26C18.2 15.95 12 21 12 21z" stroke="currentColor" stroke-width="2" fill="none" />
-                </svg>
-                QUERO DOAR
-              </button>
-            </div>
-
-            <!-- SEARCH BAR DE ACESSIBILIDADE -->
-            <div class="access-search reveal-search" aria-label="Busca de acessibilidade do site">
-              <label for="site-search" class="sr-only">Buscar uma página ou recurso do site</label>
-              <div class="search-input-wrapper">
-                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                <input type="search" id="site-search" placeholder="Buscar página, recurso ou assunto…" autocomplete="off">
-                <button id="site-search-btn" type="button">
-                  <i class="fa-solid fa-arrow-right"></i>
-                </button>
-              </div>
-              <ul id="site-search-results" class="search-results" aria-live="polite"></ul>
-            </div>
-          </div>
-
-          <div class="hero-visual">
-            <div class="hero-img-wrap">
-              <div class="hero-glow"></div>
-              <img src="imagens/maozinha.png" alt="mãos em oração" class="hero-img">
-            </div>
-          </div>
-
+    <section class="about-preview" id="quem-somos">
+      <div class="about-inner">
+        <span class="section-kicker">Sobre o projeto</span>
+        <h2 class="section-title">Uma rede feita para aproximar quem precisa de quem pode ajudar.</h2>
+        <p class="section-lead">O Mão Amiga nasceu para tornar apoio social mais acessível, humano e direto. A nova identidade do site parte exatamente da linguagem visual desta página inicial: leve, acolhedora, moderna e com bastante espaço em branco.</p>
+        <div class="values-grid">
+          <article class="value-card"><div class="value-icon"><i class="fa-solid fa-bullseye"></i></div><h3>Missão</h3><p>Facilitar conexões solidárias e tornar pedidos e ofertas de ajuda mais simples de encontrar.</p></article>
+          <article class="value-card"><div class="value-icon"><i class="fa-solid fa-eye"></i></div><h3>Visão</h3><p>Construir uma experiência digital acolhedora, confiável e acessível para diferentes comunidades.</p></article>
+          <article class="value-card"><div class="value-icon"><i class="fa-solid fa-heart"></i></div><h3>Valores</h3><p>Empatia, respeito, cooperação, transparência e compromisso com quem precisa de apoio.</p></article>
         </div>
-      </section>
-
-      <!-- ===== QUEM SOMOS (inline, com scroll animation) ===== -->
-      <section class="quem-somos-preview" id="quem-somos">
-        <div class="qs-inner">
-          <div class="qs-img-wrap qs-reveal">
-            <img src="imagens/maozinha.png" alt="mãos em oração" class="qs-img">
-          </div>
-          <h2 class="qs-reveal">Quem Somos</h2>
-          <p class="qs-subtitulo qs-reveal">
-            A <strong class="highlight">Mão Amiga</strong> é uma plataforma de apoio social criada para conectar pessoas que precisam de ajuda com quem pode oferecer apoio. Acreditamos que juntos somos mais fortes, e que a solidariedade pode transformar vidas.
-          </p>
-
-          <div class="valores-grid">
-            <div class="valor-card qs-reveal">
-              <div class="valor-icon"><i class="fa-solid fa-bullseye"></i></div>
-              <h3>Missão</h3>
-              <p>Oferecer apoio, dignidade e oportunidade a quem mais precisa, por meio da união de voluntários e iniciativas sociais.</p>
-            </div>
-            <div class="valor-card qs-reveal">
-              <div class="valor-icon"><i class="fa-solid fa-eye"></i></div>
-              <h3>Visão</h3>
-              <p>Ser referência nacional em apoio comunitário, promovendo inclusão, solidariedade e transformação social.</p>
-            </div>
-            <div class="valor-card qs-reveal">
-              <div class="valor-icon"><i class="fa-solid fa-heart"></i></div>
-              <h3>Valores</h3>
-              <p>Empatia, Respeito, Cooperação, Transparência e Comprometimento com a mudança social.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </main>
-
-    <footer>
-      <div class="footer-content">
-        <div class="logo-footer">
-          <img src="imagens/logo-black.png" alt="Mão Amiga Logo">
-        </div>
-        <div class="footer-termo">
-          <a href="#">Termos de Uso</a>
-        </div>
-        <div class="social-icons">
-          <a href="#" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="26" height="26" viewBox="0 0 24 24"><path d="M 8 3 C 5.239 3 3 5.239 3 8 L 3 16 C 3 18.761 5.239 21 8 21 L 16 21 C 18.761 21 21 18.761 21 16 L 21 8 C 21 5.239 18.761 3 16 3 L 8 3 z M 18 5 C 18.552 5 19 5.448 19 6 C 19 6.552 18.552 7 18 7 C 17.448 7 17 6.552 17 6 C 17 5.448 17.448 5 18 5 z M 12 7 C 14.761 7 17 9.239 17 12 C 17 14.761 14.761 17 12 17 C 9.239 17 7 14.761 7 12 C 7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z"></path></svg></a>
-          <a href="#" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="26" height="26" viewBox="0 0 24 24"><path d="M12,2C6.477,2,2,6.477,2,12c0,5.013,3.693,9.153,8.505,9.876V14.65H8.031v-2.629h2.474v-1.749 c0-2.896,1.411-4.167,3.818-4.167c1.153,0,1.762,0.085,2.051,0.124v2.294h-1.642c-1.022,0-1.379,0.969-1.379,2.061v1.437h2.995 l-0.406,2.629h-2.588v7.247C18.235,21.236,22,17.062,22,12C22,6.477,17.523,2,12,2z"></path></svg></a>
-          <a href="#" title="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="26" height="26" viewBox="0 0 24 24"><path d="M19.077,4.928C17.191,3.041,14.683,2.001,12.011,2c-5.506,0-9.987,4.479-9.989,9.985 c-0.001,1.76,0.459,3.478,1.333,4.992L2,22l5.233-1.237c1.459,0.796,3.101,1.215,4.773,1.216h0.004 c5.505,0,9.986-4.48,9.989-9.985C22.001,9.325,20.963,6.816,19.077,4.928z M16.898,15.554c-0.208,0.583-1.227,1.145-1.685,1.186 c-0.458,0.042-0.887,0.207-2.995-0.624c-2.537-1-4.139-3.601-4.263-3.767c-0.125-0.167-1.019-1.353-1.019-2.581 S7.581,7.936,7.81,7.687c0.229-0.25,0.499-0.312,0.666-0.312c0.166,0,0.333,0,0.478,0.006c0.178,0.007,0.375,0.016,0.562,0.431 c0.222,0.494,0.707,1.728,0.769,1.853s0.104,0.271,0.021,0.437s-0.125,0.27-0.249,0.416c-0.125,0.146-0.262,0.325-0.374,0.437 c-0.125,0.124-0.255,0.26-0.11,0.509c0.146,0.25,0.646,1.067,1.388,1.728c0.954,0.85,1.757,1.113,2.007,1.239 c0.25,0.125,0.395,0.104,0.541-0.063c0.146-0.166,0.624-0.728,0.79-0.978s0.333-0.208,0.562-0.125s1.456,0.687,1.705,0.812 c0.25,0.125,0.416,0.187,0.478,0.291C17.106,14.471,17.106,14.971,16.898,15.554z"></path></svg></a>
-        </div>
-        <div class="copyright">© 2025 • Mão Amiga. Todos os direitos reservados.</div>
       </div>
-    </footer>
-  </div>
+    </section>
+  </main>
 
-  <button id="feedback-btn" title="Enviar uma mensagem de apoio">💬</button>
-  <div id="feedback-box">
-    <span class="close" id="close-box">&times;</span>
-    <h3>Fale com a gente 💙</h3>
-    <p>Nos envie sua mensagem. Nossa equipe responderá em até <strong>24 horas</strong>.</p>
-    <label for="nome">Seu nome:</label>
-    <input type="text" id="nome" placeholder="Digite seu nome">
-    <label for="email">Seu e-mail:</label>
-    <input type="email" id="email" placeholder="Digite seu e-mail">
-    <label for="tipo">Tipo de mensagem:</label>
-    <select id="tipo">
-      <option value="">Selecione</option>
-      <option value="dúvida">Dúvida</option>
-      <option value="sugestão">Sugestão</option>
-      <option value="pedido">Pedido de apoio</option>
-      <option value="outro">Outro</option>
-    </select>
-    <label for="mensagem">Mensagem:</label>
-    <textarea id="mensagem" placeholder="Descreva sua situação ou ideia..."></textarea>
-    <button id="send-feedback">Enviar</button>
-  </div>
-
+  <footer class="site-footer"><div class="footer-inner"><img class="footer-logo" src="imagens/logo-black.png" alt="Mão Amiga"><div class="footer-links"><a href="fale-conosco.html">Contato</a><a href="autoatendimento.html">Ajuda</a></div><span>© 2026 Mão Amiga</span></div></footer>
+</div>
+<button class="feedback-btn" title="Fale conosco"><i class="fa-solid fa-comment"></i></button>
 </body>
 </html>
