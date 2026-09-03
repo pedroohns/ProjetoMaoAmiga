@@ -1,58 +1,52 @@
 # Mão Amiga - Plataforma de Apoio Social
 
-O Mão Amiga é uma plataforma voltada para conectar pessoas em situação de vulnerabilidade com voluntários dispostos a ajudar. A proposta é oferecer um ambiente simples, acessível e direto, onde usuários podem solicitar ou oferecer apoio de forma prática.
-<br>
-<br>
-(ALGUMAS FUNCIONALIDADES ESTÃO COMPROMETIDAS - CORREÇÕES EM ANDAMENTO)
----
+O **Mão Amiga** é uma plataforma de apoio social criada para aproximar pessoas que precisam de ajuda de pessoas dispostas a colaborar.
 
-## Funcionalidades
+## Estado atual
 
-- Cadastro de usuários  
-- Criação e exclusão de publicações  
-- Interface responsiva para diferentes dispositivos  
-- Navegação simples e intuitiva  
+O projeto está passando por uma refatoração estrutural e visual. O back-end antigo foi removido integralmente para permitir uma reconstrução futura com uma arquitetura mais simples e bem definida.
 
----
+Neste momento o repositório é um **protótipo front-end**, construído com HTML, CSS e JavaScript puro.
 
-## Tecnologias Utilizadas
+## Estrutura
 
-- HTML  
-- CSS  
-- JavaScript  
+- `public/index.html` — página inicial e referência principal da identidade visual.
+- `public/style.css` — design system e estilos compartilhados entre as páginas.
+- `public/script.js` — comportamentos compartilhados e demonstrações front-end.
+- Demais arquivos `.html` em `public/` — páginas e fluxos específicos.
+- `public/imagens/` — recursos visuais do projeto.
 
-### Infraestrutura
+## Funcionalidades do protótipo
 
-- Frontend hospedado na Vercel  
-- Backend hospedado na Railway  
-- Banco de dados utilizando Supabase  
+- Navegação responsiva.
+- Página inicial com busca de páginas e recursos.
+- Catálogo demonstrativo de doações e projetos.
+- Comunidade demonstrativa com publicações salvas localmente no navegador (`localStorage`).
+- Formulários de contato, doação e pedido de ajuda com validação local.
+- Autoatendimento e assistente local baseado em respostas pré-definidas.
 
----
+> Formulários, autenticação e publicações não são enviados para um servidor nesta versão.
 
-## Acesso ao Projeto
+## Tecnologias
 
-[Acesse o website do Mão Amiga clicando aqui](https://projeto-mao-amiga.vercel.app/index.html)
+- HTML5
+- CSS3
+- JavaScript
+- Font Awesome
 
----
+## Objetivo da refatoração
 
-## Status do Projeto
-
-O projeto encontra-se em desenvolvimento.  
-Podem existir bugs ou comportamentos inesperados, que serão corrigidos ao longo da evolução do sistema.
-
----
+A página inicial define a linguagem visual do Mão Amiga: gradientes suaves, glassmorphism no cabeçalho, tipografia forte, azul/lilás como cor de identidade e componentes claros e acolhedores. As páginas internas seguem a mesma linguagem sem simplesmente repetir a hero da homepage.
 
 ## Autores
 
-Pedro Henrique de Souza Silva (ativo)  
+Pedro Henrique de Souza Silva (mantenedor atual)  
 Maria Clara Mendonça  
 João Gabriel Iost  
 Pedro Henrique Carvalho  
 Gabriel Trindade  
 Renan Alves
 
----
-
 ## Observação
 
-Este projeto foi inicialmente desenvolvido em contexto acadêmico, mas posteriormente passou a ser mantido de forma independente como projeto pessoal.
+O projeto foi inicialmente desenvolvido em contexto acadêmico e posteriormente passou a ser mantido como projeto pessoal.
