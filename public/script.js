@@ -1,461 +1,270 @@
-// ============================================
-// SCRIPT.JS - Mão Amiga
-// ============================================
-// agora ele vai mostrar se voce ta logado ou nao na tela,
-// ele vai aparecer seu nome e um botao de sair caso voce esteja logado, se nao, vai aparecer normalmente os botoes de entrar e criar conta
-// tambem tem o redirecionamento dos botoes do hero, para as paginas de receber doaçoes e doar
-// e o script do menu mobile, que mostra o menu quando clica no icone e esconde quando clica fora ou no icone novamente
-// vamos ver se vai dar certo, se nao der, conserto depois, o importante é ter um script basico pra trabalhar e ir melhorando aos poucos
-// antes tinha dado certo, entao vamos ver como vai se sair agora
+const PAGE_ROUTES = [
+  { label: 'Página inicial', url: 'index.html', terms: ['inicio', 'home', 'mão amiga'] },
+  { label: 'Doações', url: 'doaçoes.html', terms: ['doacao', 'doações', 'ajuda', 'projetos'] },
+  { label: 'Comunidade', url: 'comunidade.html', terms: ['comunidade', 'historias', 'histórias', 'pessoas'] },
+  { label: 'Fale Conosco', url: 'fale-conosco.html', terms: ['contato', 'fale conosco', 'mensagem'] },
+  { label: 'Autoatendimento', url: 'autoatendimento.html', terms: ['duvida', 'dúvida', 'faq', 'ajuda', 'autoatendimento'] },
+  { label: 'Quero doar', url: 'quero-doar.html', terms: ['quero doar', 'oferecer doação', 'doador'] },
+  { label: 'Receber doações', url: 'receber-doaçoes.html', terms: ['receber', 'preciso de ajuda', 'pedido'] }
+];
 
-document.addEventListener('DOMContentLoaded', function () {
+const COMMUNITY_SEED = [
+  { name: 'Marina', type: 'historia', text: 'Recebi ajuda com alimentos em um momento muito difícil. Hoje tento devolver um pouco desse carinho ajudando outras pessoas.', time: 'Hoje' },
+  { name: 'Carlos', type: 'pedido', text: 'Estou arrecadando roupas infantis para duas famílias do meu bairro. Qualquer ajuda é muito bem-vinda.', time: 'Ontem' },
+  { name: 'Ana', type: 'voluntario', text: 'Posso ajudar com reforço escolar de matemática aos sábados. Se alguém conhecer uma família que precise, pode me chamar.', time: '2 dias atrás' }
+];
 
-  // NAV ATIVO — marca o link da página atual
-  const paginaAtual = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.desktop-nav a, .mobile-nav a').forEach(link => {
-    const href = link.getAttribute('href');
-    if (!href) return;
-    const nomePagina = href.split('/').pop();
-    if (nomePagina === paginaAtual) {
-      link.classList.add('active');
-    }
-  });
+function qs(selector, root = document) { return root.querySelector(selector); }
+function qsa(selector, root = document) { return [...root.querySelectorAll(selector)]; }
 
-  // HEADER DINAMICO
-  const usuario = JSON.parse(localStorage.getItem('usuario'));
-  const token   = localStorage.getItem('token');
-
-  const authButtons       = document.querySelector('.auth-buttons');
-  const mobileAuthButtons = document.querySelector('.mobile-auth-buttons');
-
-  if (usuario && token) {
-    // USUARIO LOGADO
-    const primeiroNome = usuario.nome.split(' ')[0];
-    const fotoUrl      = usuario.foto_url || null;
-    const perfilHref   = `perfil.html`;
-
-    // avatar: foto real ou inicial do nome (por enquanto so inicial)
-    const avatarHTML  = fotoUrl ? `<img src="${fotoUrl}" alt="${primeiroNome}" class="header-avatar-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : '';
-    const inicialHTML = `<span class="header-avatar-inicial" ${fotoUrl ? 'style="display:none"' : ''}>${primeiroNome.charAt(0).toUpperCase()}</span>`;
-
-    // desktop
-    if (authButtons) {
-      authButtons.innerHTML = `
-        <div class="usuario-logado">
-          <a href="${perfilHref}" class="usuario-perfil-link">
-            <div class="header-avatar">
-              ${avatarHTML}
-              ${inicialHTML}
-            </div>
-            <span class="usuario-nome">${primeiroNome}</span>
-          </a>
-          <button class="btn-sair" id="btnSair">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-            Sair
-          </button>
-        </div>
-      `;
-    }
-
-    // mobile
-    if (mobileAuthButtons) {
-      mobileAuthButtons.innerHTML = `
-        <a href="${perfilHref}" class="mobile-usuario-link">
-          <div class="header-avatar header-avatar-sm">
-            ${fotoUrl ? `<img src="${fotoUrl}" alt="${primeiroNome}" class="header-avatar-img">` : ''}
-            <span class="header-avatar-inicial" ${fotoUrl ? 'style="display:none"' : ''}>${primeiroNome.charAt(0).toUpperCase()}</span>
-          </div>
-          <span>${primeiroNome}</span>
-        </a>
-        <button class="mobile-sair" id="btnSairMobile">Sair</button>
-      `;
-    }
-
-    // logout
-    document.addEventListener('click', function (e) {
-      if (e.target.closest('#btnSair') || e.target.closest('#btnSairMobile')) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('usuario');
-        window.location.href = 'index.html';
-      }
-    });
-
-  } else {
-    // USUARIO DESLOGADO — login inline + modal de cadastro
-    const btnEntrar = document.querySelector('.entrar');
-    if (btnEntrar) btnEntrar.addEventListener('click', (e) => { e.stopPropagation(); toggleLoginPopover(); });
-
-    const btnCriarConta = document.querySelector('.criar-conta');
-    if (btnCriarConta) btnCriarConta.addEventListener('click', (e) => { e.stopPropagation(); abrirModalCadastro(); });
-
-    const btnMobileEntrar = document.querySelector('.mobile-entrar');
-    if (btnMobileEntrar) btnMobileEntrar.addEventListener('click', () => window.location.href = 'tela-login.html');
-
-    const btnMobileCriarConta = document.querySelector('.mobile-criar-conta');
-    if (btnMobileCriarConta) btnMobileCriarConta.addEventListener('click', () => abrirModalCadastro());
-
-    // Fecha popover ao clicar fora
-    document.addEventListener('click', (e) => {
-      const popover = document.getElementById('login-popover');
-      if (popover && !popover.contains(e.target) && !e.target.closest('.entrar')) {
-        fecharLoginPopover();
-      }
-    });
+function showToast(message) {
+  let toast = qs('.toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.className = 'toast';
+    document.body.appendChild(toast);
   }
-
-  // REDIRECIONAMENTO BOTOES HERO
-  const btnReceber = document.getElementById('btn-receber');
-  const btnDoar    = document.getElementById('btn-doar');
-
-  if (btnReceber) btnReceber.addEventListener('click', () => window.location.href = 'receber-doa%C3%A7oes.html');
-  if (btnDoar)    btnDoar.addEventListener('click',    () => window.location.href = 'quero-doar.html');
-
-  // BANNER - beneficiado com cadastro incompleto
-  if (usuario && token && usuario.tipo === 'beneficiado' && !usuario.cadastro_completo) {
-    const paginaAtual = window.location.pathname.split('/').pop();
-    const paginasIgnoradas = ['receber-doa%C3%A7oes.html', 'tela-login.html', 'tela-criar-conta.html'];
-
-    if (!paginasIgnoradas.includes(paginaAtual)) {
-      const banner = document.createElement('div');
-      banner.id = 'banner-cadastro';
-      banner.innerHTML = `
-        <i class="fa-solid fa-circle-info"></i>
-        <span>Complete seu cadastro para ter acesso às doações disponíveis para você!</span>
-        <a href="receber-doa%C3%A7oes.html">Completar agora</a>
-        <button onclick="document.getElementById('banner-cadastro').remove()" title="Fechar">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      `;
-      document.body.appendChild(banner);
-    }
-  }
-});
-// ============================================
-// LOGIN POPOVER (inline no header)
-// ============================================
-const API = 'https://projetomaoamiga-production.up.railway.app';
-
-function toggleLoginPopover() {
-  const existente = document.getElementById('login-popover');
-  if (existente) { fecharLoginPopover(); return; }
-
-  const btnEntrar = document.querySelector('.entrar');
-  if (!btnEntrar) return;
-
-  const rect = btnEntrar.getBoundingClientRect();
-
-  const popover = document.createElement('div');
-  popover.id = 'login-popover';
-  popover.innerHTML = `
-    <p class="popover-titulo">Entrar na sua conta</p>
-    <input type="email" id="pop-email" placeholder="E-mail" autocomplete="email">
-    <input type="password" id="pop-senha" placeholder="Senha" autocomplete="current-password">
-    <div id="pop-erro"></div>
-    <button id="pop-btn-entrar">Entrar</button>
-    <div class="popover-links">
-      <a href="tela-criar-conta.html">Criar conta</a>
-      <span>·</span>
-      <a href="#">Esqueci a senha</a>
-    </div>
-  `;
-
-  document.body.appendChild(popover);
-
-  // posiciona abaixo do botao
-  const top  = rect.bottom + window.scrollY + 10;
-  const left = rect.right  + window.scrollX - popover.offsetWidth;
-  popover.style.top  = `${top}px`;
-  popover.style.left = `${Math.max(12, left)}px`;
-
-  // reposiciona apos render (offsetWidth)
-  requestAnimationFrame(() => {
-    const l = rect.right + window.scrollX - popover.offsetWidth;
-    popover.style.left = `${Math.max(12, l)}px`;
-  });
-
-  document.getElementById('pop-email').focus();
-
-  // enter
-  popover.querySelectorAll('input').forEach(inp => {
-    inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') fazerLoginPopover(); });
-  });
-
-  document.getElementById('pop-btn-entrar').addEventListener('click', fazerLoginPopover);
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => toast.classList.remove('show'), 2600);
 }
 
-function fecharLoginPopover() {
-  const p = document.getElementById('login-popover');
-  if (p) { p.style.opacity = '0'; p.style.transform = 'translateY(-8px)'; setTimeout(() => p.remove(), 180); }
+function setupNavigation() {
+  const toggle = qs('.mobile-toggle');
+  const mobileNav = qs('.mobile-nav');
+  toggle?.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+
+  qsa('.mobile-nav a').forEach(link => link.addEventListener('click', () => mobileNav?.classList.remove('open')));
+
+  const current = document.body.dataset.page;
+  qsa('[data-nav]').forEach(link => {
+    if (link.dataset.nav === current) link.classList.add('active');
+  });
 }
 
-async function fazerLoginPopover() {
-  const email = document.getElementById('pop-email').value.trim();
-  const senha = document.getElementById('pop-senha').value.trim();
-  const erroEl = document.getElementById('pop-erro');
-  const btn    = document.getElementById('pop-btn-entrar');
+function setupAuthNotice() {
+  const buttons = qsa('[data-auth-action]');
+  if (!buttons.length) return;
 
-  if (!email || !senha) { erroEl.textContent = 'Preencha e-mail e senha.'; return; }
-
-  btn.disabled = true;
-  btn.textContent = 'Entrando...';
-  erroEl.textContent = '';
-
-  try {
-    const resposta = await fetch(`${API}/api/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, senha })
-    });
-
-    const dados = await resposta.json();
-
-    if (!resposta.ok) {
-      erroEl.textContent = dados.erro || 'E-mail ou senha incorretos.';
-      btn.disabled = false;
-      btn.textContent = 'Entrar';
-      return;
-    }
-
-    localStorage.setItem('token', dados.token);
-    localStorage.setItem('usuario', JSON.stringify(dados.usuario));
-    window.location.reload();
-
-  } catch {
-    erroEl.textContent = 'Erro de conexão.';
-    btn.disabled = false;
-    btn.textContent = 'Entrar';
-  }
-}
-
-// ============================================
-// MODAL DE CADASTRO
-// ============================================
-function abrirModalCadastro() {
-  if (document.getElementById('modal-cadastro')) return;
-
-  const overlay = document.createElement('div');
-  overlay.id = 'modal-cadastro';
-  overlay.innerHTML = `
-    <div class="modal-cadastro-card" id="modal-cadastro-card">
-      <div class="modal-cadastro-header">
-        <img src="imagens/logo-blue.png" alt="Mão Amiga" class="modal-logo">
-        <button class="modal-cadastro-fechar" id="fechar-modal-cadastro">&times;</button>
+  const backdrop = document.createElement('div');
+  backdrop.className = 'modal-backdrop';
+  backdrop.innerHTML = `
+    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+      <span class="card-tag">Frontend em refatoração</span>
+      <h3 id="auth-title">Área de conta temporariamente indisponível</h3>
+      <p>O back-end antigo foi removido para simplificar o projeto. Entrar e criar conta voltarão quando uma nova solução de autenticação for implementada.</p>
+      <div class="modal-actions">
+        <button class="secondary-btn" data-close-modal>Fechar</button>
+        <a class="primary-btn" href="fale-conosco.html">Fale conosco</a>
       </div>
-      <h2>Criar sua conta</h2>
-      <p class="modal-cadastro-sub">Faça parte da comunidade Mão Amiga</p>
-      <form id="form-cadastro-modal">
-        <input type="text" name="nome" placeholder="Nome completo" required>
-        <input type="email" name="email" placeholder="E-mail" required>
-        <input type="password" name="senha" placeholder="Senha (mín. 6 caracteres)" required>
-        <input type="password" name="confirmarSenha" placeholder="Confirmar senha" required>
-        <select name="tipo" required>
-          <option value="" disabled selected>Como você quer participar?</option>
-          <option value="beneficiado">Preciso de ajuda</option>
-          <option value="doador">Quero doar</option>
-          <option value="voluntario">Quero ser voluntário</option>
-        </select>
-        <div id="modal-cadastro-erro"></div>
-        <button type="submit" class="modal-cadastro-btn">Criar Conta</button>
-      </form>
-      <p class="modal-cadastro-login">Já tem conta? <a href="#" id="ir-para-login">Entrar</a></p>
-    </div>
-  `;
+    </section>`;
+  document.body.appendChild(backdrop);
 
-  document.body.appendChild(overlay);
-  requestAnimationFrame(() => overlay.classList.add('ativo'));
-
-  document.getElementById('fechar-modal-cadastro').addEventListener('click', fecharModalCadastro);
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) fecharModalCadastro(); });
-
-  document.getElementById('ir-para-login').addEventListener('click', (e) => {
-    e.preventDefault();
-    fecharModalCadastro();
-    setTimeout(toggleLoginPopover, 200);
+  buttons.forEach(btn => btn.addEventListener('click', () => backdrop.classList.add('open')));
+  backdrop.addEventListener('click', event => {
+    if (event.target === backdrop || event.target.closest('[data-close-modal]')) backdrop.classList.remove('open');
   });
+}
 
-  document.getElementById('form-cadastro-modal').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const form    = e.target;
-    const nome    = form.nome.value.trim();
-    const email   = form.email.value.trim();
-    const senha   = form.senha.value.trim();
-    const confirmar = form.confirmarSenha.value.trim();
-    const tipo    = form.tipo.value;
-    const erroEl  = document.getElementById('modal-cadastro-erro');
-    const btn     = form.querySelector('.modal-cadastro-btn');
+function setupHomeSearch() {
+  const input = qs('#site-search');
+  const results = qs('#site-search-results');
+  const button = qs('#site-search-btn');
+  if (!input || !results) return;
 
-    erroEl.textContent = '';
+  const render = () => {
+    const term = input.value.trim().toLowerCase();
+    if (!term) {
+      results.classList.remove('open');
+      results.innerHTML = '';
+      return;
+    }
+    const matches = PAGE_ROUTES.filter(item => [item.label, ...item.terms].some(value => value.toLowerCase().includes(term)));
+    results.innerHTML = matches.length
+      ? matches.map(item => `<li><a href="${item.url}">${item.label}</a></li>`).join('')
+      : '<li><a href="autoatendimento.html">Não encontrou? Abrir autoatendimento</a></li>';
+    results.classList.add('open');
+  };
 
-    if (!nome || nome.length < 3 || !nome.includes(' ')) {
-      erroEl.textContent = 'Digite seu nome completo (nome e sobrenome).'; return;
+  input.addEventListener('input', render);
+  input.addEventListener('keydown', event => {
+    if (event.key === 'Enter') {
+      const first = qs('a', results);
+      if (first) window.location.href = first.href;
     }
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      erroEl.textContent = 'Digite um e-mail válido.'; return;
-    }
-    if (!senha || senha.length < 6) {
-      erroEl.textContent = 'A senha deve ter pelo menos 6 caracteres.'; return;
-    }
-    if (senha !== confirmar) {
-      erroEl.textContent = 'As senhas não coincidem.'; return;
-    }
-    if (!tipo) {
-      erroEl.textContent = 'Selecione como você quer participar.'; return;
-    }
+  });
+  button?.addEventListener('click', () => qs('a', results)?.click());
+  document.addEventListener('click', event => {
+    if (!event.target.closest('.access-search')) results.classList.remove('open');
+  });
+}
 
-    btn.disabled = true;
-    btn.textContent = 'Criando conta...';
+function setupDonationFilters() {
+  const search = qs('#donation-search');
+  const cards = qsa('[data-donation-card]');
+  const filters = qsa('[data-donation-filter]');
+  if (!cards.length) return;
 
+  let active = 'all';
+  const apply = () => {
+    const term = (search?.value || '').trim().toLowerCase();
+    cards.forEach(card => {
+      const matchesType = active === 'all' || card.dataset.type === active;
+      const matchesText = !term || card.textContent.toLowerCase().includes(term);
+      card.style.display = matchesType && matchesText ? '' : 'none';
+    });
+  };
+
+  filters.forEach(btn => btn.addEventListener('click', () => {
+    filters.forEach(item => item.classList.remove('active'));
+    btn.classList.add('active');
+    active = btn.dataset.donationFilter;
+    apply();
+  }));
+  search?.addEventListener('input', apply);
+}
+
+function readCommunityPosts() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('maoAmigaCommunityPosts') || '[]');
+    return Array.isArray(saved) ? saved : [];
+  } catch { return []; }
+}
+
+function renderCommunity() {
+  const feed = qs('#community-feed');
+  if (!feed) return;
+  const selected = qs('[data-community-filter].active')?.dataset.communityFilter || 'all';
+  const items = [...readCommunityPosts(), ...COMMUNITY_SEED]
+    .filter(item => selected === 'all' || item.type === selected);
+
+  feed.innerHTML = items.map((item, index) => `
+    <article class="card post-card">
+      <div class="post-head">
+        <div class="user-line">
+          <div class="avatar">${item.name.charAt(0).toUpperCase()}</div>
+          <div><strong>${item.name}</strong><small>${item.time || 'Agora'}</small></div>
+        </div>
+        <span class="card-tag">${({historia:'História',pedido:'Pedido',doacao:'Doação',voluntario:'Voluntário'})[item.type] || 'Comunidade'}</span>
+      </div>
+      <div class="body">${item.text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
+      <div class="post-actions">
+        <button type="button" data-like><i class="fa-regular fa-heart"></i> Apoiar</button>
+        <button type="button" data-share><i class="fa-solid fa-share-nodes"></i> Compartilhar</button>
+      </div>
+    </article>`).join('');
+
+  qsa('[data-like]', feed).forEach(btn => btn.addEventListener('click', () => {
+    btn.innerHTML = '<i class="fa-solid fa-heart"></i> Apoiado';
+    btn.style.color = '#6677ff';
+  }));
+  qsa('[data-share]', feed).forEach(btn => btn.addEventListener('click', async () => {
     try {
-      const resposta = await fetch(`${API}/api/auth/cadastro`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, email, senha, tipo })
-      });
+      if (navigator.share) await navigator.share({ title: 'Comunidade Mão Amiga', url: location.href });
+      else await navigator.clipboard.writeText(location.href);
+      showToast('Link da comunidade copiado.');
+    } catch {}
+  }));
+}
 
-      const dados = await resposta.json();
+function setupCommunity() {
+  if (!qs('#community-feed')) return;
+  renderCommunity();
 
-      if (!resposta.ok) {
-        erroEl.textContent = dados.erro || 'Erro ao criar conta.';
-        btn.disabled = false;
-        btn.textContent = 'Criar Conta';
-        return;
-      }
+  const filters = qsa('[data-community-filter]');
+  filters.forEach(btn => btn.addEventListener('click', () => {
+    filters.forEach(item => item.classList.remove('active'));
+    btn.classList.add('active');
+    renderCommunity();
+  }));
 
-      localStorage.setItem('token', dados.token);
-      localStorage.setItem('usuario', JSON.stringify(dados.usuario));
-
-      if (tipo === 'beneficiado') {
-        window.location.href = 'receber-doa%C3%A7oes.html';
-      } else {
-        window.location.reload();
-      }
-
-    } catch {
-      erroEl.textContent = 'Erro de conexão. Tente novamente.';
-      btn.disabled = false;
-      btn.textContent = 'Criar Conta';
+  qs('#community-form')?.addEventListener('submit', event => {
+    event.preventDefault();
+    const text = qs('#community-text')?.value.trim();
+    const type = qs('#community-type')?.value || 'historia';
+    if (!text || text.length < 10) {
+      showToast('Escreva pelo menos 10 caracteres.');
+      return;
     }
+    const saved = readCommunityPosts();
+    saved.unshift({ name: 'Visitante', type, text, time: 'Agora' });
+    localStorage.setItem('maoAmigaCommunityPosts', JSON.stringify(saved.slice(0, 12)));
+    event.currentTarget.reset();
+    renderCommunity();
+    showToast('Publicação salva neste navegador.');
   });
 }
 
-function fecharModalCadastro() {
-  const overlay = document.getElementById('modal-cadastro');
-  if (!overlay) return;
-  overlay.classList.remove('ativo');
-  setTimeout(() => overlay.remove(), 250);
-  document.body.style.overflow = '';
+function setupDemoForms() {
+  qsa('[data-demo-form]').forEach(form => form.addEventListener('submit', event => {
+    event.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    form.reset();
+    showToast('Tudo certo! Este protótipo não envia dados para um servidor.');
+  }));
 }
 
-// ===== SCROLL REVEAL da section Quem Somos ===== 
-(function() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
+function setupFaq() {
+  qsa('.faq-card button').forEach(button => button.addEventListener('click', () => {
+    button.closest('.faq-card')?.classList.toggle('open');
+  }));
+}
 
-  document.querySelectorAll('.qs-reveal').forEach(el => observer.observe(el));
-})();
+function chatbotReply(text) {
+  const msg = text.toLowerCase();
+  if (msg.includes('doar') || msg.includes('doação')) return 'Para oferecer ajuda, abra a página “Quero doar”. Para pedir apoio, use “Receber doações”.';
+  if (msg.includes('conta') || msg.includes('login') || msg.includes('entrar')) return 'A área de conta está temporariamente desativada enquanto o back-end é reconstruído.';
+  if (msg.includes('comunidade') || msg.includes('publicar')) return 'A Comunidade funciona neste protótipo usando apenas o armazenamento local do navegador.';
+  if (msg.includes('contato') || msg.includes('falar')) return 'Você pode usar a página Fale Conosco. O formulário é demonstrativo e não envia dados para um servidor.';
+  return 'Posso ajudar com dúvidas sobre doações, comunidade, conta, contato e navegação do site.';
+}
 
-// BUSCA DE ACESSIBILIDADE DA HOME - fazer parecido com a autoatendimento.js
-  const searchInput = document.getElementById('site-search');
-  const searchBtn = document.getElementById('site-search-btn');
-  const searchResults = document.getElementById('site-search-results');
+function setupChat() {
+  const form = qs('#chat-form');
+  const input = qs('#chat-input');
+  const log = qs('#chat-log');
+  if (!form || !input || !log) return;
 
-  const acessibilidadeRotas = [
-    {
-      titulo: 'Doações',
-      descricao: 'Acesse a página com campanhas, contribuições e apoio disponível.',
-      href: 'doaçoes.html',
-      termos: ['doação', 'doacoes', 'doar', 'ajuda', 'campanha']
-    },
-    {
-      titulo: 'Receber Doações',
-      descricao: 'Cadastre sua necessidade e receba apoio da comunidade.',
-      href: 'receber-doa%C3%A7oes.html',
-      termos: ['receber', 'preciso de ajuda', 'beneficiado', 'cadastro']
-    },
-    {
-      titulo: 'Quero Doar',
-      descricao: 'Veja como contribuir com doações e apoio comunitário.',
-      href: 'quero-doar.html',
-      termos: ['quero doar', 'doar', 'contribuir', 'doação']
-    },
-    {
-      titulo: 'Comunidade',
-      descricao: 'Participe das histórias, discussões e trocas da comunidade.',
-      href: 'comunidade.html',
-      termos: ['comunidade', 'histórias', 'apoio social']
-    },
-    {
-      titulo: 'Quem Somos',
-      descricao: 'Conheça o propósito, missão, visão e valores do projeto Mão Amiga.',
-      href: 'quem-somos.html',
-      termos: ['quem somos', 'missão', 'visão', 'valores', 'projeto']
-    },
-    {
-      titulo: 'Fale Conosco',
-      descricao: 'Entre em contato com a equipe do Mão Amiga.',
-      href: 'fale-conosco.html',
-      termos: ['contato', 'fale conosco', 'atendimento', 'mensagem']
-    },
-    {
-      titulo: 'Autoatendimento',
-      descricao: 'Consulte orientações e recursos para resolver dúvidas rapidamente.',
-      href: 'autoatendimento.html',
-      termos: ['autoatendimento', 'dúvida', 'ajuda rápida', 'orientações']
-    }
-  ];
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    log.insertAdjacentHTML('beforeend', `<div class="chat-message user">${text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`);
+    input.value = '';
+    setTimeout(() => {
+      log.insertAdjacentHTML('beforeend', `<div class="chat-message bot">${chatbotReply(text)}</div>`);
+      log.scrollTop = log.scrollHeight;
+    }, 250);
+  });
+}
 
-  function renderSearchResults(resultados, termoPesquisado) {
-    if (!searchResults) return;
+function setupFeedback() {
+  const btn = qs('.feedback-btn');
+  if (!btn) return;
+  btn.addEventListener('click', () => window.location.href = 'fale-conosco.html');
+}
 
-    if (!termoPesquisado) {
-      searchResults.innerHTML = '';
-      return;
-    }
+function setupHeroButtons() {
+  qs('#btn-receber')?.addEventListener('click', () => location.href = 'receber-doaçoes.html');
+  qs('#btn-doar')?.addEventListener('click', () => location.href = 'quero-doar.html');
+}
 
-    if (!resultados.length) {
-      searchResults.innerHTML = `<li>Nenhum resultado para <strong>${termoPesquisado}</strong>. Tente outro termo.</li>`;
-      return;
-    }
-
-    searchResults.innerHTML = resultados.map((item) => `
-      <li>
-        <a href="${item.href}">${item.titulo}</a>
-        <p>${item.descricao}</p>
-      </li>
-    `).join('');
-  }
-
-  function pesquisarSite() {
-    if (!searchInput) return;
-    const termo = searchInput.value.trim().toLowerCase();
-
-    if (!termo) {
-      renderSearchResults([], '');
-      return;
-    }
-
-    const resultados = acessibilidadeRotas.filter((item) => {
-      const emTitulo = item.titulo.toLowerCase().includes(termo);
-      const emDescricao = item.descricao.toLowerCase().includes(termo);
-      const emTermos = item.termos.some((chave) => chave.includes(termo) || termo.includes(chave));
-      return emTitulo || emDescricao || emTermos;
-    });
-
-    renderSearchResults(resultados, termo);
-  }
-
-  if (searchBtn && searchInput) {
-    searchBtn.addEventListener('click', pesquisarSite);
-    searchInput.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        pesquisarSite();
-      }
-    });
-  }
+document.addEventListener('DOMContentLoaded', () => {
+  setupNavigation();
+  setupAuthNotice();
+  setupHomeSearch();
+  setupDonationFilters();
+  setupCommunity();
+  setupDemoForms();
+  setupFaq();
+  setupChat();
+  setupFeedback();
+  setupHeroButtons();
+});
