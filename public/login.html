@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Mão Amiga</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="icon" href="imagens/maozinha.ico">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <a href="index.html" class="voltar">← Voltar</a>
+      <img src="imagens/logo-blue.png" alt="Logo Mão Amiga" class="logo">
+      <h2>Entrar</h2>
+      <p class="subtitle">Acesse sua conta para continuar</p>
+      <form id="form-login">
+        <div class="input-group">
+          <input type="email" name="email" placeholder="E-mail" required>
+        </div>
+        <div class="input-group">
+          <input type="password" name="senha" placeholder="Senha" required>
+        </div>
+        <button type="submit" class="btn-login">Entrar</button>
+      </form>
+      <div class="links">
+        <p>Não tem conta? <a href="criar-conta.html">Criar Conta</a></p>
+      </div>
+      <div id="mensagem"></div>
+    </div>
+  </div>
+  <script src="login.js"></script>
+</body>
+</html>
