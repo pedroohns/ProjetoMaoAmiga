@@ -34,6 +34,14 @@ body {
   overflow-x: hidden;
 }
 
+.container {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
+
 
 /* HEADER */
 header {
@@ -331,6 +339,7 @@ main {
 /* FOOTER */
 footer {
   width: 100%;
+  flex-shrink: 0;
   background: #f4f8ff;
   box-shadow: 0 -2px 12px rgba(213, 220, 236, 0.185);
   padding: 14px 0 4px;
